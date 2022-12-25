@@ -5,7 +5,6 @@ export const SETTING = {
     // 是否展示设置按钮
     showSettings: true,
     tagsView: true,
-    fixedHeader: false,
     sidebarLogo: true,
     theme: '#4bc2f5',
 

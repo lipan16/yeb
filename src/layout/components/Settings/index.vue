@@ -20,11 +20,6 @@
         </div>
 
         <div class="drawer-item">
-            <span>固定 Header</span>
-            <el-switch v-model="appStore.projectConfig.fixedHeader" class="drawer-switch"/>
-        </div>
-
-        <div class="drawer-item">
             <span>侧边栏 Logo</span>
             <el-switch v-model="appStore.projectConfig.sidebarLogo" class="drawer-switch"/>
         </div>

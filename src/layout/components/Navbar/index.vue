@@ -2,7 +2,7 @@
     <div class="navbar flex-inline">
         <div style="padding: 0 15px" @click="changeMenuCollapse">
             <svg
-                :class="{'is-active': appStore.sidebar.opened}"
+                :class="{'is-active': appStore.sidebarOpened}"
                 class="hamburger"
                 viewBox="0 0 1024 1024"
                 xmlns="http://www.w3.org/2000/svg"
@@ -15,10 +15,22 @@
             </svg>
         </div>
         <Breadcrumb/>
+        <BPITime/>
         <AppDarkModeToggle/>
         <SvgIcon :name="isFullscreen ? 'fullscreen-exit' : 'fullscreen'" @click="toggle" style="margin: 0 8px"/>
         <AppLocalePicker/>
         <AppLogo/>
+        <!--背景滚动-->
+        <div class="bg-scroll" :style="{transform: `translateX(${baseX}%)`}">
+            <div class="scrolls">
+                <div class="scroll-container-1"></div>
+                <div class="scroll-container-2"></div>
+            </div>
+            <div class="scrolls">
+                <div class="scroll-container-1"></div>
+                <div class="scroll-container-2"></div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -34,13 +46,23 @@ import {useAppStoreWithOut} from '@/store/modules/app'
 const appStore = useAppStoreWithOut()
 
 const changeMenuCollapse = () => {
-    appStore.setSidebar({key: 'opened', value: !appStore.sidebar.opened})
+    appStore.setSidebarOpened( !appStore.sidebarOpened)
 }
 const {isFullscreen, toggle} = useFullscreen()
 
+const baseX = ref(0)
+
+window.requestAnimationFrame(() => {
+    console.log(baseX.value)
+    if(baseX.value >= 0){
+        baseX.value = -100
+    }
+    baseX.value += 1
+})
+
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .hamburger{
     display: inline-block;
     vertical-align: middle;
@@ -50,6 +72,40 @@ const {isFullscreen, toggle} = useFullscreen()
 
 .hamburger.is-active{
     transform: rotate(180deg);
+}
+
+.bg-scroll{
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    z-index: -1;
+    left: 0;
+    right: 0;
+    display: flex;
+    max-width: 100%;
+    max-height: 100%;
+
+    .scrolls{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-shrink: 0;
+
+        .scroll-container-1{
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+            background-image: linear-gradient(90deg, rgb(255, 145, 0) 0%, rgb(255, 128, 82) 22.496%, rgb(255, 66, 145) 41.248%, rgb(214, 0, 193) 58.752%, rgb(157, 0, 224) 77.504%, rgb(111, 0, 255) 100%);
+        }
+
+        .scroll-container-2{
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+            background-image: linear-gradient(270deg, rgb(255, 145, 0) 0%, rgb(255, 128, 82) 22.496%, rgb(255, 66, 145) 41.248%, rgb(214, 0, 193) 58.752%, rgb(157, 0, 224) 77.504%, rgb(111, 0, 255) 100%);
+        }
+
+    }
 }
 </style>
 

@@ -3,7 +3,7 @@
         <transition name="sidebarLogoFade">
             <router-link key="collapse" class="sidebar-logo-link flex-inline" to="/">
                 <SvgIcon class="sidebar-logo" name="yeb" size="32"/>
-                <span v-show="!collapse" class="sidebar-title">{{ $t('title') }}</span>
+                <span v-if="!collapse" class="sidebar-title">{{ $t('title') }}</span>
             </router-link>
         </transition>
     </div>
@@ -40,7 +40,7 @@ defineProps({
         height: 100%;
         width: 100%;
         padding-left: 12px;
-        transition: all .2s ease;
+        transition: all 0.2s ease 0s;
 
         .sidebar-logo{
             vertical-align: middle;
@@ -52,7 +52,7 @@ defineProps({
             font-weight: 600;
             font-size: 16px;
             font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
-            transition: all .5s;
+            transition: all .2s;
             line-height: normal;
         }
     }

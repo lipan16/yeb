@@ -9,6 +9,7 @@ export default {
     deptManagement: '部门管理',
     dictManagement: '字典管理',
     link: '外部链接',
+    github: 'Github',
     document: '文档',
     components: '组件',
     tinymce: '富文本编辑器',
@@ -42,7 +43,6 @@ export default {
     theme: '主题色',
     showTagsView: '显示 Tags-View',
     showSidebarLogo: '显示侧边栏 Logo',
-    fixedHeader: '固定 Header',
     sidebarTextTheme: '侧边栏文字主题色'
   }
 }

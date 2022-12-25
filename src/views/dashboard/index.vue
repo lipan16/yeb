@@ -1,6 +1,15 @@
 <template>
     <div class="dashboard">
         <HelloWorld msg="Vite + Vue"/>
+        <HelloWorld msg="Vite + Vue"/>
+        <HelloWorld msg="Vite + Vue"/>
+        <HelloWorld msg="Vite + Vue"/>
+        <HelloWorld msg="Vite + Vue"/>
+        <HelloWorld msg="Vite + Vue"/>
+        <HelloWorld msg="Vite + Vue"/>
+        <HelloWorld msg="Vite + Vue"/>
+        <HelloWorld msg="Vite + Vue"/>
+        <HelloWorld msg="Vite + Vue"/>
         <SvgIcon name="yeb" size="16"/>
         <!--        <component :is="currentRole" />-->
     </div>

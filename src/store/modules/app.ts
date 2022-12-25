@@ -17,20 +17,16 @@ const useAppStore = defineStore({
     state: () => ({
         device: DeviceType.desktop,
         // 语言
-        local: undefined,
+        local: '',
         pageLoading: false,
         projectConfig: {
             theme: SETTING.theme,
             showSettings: SETTING.showSettings,
             tagsView: SETTING.tagsView,
-            fixedHeader: SETTING.fixedHeader,
             sidebarLogo: SETTING.sidebarLogo,
         },
         // 侧边栏状态
-        sidebar: {
-            opened: true,
-            withoutAnimation: false,
-        },
+        sidebarOpened: true,
 
         beforeMiniInfo: {},
         messageHrefParams: {},
@@ -48,16 +44,8 @@ const useAppStore = defineStore({
         setProjectConfig(payload: PayLoadObject){
             set(this.projectConfig, payload.key, payload.value)
         },
-        setSidebar(payload: any){
-            set(this.sidebar, payload.key, payload.value)
-        },
-        closeSideBar(withoutAnimation: boolean){
-            this.sidebar.opened = false
-            this.sidebar.withoutAnimation = withoutAnimation
-        },
-        openSideBar(withoutAnimation: boolean){
-            this.sidebar.opened = true
-            this.sidebar.withoutAnimation = withoutAnimation
+        setSidebarOpened(opened: boolean){
+            this.sidebarOpened = opened
         },
         toggleDevice(val: DeviceType){
             this.device = val

@@ -9,6 +9,7 @@ export default {
     deptManagement: 'DepartmentManagement',
     dictManagement: 'DictionaryManagement',
     link: 'Link',
+    github: 'Github',
     document: 'Document',
     components: 'Components',
     tinymce: 'Tinymce',
@@ -42,7 +43,6 @@ export default {
     theme: 'Theme Color',
     showTagsView: 'Open Tags-View',
     showSidebarLogo: 'Sidebar Logo',
-    fixedHeader: 'Fixed Header',
     sidebarTextTheme: 'Sidebar Text Theme'
   }
 }

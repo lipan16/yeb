@@ -83,9 +83,9 @@ let menuList = [
         },
         'children': [
             {
-                'path': 'https://www.cnblogs.com/haoxianrui/',
+                'path': 'https://github.com/lipan16/yeb',
                 'meta': {
-                    'title': 'document', 'icon': 'link', 'hidden': false, 'alwaysShow': false, 'roles': ['ADMIN'], 'keepAlive': true,
+                    'title': 'github', 'icon': 'link', 'hidden': false, 'alwaysShow': false, 'roles': ['ADMIN'], 'keepAlive': true,
                 },
             },
         ],

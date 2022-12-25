@@ -31,7 +31,7 @@ const appStore = useAppStoreWithOut()
 const permissionStore = usePermissionStoreWithOut()
 
 const sidebarLogo = computed(() => appStore.projectConfig.sidebarLogo)
-const isCollapse = computed(() => !appStore.sidebar.opened)
+const isCollapse = computed(() => !appStore.sidebarOpened)
 const activeMenu = computed<string>(() => {
     const {meta, path} = route
     if(meta?.activeMenu){
@@ -44,25 +44,23 @@ const activeMenu = computed<string>(() => {
 <style lang="less">
 .has-logo{
     .el-scrollbar{
-        height: calc(100% - 50px);
+        height: calc(100% - 50px) !important;
     }
 }
 
 .sidebar-container{
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
+    flex-shrink: 0;
     height: 100%;
     width: var(--sidebar-width) !important;
-    transition: width 0.28s;
+    transition: all 0.2s ease 0s;
     background-color: var(--sidebar-menu-bg);
     font-size: 0;
     z-index: 1001;
-    overflow: hidden;
+    overflow-y: visible;
 
     .el-scrollbar{
         height: 100%;
+        overflow-y: visible;
 
         .horizontal-collapse-transition{
             transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;

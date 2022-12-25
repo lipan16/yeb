@@ -1,5 +1,5 @@
 html{
-    --background: #F7F8FA;
+    --bg-color: #F7F8FA;
     --color: #323133;
     --text: #2b2c2d;
     --box-bg: #FFF;
@@ -25,7 +25,7 @@ html{
 }
 
 html.dark{
-    --background: #6483cc;
+    --bg-color: #6483cc;
     --color: #ffffff;
     --text: #f5f7fa;
     --box-bg: #999;
@@ -40,7 +40,7 @@ html, body{
     overflow: hidden;
     box-sizing: border-box;
     color: var(--color);
-    background: var(--background);
+    background-color: var(--bg-color);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -69,6 +69,20 @@ a, a:focus, a:hover{
     cursor: pointer;
     color: inherit;
     text-decoration: none;
+}
+
+::-webkit-scrollbar{
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: #9093994d;
+    border-radius: 2px;
+    box-shadow: inset 0 0 6px #0003;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #0000000d;
 }
 
 #app{

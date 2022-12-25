@@ -10,6 +10,7 @@ declare module '@vue/runtime-core' {
     AppDarkModeToggle: typeof import('./components/Application/AppDarkModeToggle.vue')['default']
     AppLocalePicker: typeof import('./components/Application/AppLocalePicker.vue')['default']
     AppLogo: typeof import('./components/Application/AppLogo.vue')['default']
+    BPITime: typeof import('./components/BPITime/index.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']

@@ -24,7 +24,6 @@ const getClass = computed(() => {
     width: 50px;
     height: 26px;
     padding: 0 6px;
-    margin-left: auto;
     cursor: pointer;
     background-color: #45eeda;
     border-radius: 30px;
@@ -48,5 +47,4 @@ const getClass = computed(() => {
         }
     }
 }
-
 </style>

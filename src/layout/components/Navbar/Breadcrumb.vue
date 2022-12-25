@@ -78,7 +78,7 @@ onBeforeMount(() => {
     font-weight: 400 !important;
 }
 
-.app-breadcrumb.el-breadcrumb{
+.app-breadcrumb{
     display: inline-block;
     font-size: 14px;
     line-height: 50px;
