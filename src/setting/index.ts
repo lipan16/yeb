@@ -6,7 +6,26 @@ export const SETTING = {
     showSettings: true,
     tagsView: true,
     sidebarLogo: true,
-    theme: '#4bc2f5',
+    theme: '#0960bd',
+    APP_PRESET_BG_COLOR: ['#0960bd', '#1890ff', '#009688', '#536dfe', '#ff5c93', '#ee4f12', '#0096c7', '#9c27b0', '#ff9800'],
+    headerTheme: '#ffffff',
+    HEADER_PRESET_BG_COLOR: [
+        '#ffffff',
+        '#151515',
+        '#009688',
+        '#5172dc',
+        '#018ffb',
+        '#409eff',
+        '#e74c3c',
+        '#24292e',
+        '#394664',
+        '#001529',
+        '#383f45',
+    ],
+    // 灰色
+    grayMode: false,
+    // 色弱
+    colorWeak: false,
 
     errorLog: 'production',
 

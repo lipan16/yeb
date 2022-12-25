@@ -21,9 +21,12 @@ const useAppStore = defineStore({
         pageLoading: false,
         projectConfig: {
             theme: SETTING.theme,
+            headerTheme: SETTING.headerTheme,
             showSettings: SETTING.showSettings,
             tagsView: SETTING.tagsView,
             sidebarLogo: SETTING.sidebarLogo,
+            grayMode: SETTING.grayMode,
+            colorWeak: SETTING.colorWeak,
         },
         // 侧边栏状态
         sidebarOpened: true,

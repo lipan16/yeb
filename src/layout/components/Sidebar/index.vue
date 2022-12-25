@@ -55,7 +55,7 @@ const activeMenu = computed<string>(() => {
     transition: all 0.2s ease 0s;
     background-color: var(--sidebar-menu-bg);
     font-size: 0;
-    z-index: 1001;
+    z-index: 899;
     overflow-y: visible;
 
     .el-scrollbar{

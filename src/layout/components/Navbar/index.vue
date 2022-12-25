@@ -1,5 +1,5 @@
 <template>
-    <div class="navbar flex-inline">
+    <div class="navbar flex-inline" :style="{backgroundColor: appStore.projectConfig.headerTheme}">
         <div style="padding: 0 15px" @click="changeMenuCollapse">
             <svg
                 :class="{'is-active': appStore.sidebarOpened}"
@@ -53,7 +53,6 @@ const {isFullscreen, toggle} = useFullscreen()
 const baseX = ref(0)
 
 window.requestAnimationFrame(() => {
-    console.log(baseX.value)
     if(baseX.value >= 0){
         baseX.value = -100
     }
@@ -63,6 +62,9 @@ window.requestAnimationFrame(() => {
 </script>
 
 <style lang="less" scoped>
+.navbar{
+    color: var(--text);
+}
 .hamburger{
     display: inline-block;
     vertical-align: middle;
