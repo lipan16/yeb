@@ -28,23 +28,40 @@
                 </span>
             </div>
         </div>
+        <div>
+            <el-divider content-position="center">菜单主题</el-divider>
+            <div class="themes">
+                <span
+                    v-for="item in SETTING.SIDEBAR_PRESET_BG_COLOR"
+                    key="item"
+                    class="head-theme"
+                    :style="{backgroundColor: item, border: item === sidebarTheme ? '1px solid #4ba9ff': ''}"
+                    @click="themeChange('sidebarTheme', item)"
+                >
+                    <el-icon v-show="item === sidebarTheme" color="#fff"><Check/></el-icon>
+                </span>
+            </div>
+        </div>
 
         <div class="switch-item">
             <span>开启 Tags-View</span>
-            <el-switch v-model="appStore.projectConfig.tagsView" active-text="开" inactive-text="关" inline-prompt/>
+            <el-switch v-model="appStore.projectConfig.tagsView" active-text="开" inactive-text="关" inline-prompt
+                       :style="{'--el-switch-on-color': appStore.projectConfig.theme}"/>
         </div>
-
         <div class="switch-item">
             <span>侧边栏 Logo</span>
-            <el-switch v-model="appStore.projectConfig.sidebarLogo" active-text="开" inactive-text="关" inline-prompt/>
+            <el-switch v-model="appStore.projectConfig.sidebarLogo" active-text="开" inactive-text="关" inline-prompt
+                       :style="{'--el-switch-on-color': appStore.projectConfig.theme}"/>
         </div>
         <div class="switch-item">
             <span>灰色模式</span>
-            <el-switch v-model="appStore.projectConfig.grayMode" @change="grayModeSwitchChange" active-text="开" inactive-text="关" inline-prompt/>
+            <el-switch v-model="appStore.projectConfig.grayMode" @change="grayModeSwitchChange" active-text="开" inactive-text="关" inline-prompt
+                       :style="{'--el-switch-on-color': appStore.projectConfig.theme}"/>
         </div>
         <div class="switch-item">
             <span>色弱模式</span>
-            <el-switch v-model="appStore.projectConfig.colorWeak" @change="colorWeakSwitchChange" active-text="开" inactive-text="关" inline-prompt/>
+            <el-switch v-model="appStore.projectConfig.colorWeak" @change="colorWeakSwitchChange" active-text="开" inactive-text="关" inline-prompt
+                       :style="{'--el-switch-on-color': appStore.projectConfig.theme}"/>
         </div>
     </div>
 </template>
@@ -56,7 +73,6 @@ import {toggleClassName} from '@/utils'
 
 const appStore = useAppStoreWithOut()
 
-
 function sysThemeChange(value: string){
     appStore.setProjectConfig({key: 'theme', value})
 }
@@ -66,6 +82,7 @@ function themeChange(key: string, value: string){
 }
 
 const headerTheme = computed(() => appStore.projectConfig.headerTheme)
+const sidebarTheme = computed(() => appStore.projectConfig.sidebarTheme)
 
 function grayModeSwitchChange(value: boolean){
     toggleClassName(value, 'gray-mode', document.documentElement)

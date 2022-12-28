@@ -94,14 +94,14 @@ function resolvePath(routePath: string){
 .yeb-el-menu--popup-container{
     .el-menu-item{
         &:hover{
-            background-color: var(--sidebar-sub-menu-hover) !important;
-            color: var(--sidebar-sub-menu-active-text) !important;
+            background-color: var(--el-menu-hover-color) !important;
+            color: var(--el-menu-active-color) !important;
         }
     }
     .nest-menu .el-sub-menu .el-sub-menu__title{
         &:hover{
-            background-color: var(--sidebar-sub-menu-hover) !important;
-            color: var(--sidebar-sub-menu-active-text) !important;
+            background-color: var(--el-menu-hover-color) !important;
+            color: var(--el-menu-active-color) !important;
         }
     }
 }

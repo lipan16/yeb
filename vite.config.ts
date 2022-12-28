@@ -93,6 +93,22 @@ export default defineConfig(({mode}) => {
                 },
             },
         },
+        build: {
+            cssCodeSplit: false,
+            sourcemap: false,
+            outDir: 'dist',
+            emptyOutDir: true,
+            chunkSizeWarningLimit: 1500,
+            rollupOptions: {
+                output: {
+                    manualChunks: {
+                        // 分包配置，配置完成自动按需加载
+                        vue: ['vue', 'vue-router', 'pinia', 'vue-i18n', 'element-plus'],
+                        echarts: ['echarts'],
+                    },
+                },
+            },
+        },
         css: {
             preprocessorOptions: {
                 less: {

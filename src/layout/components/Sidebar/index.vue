@@ -1,5 +1,5 @@
 <template>
-    <div :class="{'has-logo': sidebarLogo,  'sidebar-container': true}">
+    <div :class="{'has-logo': sidebarLogo,  'sidebar-container': true}" :style="{backgroundColor: appStore.projectConfig.sidebarTheme}">
         <SidebarLogo v-show="sidebarLogo" :collapse="isCollapse"/>
         <el-scrollbar wrap-class="scrollbar-wrapper">
             <el-menu
@@ -9,9 +9,14 @@
                 :unique-opened="true"
                 :collapse-transition="false"
                 :router="true"
-                background-color="var(--sidebar-menu-bg)"
-                text-color="var(--sidebar-menu-text)"
-                active-text-color="var(--sidebar-menu-active-text)"
+                :style="{
+                    '--el-menu-bg-color': appStore.projectConfig.sidebarTheme,
+                    '--el-menu-hover-bg-color': appStore.projectConfig.sidebarTheme,
+                    '--el-menu-hover-color': appStore.projectConfig.theme,
+                    '--el-menu-active-color': appStore.projectConfig.theme,
+                    '--sidebar-sub-menu-hover': appStore.projectConfig.theme,
+                    '--text-color': appStore.projectConfig.theme,
+                }"
             >
                 <SidebarItem v-for="route in permissionStore.routes" :key="route.path" :item="route" :base-path="route.path" :is-collapse="isCollapse"/>
             </el-menu>
@@ -52,8 +57,7 @@ const activeMenu = computed<string>(() => {
     flex-shrink: 0;
     height: 100%;
     width: var(--sidebar-width) !important;
-    transition: all 0.2s ease 0s;
-    background-color: var(--sidebar-menu-bg);
+    transition: width .3s ease 0s;
     font-size: 0;
     z-index: 899;
     overflow-y: visible;
@@ -61,10 +65,6 @@ const activeMenu = computed<string>(() => {
     .el-scrollbar{
         height: 100%;
         overflow-y: visible;
-
-        .horizontal-collapse-transition{
-            transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
-        }
 
         .scrollbar-wrapper{
             overflow-x: hidden !important;
@@ -122,8 +122,7 @@ const activeMenu = computed<string>(() => {
         // menu hover
         .submenu-title-noDropdown, .el-sub-menu__title{
             &:hover{
-                color: var(--sidebar-menu-active-text) !important;
-                background-color: var(--sidebar-menu-hover) !important;
+                color: var(--el-menu-hover-color) !important;
             }
         }
 
@@ -131,21 +130,12 @@ const activeMenu = computed<string>(() => {
             background-color: var(--sidebar-sub-menu-bg) !important;
 
             &.is-active{
-                background-color: var(--sidebar-sub-menu-hover) !important;
-                color: var(--sidebar-sub-menu-active-text) !important;
+                background-color: rgba(255, 92, 147, .1) !important;
             }
 
             &:hover{
-                color: var(--sidebar-sub-menu-active-text) !important;
+                color: var(--el-menu-hover-color) !important;
             }
-        }
-        .nest-menu .el-sub-menu .el-sub-menu__title{
-            //background-color: var(--sidebar-sub-menu-bg) !important;
-            //
-            //&:hover{
-            //    background-color: var(--sidebar-sub-menu-hover) !important;
-            //    color: var(--sidebar-sub-menu-active-text) !important;
-            //}
         }
     }
 }

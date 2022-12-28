@@ -92,7 +92,6 @@ function handleOutsideClick(){
 // mobile responsive
 .mobile{
     .sidebar-container{
-        transition: all 0.2s ease 0s;
         width: var(--sidebar-width) !important;
     }
 
@@ -115,47 +114,7 @@ function handleOutsideClick(){
 }
 
 .main-container{
-    transition: all 0.2s ease 0s;
     position: relative;
     width: 100%;
-
-    .test{
-        height: 50px;
-        position: relative;
-
-        .bg-scroll{
-            position: absolute;
-            width: 100%;
-            height: 50px;
-            z-index: -1;
-            left: 0;
-            right: 0;
-            display: flex;
-            max-width: 100%;
-            max-height: 100%;
-
-            .scrolls{
-                width: 100%;
-                height: 100%;
-                display: flex;
-                flex-shrink: 0;
-
-                .scroll-container-1{
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 0;
-                    background-image: linear-gradient(90deg, rgb(255, 145, 0) 0%, rgb(255, 128, 82) 22.496%, rgb(255, 66, 145) 41.248%, rgb(214, 0, 193) 58.752%, rgb(157, 0, 224) 77.504%, rgb(111, 0, 255) 100%);
-                }
-
-                .scroll-container-2{
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 0;
-                    background-image: linear-gradient(270deg, rgb(255, 145, 0) 0%, rgb(255, 128, 82) 22.496%, rgb(255, 66, 145) 41.248%, rgb(214, 0, 193) 58.752%, rgb(157, 0, 224) 77.504%, rgb(111, 0, 255) 100%);
-                }
-
-            }
-        }
-    }
 }
 </style>

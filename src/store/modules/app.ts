@@ -25,6 +25,7 @@ const useAppStore = defineStore({
             showSettings: SETTING.showSettings,
             tagsView: SETTING.tagsView,
             sidebarLogo: SETTING.sidebarLogo,
+            sidebarTheme: SETTING.sidebarTheme,
             grayMode: SETTING.grayMode,
             colorWeak: SETTING.colorWeak,
         },

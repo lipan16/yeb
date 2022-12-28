@@ -6,7 +6,7 @@ export const SETTING = {
     showSettings: true,
     tagsView: true,
     sidebarLogo: true,
-    theme: '#0960bd',
+    theme: '#fd726d',
     APP_PRESET_BG_COLOR: ['#0960bd', '#1890ff', '#009688', '#536dfe', '#ff5c93', '#ee4f12', '#0096c7', '#9c27b0', '#ff9800'],
     headerTheme: '#ffffff',
     HEADER_PRESET_BG_COLOR: [
@@ -21,6 +21,18 @@ export const SETTING = {
         '#394664',
         '#001529',
         '#383f45',
+    ],
+    sidebarTheme: '#ffffff',
+    SIDEBAR_PRESET_BG_COLOR: [
+        '#ffffff',
+        '#409eff',
+        '#009688',
+        '#27ae60',
+        '#e74c3c',
+        '#fd726d',
+        '#f39c12',
+        '#9b59b6',
+        '#5172dc',
     ],
     // 灰色
     grayMode: false,
