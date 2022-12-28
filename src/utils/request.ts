@@ -13,6 +13,7 @@ const Request = axios.create({
 Request.interceptors.request.use((config) => {
     const userStore = useUserStoreWithOut()
     if(userStore.token){
+        // @ts-ignore
         config.headers['X-Access-Token'] = userStore.token
     }
     return config

@@ -16,7 +16,7 @@ import {DeviceType, useAppStoreWithOut} from '@/store/modules/app'
 
 const appStore = useAppStoreWithOut()
 
-const sidebar = computed(() => appStore.sidebar)
+const sidebar = computed(() => appStore.sidebarOpened)
 const device = computed(() => appStore.device)
 
 const props = defineProps({
@@ -29,8 +29,8 @@ const props = defineProps({
 const router = useRouter()
 
 function push(){
-    if(device.value === DeviceType.mobile && sidebar.value.opened == true){
-        appStore.closeSideBar(false)
+    if(device.value === DeviceType.mobile && sidebar.value){
+        appStore.setSidebarOpened(false)
     }
     router.push(props.to).catch(err => {
         console.error(err)

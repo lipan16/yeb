@@ -14,6 +14,9 @@ import {setupGlobDirectives} from '@/directive'
 // 注册svg图片
 import 'virtual:svg-icons-register'
 
+// 生产环境 当服务端首页有更新时，自动更新html
+import '@/utils/autoUpdateHtml'
+
 async function booting(){
     // 创建应用实例
     const app = createApp(App)

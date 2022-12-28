@@ -68,6 +68,7 @@ const loginForm = reactive({
 
 // 校验规则
 const validateUsername = (rule, value, callback) => {
+    console.log('rule', rule)
     if(!value){
         callback(new Error('Please enter the correct user name'))
     }else{
@@ -76,6 +77,7 @@ const validateUsername = (rule, value, callback) => {
 }
 
 const validatePassword = (rule, value, callback) => {
+    console.log('rule', rule)
     if(value.length > 6){
         callback(new Error('The password can not be less than 6 digits'))
     }else{
@@ -92,7 +94,7 @@ const rulesLoginForm = reactive<FormRules>({
 
 const loading = ref(false)
 
-async function handleLogin(form: FormInstance | undefined){
+async function handleLogin(form: FormInstance){
     await form.validate(valid => {
         if(valid){
             loading.value = true

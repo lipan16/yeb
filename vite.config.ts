@@ -94,17 +94,29 @@ export default defineConfig(({mode}) => {
             },
         },
         build: {
+            minify: 'esbuild',
+            target: 'es2015',
+            cssTarget: 'chrome80',
             cssCodeSplit: false,
             sourcemap: false,
             outDir: 'dist',
             emptyOutDir: true,
+            terserOptions: {
+                compress: {
+                    keep_infinity: true,
+                    // Used to delete console in production environment
+                    drop_console: true,
+                    drop_debugger: true,
+                },
+            },
+            // Turning off brotliSize display can slightly reduce packaging time
+            reportCompressedSize: false,
             chunkSizeWarningLimit: 1500,
             rollupOptions: {
                 output: {
                     manualChunks: {
                         // 分包配置，配置完成自动按需加载
                         vue: ['vue', 'vue-router', 'pinia', 'vue-i18n', 'element-plus'],
-                        echarts: ['echarts'],
                     },
                 },
             },

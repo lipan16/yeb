@@ -40,8 +40,8 @@ function moveToTarget(currentTag: TagView){
 
     // find first tag and last tag
     if(tagsViewStore.visitedViews.length > 0){
-        firstTag = tagsViewStore.visitedViews[0]
-        lastTag = tagsViewStore.visitedViews[tagsViewStore.visitedViews.length - 1]
+        firstTag = tagsViewStore.visitedViews[0] as any
+        lastTag = tagsViewStore.visitedViews[tagsViewStore.visitedViews.length - 1] as any
     }
 
     if(firstTag === currentTag){
@@ -56,10 +56,10 @@ function moveToTarget(currentTag: TagView){
         for(const k in tagListDom){
             if(k !== 'length' && Object.hasOwnProperty.call(tagListDom, k)){
                 if((tagListDom[k] as any).dataset.path === tagsViewStore.visitedViews[currentIndex - 1].path){
-                    prevTag = tagListDom[k]
+                    prevTag = tagListDom[k] as any
                 }
                 if((tagListDom[k] as any).dataset.path === tagsViewStore.visitedViews[currentIndex + 1].path){
-                    nextTag = tagListDom[k]
+                    nextTag = tagListDom[k] as any
                 }
             }
         }

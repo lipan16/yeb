@@ -61,7 +61,7 @@ export function getUrlParam(paraName){
  * @param pEnd 结束位置
  * @returns {string}
  */
-String.prototype.sliceByPoint = function(pStart, pEnd){
+String.prototype['sliceByPoint'] = function(pStart: number, pEnd: number){
     let result = '' // 截取的结果
     let pIndex = 0 // 码点的指针
     let cIndex = 0 // 码元的指针
