@@ -144,4 +144,14 @@ const yebRequest = <D = any, T = any>(config: YEBRequestConfig<D, T>) => {
     return yAxios.request<YEBResponse<T>>(config)
 }
 
+// 取消请求
+export const cancelRequest = (url: string | string[]) => {
+    return yAxios.cancelRequest(url)
+}
+
+// 取消全部请求
+export const cancelAllRequest = () => {
+    return yAxios.cancelAllRequest()
+}
+
 export default yebRequest
