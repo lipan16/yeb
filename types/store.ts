@@ -53,3 +53,9 @@ export interface LoginData{
      */
     // verifyCodeKey: string;
 }
+
+export interface LoginResponseData{
+    accessToken: string,
+    user_id: number,
+    name: string
+}
