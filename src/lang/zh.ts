@@ -29,6 +29,7 @@ export default {
     username: '账号',
     password: '密码',
     captcha: '验证码',
+    holdSession: '保持会话'
   },
   tagsView: {
     refresh: '刷新',

@@ -28,7 +28,8 @@ export default {
     login: 'Login',
     username: 'Username',
     password: 'Password',
-    captcha: 'Captcha'
+    captcha: 'Captcha',
+    holdSession: 'Hold Session'
   },
   tagsView: {
     refresh: 'Refresh',

@@ -118,6 +118,7 @@ export const LoginInfo = (query) => {
     // if(username === '010924' && password === 'cib@1234'){
     return {
         code: '200',
+        message: 'ok',
         data: {
             user_id: Random.id(),
             name: Random.cname(),
