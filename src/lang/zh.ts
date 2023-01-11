@@ -29,7 +29,13 @@ export default {
     username: '账号',
     password: '密码',
     captcha: '验证码',
-    holdSession: '保持会话'
+    holdSession: '保持会话',
+    'please enter captcha': '请输入验证码',
+    success: '登录成功',
+    error: '登录失败',
+    waring: 'waring',
+    'password validate error': '密码校验失败',
+    'please enter an account': '请输入账号',
   },
   tagsView: {
     refresh: '刷新',

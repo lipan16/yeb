@@ -8,6 +8,8 @@ import UTF8 from 'crypto-js/enc-utf8'
 import Base64 from 'crypto-js/enc-base64'
 import md5 from 'crypto-js/md5'
 
+import {cacheCipher} from "@/setting/KEY"
+
 export class AesEncryption {
     private key;
     private iv;
@@ -50,4 +52,11 @@ export function decodeByBase64(cipherText: string) {
 
 export function encryptByMd5(password: string) {
     return md5(password).toString();
+}
+
+export const useEncryption = (opt: Partial<EncryptionParams> = cacheCipher) => {
+    if([opt.key?.length, opt.iv?.length].some((item) => item !== 16)){
+        throw new Error('When hasEncrypt is true, the key or iv must be 16 bits!')
+    }
+    return new AesEncryption(opt)
 }

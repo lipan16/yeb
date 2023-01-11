@@ -29,27 +29,22 @@ export const useUserStore = defineStore('user', () => {
     // actions
 
     // 登录
-    function login(loginData: LoginData){
-        return new Promise<void>((resolve, reject) => {
-            Api.auth.login(loginData).then(response => {
-                const {accessToken} = response.data
-                token.value = accessToken
-                setAuthCache(TOKEN_KEY, accessToken)
-                resolve()
-            }).catch(error => {
-                reject(error)
-            })
+    function login(loginData: LoginData) {
+        return Api.auth.login(loginData).then(response => {
+            const {accessToken} = response.data
+            token.value = accessToken
+            setAuthCache(TOKEN_KEY, accessToken)
         })
     }
 
     // 获取信息(用户昵称、头像、角色集合、权限集合)
-    function getUserInfo(){
+    function getUserInfo() {
         return new Promise<UserInfo>((resolve, reject) => {
             Api.auth.getUserInfo().then(({data}) => {
-                if(!data){
+                if (!data) {
                     return reject('Verification failed, please Login again.')
                 }
-                if(!data.roles || data.roles.length <= 0){
+                if (!data.roles || data.roles.length <= 0) {
                     reject('getUserInfo: roles must be a non-null array!')
                 }
                 lastUpdateTime.value = new Date().getTime()
@@ -65,20 +60,15 @@ export const useUserStore = defineStore('user', () => {
     }
 
     // 注销
-    function logout(){
-        return new Promise<void>((resolve, reject) => {
-            Api.auth.logout().then(() => {
-                resetRouter()
-                resetToken()
-                resolve()
-            }).catch(error => {
-                reject(error)
-            })
+    function logout() {
+        return Api.auth.logout().then(() => {
+            resetRouter()
+            resetToken()
         })
     }
 
     // 重置
-    function resetToken(){
+    function resetToken() {
         removeAuthCache(TOKEN_KEY)
         token.value = ''
         nickname.value = ''
@@ -102,6 +92,6 @@ export const useUserStore = defineStore('user', () => {
 })
 
 // 非setup Need to be used outside the setup
-export function useUserStoreWithOut(){
+export function useUserStoreWithOut() {
     return useUserStore(store)
 }

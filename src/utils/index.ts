@@ -70,7 +70,7 @@ String.prototype['sliceByPoint'] = function(pStart: number, pEnd: number){
             break
         }
         // 获取字符的码点值
-        const point = this.codePointAt(cIndex)
+        const point = this.codePointAt(cIndex) as number
         if(pIndex >= pStart){
             // 根据码点恢复字符
             result += String.fromCodePoint(point)

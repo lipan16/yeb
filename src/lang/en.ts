@@ -29,7 +29,13 @@ export default {
     username: 'Username',
     password: 'Password',
     captcha: 'Captcha',
-    holdSession: 'Hold Session'
+    holdSession: 'Hold Session',
+    'please enter captcha': 'Please enter captcha',
+    success: 'login success',
+    error: 'login error',
+    waring: 'waring',
+    'password validate error': 'password validate error',
+    'please enter an account': 'please enter an account',
   },
   tagsView: {
     refresh: 'Refresh',
