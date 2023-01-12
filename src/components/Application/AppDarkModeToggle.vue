@@ -25,7 +25,7 @@ const getClass = computed(() => {
     height: 26px;
     padding: 0 6px;
     cursor: pointer;
-    background-color: #45eeda;
+    background-color: var(--box-bg);
     border-radius: 30px;
     justify-content: space-between;
     align-items: center;
@@ -35,7 +35,7 @@ const getClass = computed(() => {
         z-index: 1;
         width: 18px;
         height: 18px;
-        background-color: #fff;
+        background-color: var(--btn-bg);
         border-radius: 50%;
         transition: transform 0.5s, background-color 0.5s;
         will-change: transform;

@@ -33,7 +33,7 @@ export default {
     'please enter captcha': '请输入验证码',
     success: '登录成功',
     error: '登录失败',
-    waring: 'waring',
+    warning: 'warning',
     'password validate error': '密码校验失败',
     'please enter an account': '请输入账号',
   },

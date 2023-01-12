@@ -1,6 +1,6 @@
 <template>
     <svg aria-hidden="true" class="svg-icon" :style="getStyle">
-        <use :href="symbolId"/>
+        <use :href="symbolId" :fill="color"/>
     </svg>
 </template>
 
@@ -19,10 +19,10 @@ export default defineComponent({
         const symbolId = computed(() => `#${props.prefix}-${props.name}`)
 
         const getStyle = computed(() => {
-            const {size, color} = props
+            const {size} = props
             let s = `${size}`
             s = `${s.replace('px', '')}px`
-            return {width: s, height: s, fill: color}
+            return {width: s, height: s}
         })
 
         return {symbolId, getStyle}
@@ -32,6 +32,7 @@ export default defineComponent({
 <style scoped>
 .svg-icon{
     vertical-align: -0.15em;
+    position: relative;
     overflow: hidden;
     fill: currentColor;
 }

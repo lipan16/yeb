@@ -33,7 +33,7 @@ export default {
     'please enter captcha': 'Please enter captcha',
     success: 'login success',
     error: 'login error',
-    waring: 'waring',
+    warning: 'warning',
     'password validate error': 'password validate error',
     'please enter an account': 'please enter an account',
   },

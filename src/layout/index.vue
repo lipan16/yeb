@@ -29,15 +29,6 @@ import {DeviceType, useAppStoreWithOut} from '@/store/modules/app'
 const {width} = useWindowSize()
 const appStore = useAppStoreWithOut()
 
-/**
- * 响应式布局容器固定宽度
- *
- * 大屏（>=1200px）
- * 中屏（>=992px）
- * 小屏（>=768px）
- */
-const WIDTH = 768
-
 const showTagsView = computed(() => appStore.projectConfig.tagsView)
 const showSettings = computed(() => appStore.projectConfig.showSettings)
 
@@ -47,16 +38,28 @@ const classObj = computed(() => ({
     mobile: appStore.device === DeviceType.mobile,
 }))
 
+/**
+ * 响应式布局容器固定宽度
+ * xs: < 768px
+ * sm: >= 768px
+ * md: >= 992px
+ * lg: >= 1200px
+ * xl: >= 1920px
+ *
+ * 大屏（>=1200px）
+ * 中屏（>=992px）
+ * 小屏（>=768px）
+ */
 watchEffect(() => {
     console.log('watchEffect', width.value)
-    if(width.value < WIDTH){
+    
+    if(width.value < 768){
         appStore.toggleDevice(DeviceType.mobile)
         appStore.setSidebarOpened(false)
     }else{
         appStore.toggleDevice(DeviceType.desktop)
 
         if(width.value >= 1200){
-            //大屏
             appStore.setSidebarOpened(true)
         }else{
             appStore.setSidebarOpened(false)

@@ -1,5 +1,7 @@
 <template>
     <div class="login flex-list">
+        <div id="login-three-container"/>
+
         <div class="login-header flex-inline">
             <AppDarkModeToggle/>
             <AppLocalePicker/>
@@ -15,7 +17,7 @@
 
                 <img class="avatar" src="@/assets/avatar.png" alt=""/>
 
-                <div class="title-container">{{ $t('login.title') }}</div>
+                <div class="title">{{ $t('login.title') }}</div>
 
                 <el-form-item prop="username">
                     <el-input
@@ -56,7 +58,7 @@
                     />
                     <div class="captcha">
                         {{ loginForm.captcha_id }}
-<!--                        <img @click="onChangeCaptcha" class="captcha-img" :src="'&id=' + loginForm.captcha_id" alt=""/>-->
+                        <!--                        <img @click="onChangeCaptcha" class="captcha-img" :src="'&id=' + loginForm.captcha_id" alt=""/>-->
                     </div>
                 </el-form-item>
 
@@ -71,8 +73,8 @@
 </template>
 
 <script lang="ts" setup>
-import {useI18n} from "vue-i18n"
-import {clone} from "lodash"
+import {useI18n} from 'vue-i18n'
+import {clone} from 'lodash'
 import {ElMessage, FormInstance, FormRules} from 'element-plus'
 import {UserFilled, Lock} from '@element-plus/icons-vue'
 
@@ -81,8 +83,8 @@ import AppDarkModeToggle from '@/components/Application/AppDarkModeToggle.vue'
 import AppLogo from '@/components/Application/AppLogo.vue'
 import {useUserStoreWithOut} from '@/store/modules/user'
 import {router} from '@/router'
-import {getUrlParam} from "@/utils"
-import {useEncryption} from "@/utils/encrypt"
+import {getUrlParam} from '@/utils'
+import {useEncryption} from '@/utils/encrypt'
 
 const userStore = useUserStoreWithOut()
 const {t} = useI18n()
@@ -124,7 +126,7 @@ const validateCaptcha = (rule, value, callback) => {
 
 const rulesLoginForm = reactive<FormRules>({
     username: [
-        {required: true, trigger: 'blur', validator: validateUsername}
+        {required: true, trigger: 'blur', validator: validateUsername},
     ],
     password: [{required: true, trigger: 'blur', validator: validatePassword}],
     captcha: [{required: true, trigger: 'blur', validator: validateCaptcha}],
@@ -141,7 +143,7 @@ async function handleLogin(form: FormInstance){
     // todo bug 使用toRaw方法后返回新对象，修改新对象会影响原reactive的对象
     const loginParams = clone(loginForm)
     loginParams.password = encryption.encryptByAES(loginParams.password)
-    
+
     await form.validate(valid => {
         if(valid){
             loading.value = true
@@ -154,7 +156,7 @@ async function handleLogin(form: FormInstance){
                 onChangeCaptcha()
             })
         }else{
-            ElMessage({type: 'waring', message: t('login.waring')})
+            ElMessage({type: 'warning', message: t('login.warning')})
             console.error('error submit')
             onChangeCaptcha()
         }
@@ -167,10 +169,12 @@ async function handleLogin(form: FormInstance){
 .login{
     height: 100%;
     width: 100%;
+    position: relative;
 }
 
 .login-header{
     justify-content: flex-end;
+    margin-right: 20px;
 }
 
 .login-content{
@@ -181,6 +185,34 @@ async function handleLogin(form: FormInstance){
 
     .head{
         background: #ccccff;
+        position: relative;
+        overflow: hidden;
+        outline: none;
+        border: none;
+        z-index: 1;
+
+        &:before{
+            content: '';
+            position: absolute;
+            background-color: red;
+            z-index: -2;
+            width: 100%;
+            height: 100%;
+            left: 50%;
+            top: 50%;
+            transform-origin: 0 0;
+            animation: rotate 3s infinite linear;
+        }
+
+        &:after{
+            position: absolute;
+            content: '';
+            width: calc(100% - 4px);
+            height: calc(100% - 4px);
+            left: 2px;
+            top: 2px;
+            z-index: -1;
+        }
 
         img{
             display: block;
@@ -188,61 +220,108 @@ async function handleLogin(form: FormInstance){
             user-select: none;
         }
     }
-}
 
-@media (min-width: 576px){
     .login-form{
-        width: 100%;
-    }
-}
+        position: relative;
+        border: 0 2px 12px 0 var(--border-shadow);
+        background: var(--box-bg);
+        border-radius: var(--border-radius);
+        padding: 50px 32px;
+        z-index: 2;
 
-.login-form{
-    position: relative;
-    border: 0 2px 12px 0 var(--border-shadow);
-    background: var(--box-bg);
-    border-radius: var(--border-radius);
-    padding: 50px 32px;
+        .avatar{
+            display: block;
+            position: absolute;
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            top: -50px;
+            right: calc(50% - 50px);
+            user-select: none;
+        }
 
-    .avatar{
-        display: block;
-        position: absolute;
-        height: 100px;
-        width: 100px;
-        border-radius: 50%;
-        top: -50px;
-        right: calc(50% - 50px);
-        user-select: none;
-    }
+        .title{
+            position: relative;
+            text-align: center;
+            color: var(--text);
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px var(--border-shadow);
+            font-size: 32px;
+            line-height: 40px;
+            margin-top: 16px;
+            margin-bottom: 22px;
+            cursor: pointer;
 
-    .title-container{
-        text-align: center;
-        color: var(--text);
-        letter-spacing: 1px;
-        text-shadow: 0 0 10px var(--border-shadow);
-        font-size: 32px;
-        line-height: 40px;
-        margin-top: 16px;
-        margin-bottom: 22px;
-    }
-
-    .login-captcha{
-        .el-form-item__content{
-            .el-input{
-                width: 60%;
+            &:before, &:after{
+                content: '';
+                position: absolute;
+                left: 0;
+                right: 0;
+                height: 2px;
+                background-color: #fc2f70;
+                transform: scaleX(0);
+                transition: transform .5s ease;
             }
 
-            .captcha{
-                width: 40%;
-                text-align: center;
+            &:before{
+                top: 0;
+                transform-origin: center right;
+            }
+
+            &:hover::before{
+                transform-origin: center left;
+                transform: scaleX(1);
+            }
+
+            &:after{
+                bottom: 0;
+                transform-origin: center left;
+            }
+
+            &:hover::after{
+                transform-origin: center right;
+                transform: scaleX(1);
+            }
+        }
+
+        .login-captcha{
+            .el-form-item__content{
+                .el-input{
+                    width: 60%;
+                }
+
+                .captcha{
+                    width: 40%;
+                    text-align: center;
+                }
+            }
+        }
+
+        .btn{
+            width: 100%;
+            text-align: center;
+            margin-top: 16px;
+            --el-button-bg-color: var(--el-color-primary);
+
+            &:hover{
+
             }
         }
     }
+}
 
-    .btn{
-        width: 100%;
-        text-align: center;
-        margin-top: 16px;
-        --el-button-bg-color: var(--el-color-primary);
+@keyframes rotate{
+    to{
+        transform: rotate(1turn);
+    }
+
+}
+
+@media screen and (max-width: 768px){
+    .login-content{
+        padding-top: 10px;
+        width: 340px;
     }
 }
+
 </style>
