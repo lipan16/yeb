@@ -40,34 +40,36 @@ let menuList = [
     {
         'path': '/multi-level-menu', 'component': 'Layout', 'redirect': '/nested/level1/level2',
         'meta': {
-            'title': '多级菜单', 'icon': 'nested', 'hidden': false, 'alwaysShow': true, 'roles': ['ADMIN'], 'keepAlive': true,
+            'title': 'multi-level-menu', 'icon': 'nested', 'hidden': false, 'alwaysShow': true, 'roles': ['ADMIN'], 'keepAlive': true,
         },
         'children': [
             {
                 'path': 'nested_level1_index', 'component': 'nested/level1/index', 'redirect': '/nested/level1/level2',
                 'meta': {
-                    'title': '菜单一级', 'icon': '', 'hidden': false, 'alwaysShow': true, 'roles': ['ADMIN'], 'keepAlive': true,
+                    'title': 'nested_level1', 'icon': '', 'hidden': false, 'alwaysShow': true, 'roles': ['ADMIN'], 'keepAlive': true,
                 },
                 'children': [
                     {
                         'path': 'nested_level1_level2_index', 'component': 'nested/level1/level2/index',
                         'redirect': '/nested/level1/level2/level3',
                         'meta': {
-                            'title': '菜单二级', 'icon': '', 'hidden': false, 'alwaysShow': true, 'roles': ['ADMIN'], 'keepAlive': true,
+                            'title': 'nested_level1_level2', 'icon': '', 'hidden': false, 'alwaysShow': true, 'roles': ['ADMIN'], 'keepAlive': true,
                         },
                         'children': [
                             {
                                 'path': 'nested_level1_level2_level3_index1', 'component': 'nested/level1/level2/level3/index1',
                                 'name': 'nested_level1_level2_level3_index1',
                                 'meta': {
-                                    'title': '菜单三级-1', 'icon': '', 'hidden': false, 'alwaysShow': false, 'roles': ['ADMIN'], 'keepAlive': true,
+                                    'title': 'nested_level1_level2_level3_index1', 'icon': '', 'hidden': false, 'alwaysShow': false, 'roles': ['ADMIN'],
+                                    'keepAlive': true,
                                 },
                             },
                             {
                                 'path': 'nested_level1_level2_level3_index2', 'component': 'nested/level1/level2/level3/index2',
                                 'name': 'nested_level1_level2_level3_index2',
                                 'meta': {
-                                    'title': '菜单三级-2', 'icon': '', 'hidden': false, 'alwaysShow': false, 'roles': ['ADMIN'], 'keepAlive': true,
+                                    'title': 'nested_level1_level2_level3_index2', 'icon': '', 'hidden': false, 'alwaysShow': false, 'roles': ['ADMIN'],
+                                    'keepAlive': true,
                                 },
                             },
                         ],
@@ -143,7 +145,6 @@ const UserInfo = {
     'roles': ['ADMIN'],
     'perms': ['sys:user:edit', 'sys:user:delete', 'sys:user:add'],
 }
-
 
 export default [
     {

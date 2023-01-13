@@ -52,7 +52,7 @@ const classObj = computed(() => ({
  */
 watchEffect(() => {
     console.log('watchEffect', width.value)
-    
+
     if(width.value < 768){
         appStore.toggleDevice(DeviceType.mobile)
         appStore.setSidebarOpened(false)
@@ -113,7 +113,7 @@ function handleOutsideClick(){
     top: 0;
     height: 100%;
     position: absolute;
-    z-index: 900;
+    z-index: 890;
 }
 
 .main-container{

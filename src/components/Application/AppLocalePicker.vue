@@ -1,7 +1,7 @@
 <template>
     <el-dropdown class="lang-select" trigger="click" @command="handleLocale">
-        <div class="lang-select__icon">
-            <SvgIcon name="language" color="red"/>
+        <div>
+            <SvgIcon name="language"/>
         </div>
         <template #dropdown>
             <el-dropdown-menu>
@@ -32,5 +32,8 @@ async function handleLocale(lang: string){
 <style lang="less" scoped>
 .lang-select{
     margin: 8px;
+    .svg-icon{
+        fill: var(--text)
+    }
 }
 </style>
