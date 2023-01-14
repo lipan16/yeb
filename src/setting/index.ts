@@ -1,5 +1,7 @@
 export const SETTING = {
-
+    BPI_TIME_1: '2018-11-04 18:36:00',
+    BPI_TIME_2: '2020-11-07 12:20:00',
+    BPI_TIME_3: '2022-01-16 11:32:00',
     // 页面标题
     title: import.meta.env.VITE_APP_TITLE,
     // 是否展示设置按钮

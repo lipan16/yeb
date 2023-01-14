@@ -24,10 +24,10 @@
 import welcomeSvg from '@/assets/svg/welcome.svg'
 import coffeeSvg from '@/assets/svg/coffee.svg'
 import {useUserStoreWithOut} from '@/store/modules/user'
-import dayjs from 'dayjs'
+import moment from 'moment'
 
 const userStore = useUserStoreWithOut()
-const workingTime = dayjs()
+const workingTime = moment()
 
 const workState = ref(true)
 
