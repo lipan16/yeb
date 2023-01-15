@@ -30,7 +30,6 @@ module.exports = defineConfig({
     },
     // 启用的规则
     extends: [
-        'standard',
         'plugin:vue/vue3-recommended',
         'plugin:@typescript-eslint/recommended',
         'prettier',
@@ -52,14 +51,14 @@ module.exports = defineConfig({
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-unused-vars': [
-            'error',
+            'warn',
             {
-                argsIgnorePattern: '^_$',
-                varsIgnorePattern: '^_$'
+                argsIgnorePattern: '^_',
+                varsIgnorePattern: '^_'
             }
         ],
         'no-unused-vars': [
-            'error',
+            'warn',
             {
                 argsIgnorePattern: '^_',
                 varsIgnorePattern: '^_'

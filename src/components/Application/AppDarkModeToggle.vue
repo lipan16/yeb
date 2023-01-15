@@ -26,6 +26,7 @@ const getClass = computed(() => {
     padding: 0 6px;
     cursor: pointer;
     border: 1px solid;
+    flex-shrink: 0;
     background-color: var(--box-bg);
     border-radius: 30px;
     justify-content: space-between;

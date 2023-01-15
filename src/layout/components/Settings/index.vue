@@ -73,7 +73,7 @@ import {toggleClassName} from '@/utils'
 
 const appStore = useAppStoreWithOut()
 
-function sysThemeChange(value: string){
+function sysThemeChange(value: any){
     appStore.setProjectConfig({key: 'theme', value})
 }
 
@@ -84,11 +84,11 @@ function themeChange(key: string, value: string){
 const headerTheme = computed(() => appStore.projectConfig.headerTheme)
 const sidebarTheme = computed(() => appStore.projectConfig.sidebarTheme)
 
-function grayModeSwitchChange(value: boolean){
+function grayModeSwitchChange(value){
     toggleClassName(value, 'gray-mode', document.documentElement)
 }
 
-function colorWeakSwitchChange(value: boolean){
+function colorWeakSwitchChange(value){
     toggleClassName(value, 'color-weak', document.documentElement)
 }
 

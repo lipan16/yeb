@@ -12,7 +12,7 @@
             <div class="head">
                 <img src="@/assets/login_header.png" alt=""/>
             </div>
-            <el-form @keyup.enter="handleLogin(refLoginForm)" ref="refLoginForm" :model="loginForm" :rules="rulesLoginForm"
+            <el-form ref="refLoginForm" @keyup.enter="handleLogin(refLoginForm)" :model="loginForm" :rules="rulesLoginForm"
                      class="login-form" auto-complete="on" label-position="left" size="large">
 
                 <img class="avatar" src="@/assets/avatar.png" alt=""/>

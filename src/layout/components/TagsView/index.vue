@@ -64,7 +64,7 @@ const router = useRouter()
 const route = useRoute()
 
 const visible = ref(false)
-const selectedTag = ref<TagView>({})
+const selectedTag = ref({})
 const scrollPaneRef = ref()
 const left = ref(0)
 const top = ref(0)
@@ -178,10 +178,7 @@ function refreshSelectedTag(view: TagView){
     })
 }
 
-function toLastView(visitedViews: TagView[], view
-
-    ?: any,
-){
+function toLastView(visitedViews: TagView[], view?: any,){
     const latestView = visitedViews.slice(-1)[0]
     if(latestView && latestView.fullPath){
         router.push(latestView.fullPath)

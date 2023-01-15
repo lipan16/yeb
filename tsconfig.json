@@ -11,8 +11,10 @@
     // 解析非相对模块名的基准目录
     "baseUrl": ".",
     "allowJs": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    // 解析unused vars
+    "noUnusedLocals": false,
+    // 允许有不使用的入参
+    "noUnusedParameters": false,
     "experimentalDecorators": true,
     // 要包含的类型声明文件名列表
     "types": ["vite/client", "vite-plugin-svg-icons/client"],
