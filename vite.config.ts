@@ -15,7 +15,7 @@ export default defineConfig(({mode}) => {
     const env = loadEnv(mode, process.cwd(), '')
     let isBuild = true
     return {
-        base: './',
+        base: env.VITE_APP_PUBLIC_PATH,
         resolve: {
             alias: {
                 'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js',

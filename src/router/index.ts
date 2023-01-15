@@ -59,7 +59,7 @@ export const constantRoutes: RouteRecordRaw[] = [
 ]
 
 export const router = createRouter({
-    history: createWebHistory(import.meta.env.VITE_APP_BASE_URL),
+    history: createWebHistory(import.meta.env.VITE_APP_PUBLIC_PATH),
     routes: constantRoutes,
     strict: true,
     scrollBehavior: () => ({left: 0, top: 0}),
