@@ -98,3 +98,6 @@ export function toggleClassName(flag: boolean, clsName: string, target?: HTMLEle
 export function getRandomColor(){
     return `#${Math.floor(Math.random() * 0xffffff).toString(16)}`
 }
+
+// ts 类型校验：可以是任何类型，但不能是日期
+type BanDate<T> = T extends Date ? never : T;

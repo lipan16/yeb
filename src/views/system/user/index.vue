@@ -1,6 +1,6 @@
 <template>
     <div class="app-container">
-        1
+        user index
         <!--<el-row :gutter="20">-->
         <!--    &lt;!&ndash; 部门树 &ndash;&gt;-->
         <!--    <el-col :span="4" :xs="24">-->

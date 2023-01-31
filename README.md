@@ -11,3 +11,8 @@
 1. 基本模板初始化
 2. header自定义背景色
 
+### rem适配：
+npm i postcss-pxtorem autoprefixer amfe-flexible --save-dev
+    postcss-pxtorem 是PostCSS的插件，用于将像素单元生成rem单位 
+    autoprefixer 浏览器前缀处理插件 
+    amfe-flexible 可伸缩布局方案 替代了原先的lib-flexible 选用了当前众多浏览器兼容的viewport

@@ -11,6 +11,9 @@ import {registerGlobalComponent} from '@/components/registerGlobalComponent'
 import {setupRouterGuard} from '@/router/guard'
 import {setupGlobDirectives} from '@/directive'
 
+// 可伸缩布局
+import "amfe-flexible/index.js"
+
 // 注册svg图片
 import 'virtual:svg-icons-register'
 
