@@ -1,4 +1,4 @@
-import {defineConfig, loadEnv} from 'vite'
+import {ConfigEnv, defineConfig, loadEnv, UserConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -11,9 +11,10 @@ import {createSvgIconsPlugin} from 'vite-plugin-svg-icons'
 import legacy from '@vitejs/plugin-legacy'
 import {viteMockServe} from 'vite-plugin-mock'
 
-export default defineConfig(({mode}) => {
+export default defineConfig(({mode, command}: ConfigEnv): UserConfig => {
     const env = loadEnv(mode, process.cwd(), '')
-    let isBuild = true
+    let isBuild = command === 'build'
+
     return {
         base: env.VITE_APP_PUBLIC_PATH,
         resolve: {
