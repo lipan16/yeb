@@ -48,6 +48,7 @@
 </template>
 
 <script setup lang="ts">
+
 import {getCurrentInstance, ComponentInternalInstance} from 'vue'
 import {useRouter, useRoute} from 'vue-router'
 import path from 'path-browserify'
@@ -269,7 +270,7 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .tags-view__container{
-    height: 36px;
+    height: 34px;
     width: 100%;
     background: var(--bg-color);
     border-bottom: 1px solid #d8dce5;
@@ -280,7 +281,6 @@ onMounted(() => {
             display: inline-block;
             position: relative;
             cursor: pointer;
-            height: 28px;
             line-height: 28px;
             border: 1px solid #d8dce5;
             color: #495060;

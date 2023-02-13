@@ -31,7 +31,7 @@ export default defineComponent({
 </script>
 <style scoped>
 .svg-icon{
-    vertical-align: -0.15em;
+    vertical-align: middle;
     position: relative;
     overflow: hidden;
     fill: currentColor;
