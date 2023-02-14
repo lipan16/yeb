@@ -56,5 +56,10 @@ export default {
     showTagsView: 'Open Tags-View',
     showSidebarLogo: 'Sidebar Logo',
     sidebarTextTheme: 'Sidebar Text Theme'
+  },
+  dashboard: {
+    'You have worked today': 'You have worked today: ',
+    'Continue to work': 'Continue to work',
+    'have a bit of rest': 'have a bit of rest'
   }
 }

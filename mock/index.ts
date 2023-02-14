@@ -122,8 +122,6 @@ export const LoginInfo = (query) => {
         code: '200',
         message: 'ok',
         data: {
-            user_id: Random.id(),
-            name: Random.cname(),
             accessToken: Random.guid(),
         },
     }
@@ -139,8 +137,8 @@ export const LoginInfo = (query) => {
 }
 
 const UserInfo = {
-    'userId': '2',
-    'nickname': '系统管理员',
+    'userId': Random.id(),
+    'nickname': Random.cname(),
     'avatar': 'https://s2.loli.net/2022/04/07/gw1L2Z5sPtS8GIl.gif',
     'roles': ['ADMIN'],
     'perms': ['sys:user:edit', 'sys:user:delete', 'sys:user:add'],

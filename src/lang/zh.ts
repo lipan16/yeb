@@ -56,5 +56,10 @@ export default {
     showTagsView: '显示 Tags-View',
     showSidebarLogo: '显示侧边栏 Logo',
     sidebarTextTheme: '侧边栏文字主题色'
+  },
+  dashboard: {
+    'You have worked today': '您今天已经工作了: ',
+    'Continue to work': '继续工作',
+    'have a bit of rest': '休息一会',
   }
 }
