@@ -94,6 +94,13 @@ export default defineConfig(({mode, command}: ConfigEnv): UserConfig => {
                 },
             },
         },
+        css: {
+            preprocessorOptions: {
+                less: {
+                    javascriptEnabled: true,
+                },
+            },
+        },
         build: {
             minify: 'esbuild',
             target: 'es2015',
@@ -119,16 +126,6 @@ export default defineConfig(({mode, command}: ConfigEnv): UserConfig => {
                         // 分包配置，配置完成自动按需加载
                         vue: ['vue', 'vue-router', 'pinia', 'vue-i18n', 'element-plus'],
                     },
-                },
-            },
-        },
-        css: {
-            preprocessorOptions: {
-                less: {
-                    modifyVars: {
-                        // 'success-color': '#55D187', //  Success color
-                    },
-                    javascriptEnabled: true,
                 },
             },
         },
