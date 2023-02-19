@@ -37,7 +37,13 @@ export default defineComponent({
 @ballSize: 10px; // 小球尺寸
 @containerSize: 100px; // 容器尺寸
 @deg: 360deg / @dots;
-@ani-duration: 2000s; // 动画时间
+@ani-duration: 2000ms; // 动画时间
+
+.full-loading{
+    height: 200px;
+    width: 200px;
+    position: relative;
+}
 
 .loading{
     width: @containerSize;
@@ -52,40 +58,39 @@ export default defineComponent({
         left: 50%;
         width: @ballSize;
         height: @ballSize;
-        margin-left: -@ballSize / 2;
-        margin-top: -@ballSize / 2;
+        margin-left: (-@ballSize / 2);
+        margin-top: (-@ballSize / 2);
         perspective: 70px;
         transform-style: preserve-3d;
 
-        :before, :after{
+        &::before, &::after{
             content: '';
             position: absolute;
             width: 100%;
             height: 100%;
             border-radius: 50%;
         }
-        :before{
+        &::before{
             background-color: #000000;
             top: -100%;
             animation: blackMove @ani-duration infinite;
         }
-        :after{
+        &::after{
             background-color: #fff;
             top: 100%;
+            animation: whiteMove @ani-duration infinite;
         }
     }
 }
 
-.loop(@i) when(@i <= @dots){
-    .dot:nth-child(@{i}){
-        transform: rotate(@deg * @i) translateY(-@containerSize / 2);
-        :before, :after{
-            animation-delay: -@ani-duration / @dots * 6 * @i;
+each(range(@dots), {
+    .dot:nth-child(@{value}){
+        transform: rotate((@deg * @value)) translateY((-@containerSize / 2));
+        &::before, &::after{
+            animation-delay: (-@ani-duration / @dots * 6 * @value);
         }
     }
-    .loop(@i + 1);
-}
-.loop(1);
+});
 
 @keyframes blackMove{
     0%{
