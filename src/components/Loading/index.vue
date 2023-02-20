@@ -76,7 +76,7 @@ export default defineComponent({
             animation: blackMove @ani-duration infinite;
         }
         &::after{
-            background-color: #fff;
+            background-color: #3d5cf3;
             top: 100%;
             animation: whiteMove @ani-duration infinite;
         }

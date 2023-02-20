@@ -27,7 +27,7 @@ defineProps<{msg: string}>()
 const userStore = useUserStoreWithOut()
 
 const workingTime = reactive({
-    time: 3665,
+    time: 0,
     showTime: '',
     status: true,
 })
