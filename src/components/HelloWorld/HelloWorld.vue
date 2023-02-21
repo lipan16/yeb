@@ -32,7 +32,6 @@ const workingTime = reactive({
     status: true,
 })
 
-console.log('workingTime', workingTime.time)
 const {pause, resume, isActive} = useIntervalFn(() => {
     workingTime.status && workingTime.time++
     const H = Math.floor(workingTime.time / 3600)

@@ -40,9 +40,6 @@ export default defineComponent({
 @ani-duration: 2000ms; // 动画时间
 
 .full-loading{
-    height: 200px;
-    width: 200px;
-    position: relative;
 }
 
 .loading{
