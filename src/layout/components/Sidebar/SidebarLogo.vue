@@ -1,8 +1,8 @@
 <template>
     <div class="sidebar-logo-container">
         <router-link key="collapse" class="sidebar-logo-link flex-inline" to="/">
-            <SvgIcon class="sidebar-logo" name="yeb" size="32" :color="appStore.projectConfig.theme"/>
-            <span v-show="!collapse" class="sidebar-title" :style="{color: appStore.projectConfig.theme}">{{ $t('title') }}</span>
+            <SvgIcon class="sidebar-logo" name="yeb" size="32" :color="appStore.projectConfig.theme" />
+            <span v-show="!collapse" class="sidebar-title" :style="{color: appStore.projectConfig.theme}">{{ $t("title") }}</span>
         </router-link>
         <!--<transition name="sidebarLogoFade">-->
         <!--    <router-link v-if="collapse" key="collapse" class="sidebar-logo-link flex-inline" to="/">-->
@@ -18,27 +18,27 @@
 </template>
 
 <script lang="ts" setup>
-import {useAppStoreWithOut} from '@/store/modules/app'
+import {useAppStoreWithOut} from "@/store/modules/app"
 
 defineProps({
-    collapse: {type: Boolean, required: true},
+    collapse: {type: Boolean, required: true}
 })
 const appStore = useAppStoreWithOut()
-
 </script>
 
 <style lang="less" scoped>
-.sidebarLogoFade-enter-active{
-    transition: opacity .1s;
+.sidebarLogoFade-enter-active {
+    transition: opacity 0.1s;
 }
 
-.sidebarLogoFade-enter, .sidebarLogoFade-leave-to{
+.sidebarLogoFade-enter,
+.sidebarLogoFade-leave-to {
     //opacity: 0;
 }
 
-.sidebar-logo-container{
+.sidebar-logo-container {
     padding: 10px;
-    background-color: v-bind('appStore.projectConfig.sidebarTheme');
+    background-color: v-bind("appStore.projectConfig.sidebarTheme");
     position: relative;
     width: 100%;
     height: 50px;
@@ -46,16 +46,16 @@ const appStore = useAppStoreWithOut()
     text-align: center;
     overflow: hidden;
 
-    .sidebar-logo-link{
+    .sidebar-logo-link {
         height: 100%;
         width: 100%;
         //padding-left: 12px;
 
-        .sidebar-logo{
+        .sidebar-logo {
             vertical-align: middle;
         }
 
-        .sidebar-title{
+        .sidebar-title {
             margin-left: 12px;
             font-weight: 600;
             font-size: 16px;

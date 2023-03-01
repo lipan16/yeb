@@ -1,24 +1,24 @@
 <template>
     <div class="app-dark-mode" :class="getClass" @click="toggleDark()">
-        <div class="inner"/>
-        <SvgIcon size="14" name="sun"/>
-        <SvgIcon size="14" name="moon"/>
+        <div class="inner"></div>
+        <SvgIcon size="14" name="sun" />
+        <SvgIcon size="14" name="moon" />
     </div>
 </template>
 <script lang="ts" setup>
-import SvgIcon from '@/components/Icon/SvgIcon.vue'
-import {useDark, useToggle} from '@vueuse/core'
-import {computed} from 'vue'
+import SvgIcon from "@/components/Icon/SvgIcon.vue"
+import {useDark, useToggle} from "@vueuse/core"
+import {computed} from "vue"
 
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
 
 const getClass = computed(() => {
-    return isDark.value ? 'dark' : ''
+    return isDark.value ? "dark" : ""
 })
 </script>
 <style lang="less" scoped>
-.app-dark-mode{
+.app-dark-mode {
     position: relative;
     display: flex;
     width: 50px;
@@ -32,7 +32,7 @@ const getClass = computed(() => {
     justify-content: space-between;
     align-items: center;
 
-    .inner{
+    .inner {
         position: absolute;
         z-index: 1;
         width: 18px;
@@ -43,8 +43,8 @@ const getClass = computed(() => {
         will-change: transform;
     }
 
-    &.dark{
-        .inner{
+    &.dark {
+        .inner {
             transform: translateX(21px);
         }
     }

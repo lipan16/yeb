@@ -5,19 +5,19 @@
 </template>
 
 <script setup lang="ts">
-import {useIntervalFn} from '@vueuse/core'
-import {SETTING} from '@/setting'
-import moment, {Moment} from 'moment'
+import {useIntervalFn} from "@vueuse/core"
+import {SETTING} from "@/setting"
+import moment, {Moment} from "moment"
 
 const bpi = reactive({
-    realTime: '',
-    breakTime: '',
-    longTime: '',
-    value: '',
+    realTime: "",
+    breakTime: "",
+    longTime: "",
+    value: ""
 })
 const timeShowType = ref(true)
 const clickCount = ref(0)
-let dateTime = moment(SETTING.BPI_TIME_1)
+const dateTime = moment(SETTING.BPI_TIME_1)
 
 const {pause, resume, isActive} = useIntervalFn(() => {
     intervalCb()
@@ -37,8 +37,8 @@ const intervalCb = () => {
 }
 
 const showTime = (type: boolean, begin1: Moment = dateTime, end1: Moment = moment(), begin2: Moment = moment(), end2: Moment = moment()) => {
-    let time = moment.duration(end1.diff(begin1))
-    let time2 = moment.duration(end2.diff(begin2))
+    const time = moment.duration(end1.diff(begin1))
+    const time2 = moment.duration(end2.diff(begin2))
     time.add(time2)
 
     const y = time.years()
@@ -48,17 +48,16 @@ const showTime = (type: boolean, begin1: Moment = dateTime, end1: Moment = momen
     const H = time.hours()
     const m = time.minutes()
     const s = time.seconds()
-    return (type ? D : y + '年' + M + '个月' + d) + '天' + H + '时' + m + '分' + s + '秒'
+    return (type ? D : y + "年" + M + "个月" + d) + "天" + H + "时" + m + "分" + s + "秒"
 }
 
 onMounted(() => {
     bpi.breakTime = showTime(timeShowType.value, moment(SETTING.BPI_TIME_2), moment(SETTING.BPI_TIME_3))
 })
-
 </script>
 
 <style lang="less" scoped>
-.bpi-time{
+.bpi-time {
     margin-left: auto;
     padding: 0 4px;
     flex-shrink: 0;

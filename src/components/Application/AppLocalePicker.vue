@@ -1,7 +1,7 @@
 <template>
     <el-dropdown class="lang-select" trigger="click" @command="handleLocale">
         <div>
-            <SvgIcon name="language"/>
+            <SvgIcon name="language" />
         </div>
         <template #dropdown>
             <el-dropdown-menu>
@@ -12,28 +12,27 @@
     </el-dropdown>
 </template>
 <script lang="ts" setup>
-import {ref} from 'vue'
-import {useAppStoreWithOut} from '@/store/modules/app'
-import {changeLocale} from '@/lang'
-import SvgIcon from '@/components/Icon/SvgIcon.vue'
+import {ref} from "vue"
+import {useAppStoreWithOut} from "@/store/modules/app"
+import {changeLocale} from "@/lang"
+import SvgIcon from "@/components/Icon/SvgIcon.vue"
 
-const selectedKeys = ref<string>('')
+const selectedKeys = ref<string>("")
 
-let appStore = useAppStoreWithOut()
+const appStore = useAppStoreWithOut()
 
-async function handleLocale(lang: string){
+async function handleLocale(lang: string) {
     selectedKeys.value = lang
     appStore.setLocal(lang)
     await changeLocale(lang)
 }
-
 </script>
 
 <style lang="less" scoped>
-.lang-select{
+.lang-select {
     margin: 8px;
-    .svg-icon{
-        fill: var(--text)
+    .svg-icon {
+        fill: var(--text);
     }
 }
 </style>

@@ -14,23 +14,23 @@
                 />
             </svg>
         </div>
-        <Breadcrumb/>
-        <BPITime/>
-        <AppDarkModeToggle/>
-        <SvgIcon :name="isFullscreen ? 'fullscreen-exit' : 'fullscreen'" @click="toggle" style="margin: 0 8px"/>
-        <AppLocalePicker/>
-        <AppLogo/>
+        <Breadcrumb />
+        <BPITime />
+        <AppDarkModeToggle />
+        <SvgIcon :name="isFullscreen ? 'fullscreen-exit' : 'fullscreen'" @click="toggle" style="margin: 0 8px" />
+        <AppLocalePicker />
+        <AppLogo />
     </div>
 </template>
 
 <script lang="ts" setup>
-import {useFullscreen} from '@vueuse/core'
+import {useFullscreen} from "@vueuse/core"
 
-import AppLocalePicker from '@/components/Application/AppLocalePicker.vue'
-import AppDarkModeToggle from '@/components/Application/AppDarkModeToggle.vue'
-import AppLogo from '@/components/Application/AppLogo.vue'
-import Breadcrumb from '@/layout/components/Navbar/Breadcrumb.vue'
-import {useAppStoreWithOut} from '@/store/modules/app'
+import AppLocalePicker from "@/components/Application/AppLocalePicker.vue"
+import AppDarkModeToggle from "@/components/Application/AppDarkModeToggle.vue"
+import AppLogo from "@/components/Application/AppLogo.vue"
+import Breadcrumb from "@/layout/components/Navbar/Breadcrumb.vue"
+import {useAppStoreWithOut} from "@/store/modules/app"
 
 const appStore = useAppStoreWithOut()
 
@@ -41,18 +41,17 @@ const {isFullscreen, toggle} = useFullscreen()
 </script>
 
 <style lang="less" scoped>
-.navbar{
+.navbar {
     color: var(--text);
 }
-.hamburger{
+.hamburger {
     display: inline-block;
     vertical-align: middle;
     width: 20px;
     height: 20px;
 }
 
-.hamburger.is-active{
+.hamburger.is-active {
     transform: rotate(180deg);
 }
 </style>
-

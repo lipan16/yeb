@@ -1,14 +1,14 @@
-import {defineStore} from 'pinia'
-import {ref} from 'vue'
-import {RouteLocationNormalized} from 'vue-router'
+import {defineStore} from "pinia"
+import {ref} from "vue"
+import {RouteLocationNormalized} from "vue-router"
 
-import {store} from '@/store'
+import {store} from "@/store"
 
-export interface TagView extends Partial<RouteLocationNormalized>{
-    title?: string;
+export interface TagView extends Partial<RouteLocationNormalized> {
+    title?: string
 }
 
-export const useTagsViewStore = defineStore('tagsView', () => {
+export const useTagsViewStore = defineStore("tagsView", () => {
     /**
      * state
      *
@@ -17,31 +17,31 @@ export const useTagsViewStore = defineStore('tagsView', () => {
     const cachedViews = ref<string[]>([])
 
     // actions
-    function addVisitedView(view: TagView){
-        if(visitedViews.value.some(v => v.path === view.path)) return
-        if(view.meta && view.meta.affix){
-            visitedViews.value.unshift(
-                Object.assign({}, view, {title: view.meta?.title || 'no-name'}),
-            )
-        }else{
-            visitedViews.value.push(
-                Object.assign({}, view, {title: view.meta?.title || 'no-name'}),
-            )
+    function addVisitedView(view: TagView) {
+        if (visitedViews.value.some(v => v.path === view.path)) {
+            return
+        }
+        if (view.meta && view.meta.affix) {
+            visitedViews.value.unshift(Object.assign({}, view, {title: view.meta?.title || "no-name"}))
+        } else {
+            visitedViews.value.push(Object.assign({}, view, {title: view.meta?.title || "no-name"}))
         }
     }
 
-    function addCachedView(view: TagView){
+    function addCachedView(view: TagView) {
         const viewName = view.name as string
-        if(cachedViews.value.includes(viewName)) return
-        if(view.meta?.keepAlive){
+        if (cachedViews.value.includes(viewName)) {
+            return
+        }
+        if (view.meta?.keepAlive) {
             cachedViews.value.push(viewName)
         }
     }
 
-    function delVisitedView(view: TagView){
+    function delVisitedView(view: TagView) {
         return new Promise(resolve => {
-            for(const [i, v] of visitedViews.value.entries()){
-                if(v.path === view.path){
+            for (const [i, v] of visitedViews.value.entries()) {
+                if (v.path === view.path) {
                     visitedViews.value.splice(i, 1)
                     break
                 }
@@ -50,7 +50,7 @@ export const useTagsViewStore = defineStore('tagsView', () => {
         })
     }
 
-    function delCachedView(view: TagView){
+    function delCachedView(view: TagView) {
         const viewName = view.name as string
         return new Promise(resolve => {
             const index = cachedViews.value.indexOf(viewName)
@@ -59,20 +59,20 @@ export const useTagsViewStore = defineStore('tagsView', () => {
         })
     }
 
-    function delOtherVisitedViews(view: TagView){
+    function delOtherVisitedViews(view: TagView) {
         return new Promise(resolve => {
             visitedViews.value = visitedViews.value.filter(v => v.meta?.affix || v.path === view.path)
             resolve([...visitedViews.value])
         })
     }
 
-    function delOtherCachedViews(view: TagView){
+    function delOtherCachedViews(view: TagView) {
         const viewName = view.name as string
         return new Promise(resolve => {
             const index = cachedViews.value.indexOf(viewName)
-            if(index > -1){
+            if (index > -1) {
                 cachedViews.value = cachedViews.value.slice(index, index + 1)
-            }else{
+            } else {
                 // if index = -1, there is no cached tags
                 cachedViews.value = []
             }
@@ -80,109 +80,109 @@ export const useTagsViewStore = defineStore('tagsView', () => {
         })
     }
 
-    function updateVisitedView(view: TagView){
-        for(let v of visitedViews.value){
-            if(v.path === view.path){
+    function updateVisitedView(view: TagView) {
+        for (let v of visitedViews.value) {
+            if (v.path === view.path) {
                 v = Object.assign(v, view)
                 break
             }
         }
     }
 
-    function addView(view: TagView){
+    function addView(view: TagView) {
         addVisitedView(view)
         addCachedView(view)
     }
 
-    function delView(view: TagView){
+    function delView(view: TagView) {
         return new Promise(resolve => {
             delVisitedView(view)
             delCachedView(view)
             resolve({
                 visitedViews: [...visitedViews.value],
-                cachedViews: [...cachedViews.value],
+                cachedViews: [...cachedViews.value]
             })
         })
     }
 
-    function delOtherViews(view: TagView){
+    function delOtherViews(view: TagView) {
         return new Promise(resolve => {
             delOtherVisitedViews(view)
             delOtherCachedViews(view)
             resolve({
                 visitedViews: [...visitedViews.value],
-                cachedViews: [...cachedViews.value],
+                cachedViews: [...cachedViews.value]
             })
         })
     }
 
-    function delLeftViews(view: TagView){
+    function delLeftViews(view: TagView) {
         return new Promise(resolve => {
             const currIndex = visitedViews.value.findIndex(v => v.path === view.path)
-            if(currIndex === -1){
+            if (currIndex === -1) {
                 return
             }
             visitedViews.value = visitedViews.value.filter((item, index) => {
                 // affix:true 固定tag，例如“首页”
-                if(index >= currIndex || (item.meta && item.meta.affix)){
+                if (index >= currIndex || (item.meta && item.meta.affix)) {
                     return true
                 }
 
                 const cacheIndex = cachedViews.value.indexOf(item.name as string)
-                if(cacheIndex > -1){
+                if (cacheIndex > -1) {
                     cachedViews.value.splice(cacheIndex, 1)
                 }
                 return false
             })
             resolve({
-                visitedViews: [...visitedViews.value],
+                visitedViews: [...visitedViews.value]
             })
         })
     }
 
-    function delRightViews(view: TagView){
+    function delRightViews(view: TagView) {
         return new Promise(resolve => {
             const currIndex = visitedViews.value.findIndex(v => v.path === view.path)
-            if(currIndex === -1){
+            if (currIndex === -1) {
                 return
             }
             visitedViews.value = visitedViews.value.filter((item, index) => {
                 // affix:true 固定tag，例如“首页”
-                if(index <= currIndex || (item.meta && item.meta.affix)){
+                if (index <= currIndex || (item.meta && item.meta.affix)) {
                     return true
                 }
 
                 const cacheIndex = cachedViews.value.indexOf(item.name as string)
-                if(cacheIndex > -1){
+                if (cacheIndex > -1) {
                     cachedViews.value.splice(cacheIndex, 1)
                 }
                 return false
             })
             resolve({
-                visitedViews: [...visitedViews.value],
+                visitedViews: [...visitedViews.value]
             })
         })
     }
 
-    function delAllViews(){
+    function delAllViews() {
         return new Promise(resolve => {
             visitedViews.value = visitedViews.value.filter(tag => tag.meta?.affix)
             cachedViews.value = []
             resolve({
                 visitedViews: [...visitedViews.value],
-                cachedViews: [...cachedViews.value],
+                cachedViews: [...cachedViews.value]
             })
         })
     }
 
-    function delAllVisitedViews(){
+    function delAllVisitedViews() {
         return new Promise(resolve => {
             visitedViews.value = visitedViews.value.filter(tag => tag.meta?.affix)
             resolve([...visitedViews.value])
         })
     }
 
-    function delAllCachedViews(){
+    function delAllCachedViews() {
         return new Promise(resolve => {
             cachedViews.value = []
             resolve([...cachedViews.value])
@@ -206,10 +206,10 @@ export const useTagsViewStore = defineStore('tagsView', () => {
         delRightViews,
         delAllViews,
         delAllVisitedViews,
-        delAllCachedViews,
+        delAllCachedViews
     }
 })
 
-export function useTagsViewStoreWithOut(){
+export function useTagsViewStoreWithOut() {
     return useTagsViewStore(store)
 }

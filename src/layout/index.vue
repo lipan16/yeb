@@ -2,29 +2,29 @@
     <div :class="classObj" class="app-wrapper">
         <!-- 手机设备 && 侧边栏 → 显示遮罩层 -->
         <div class="drawer-bg" v-show="classObj.mobile && classObj.openSidebar" @click="handleOutsideClick"></div>
-        <Sidebar/>
+        <Sidebar />
         <div class="main-container flex-list">
-            <Navbar/>
-            <TagsView v-if="showTagsView"/>
+            <Navbar />
+            <TagsView v-if="showTagsView" />
 
             <!--主页面-->
-            <AppMain/>
+            <AppMain />
 
             <!-- 设置面板 -->
             <RightPanel v-if="showSettings">
-                <Settings/>
+                <Settings />
             </RightPanel>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import {computed, watchEffect} from 'vue'
-import {useWindowSize} from '@vueuse/core'
+import {computed, watchEffect} from "vue"
+import {useWindowSize} from "@vueuse/core"
 
-import RightPanel from '@/components/RightPanel/index.vue'
-import {AppMain, Navbar, Settings, Sidebar, TagsView} from './components'
-import {DeviceType, useAppStoreWithOut} from '@/store/modules/app'
+import RightPanel from "@/components/RightPanel/index.vue"
+import {AppMain, Navbar, Settings, Sidebar, TagsView} from "./components"
+import {DeviceType, useAppStoreWithOut} from "@/store/modules/app"
 
 const {width} = useWindowSize()
 const appStore = useAppStoreWithOut()
@@ -35,7 +35,7 @@ const showSettings = computed(() => appStore.projectConfig.showSettings)
 const classObj = computed(() => ({
     closeSidebar: !appStore.sidebarOpened,
     openSidebar: appStore.sidebarOpened,
-    mobile: appStore.device === DeviceType.mobile,
+    mobile: appStore.device === DeviceType.mobile
 }))
 
 /**
@@ -51,62 +51,62 @@ const classObj = computed(() => ({
  * 小屏（>=768px）
  */
 watchEffect(() => {
-    console.log('watchEffect', width.value)
+    console.log("watchEffect", width.value)
 
-    if(width.value < 768){
+    if (width.value < 768) {
         appStore.toggleDevice(DeviceType.mobile)
         appStore.setSidebarOpened(false)
-    }else{
+    } else {
         appStore.toggleDevice(DeviceType.desktop)
 
-        if(width.value >= 1200){
+        if (width.value >= 1200) {
             appStore.setSidebarOpened(true)
-        }else{
+        } else {
             appStore.setSidebarOpened(false)
         }
     }
 })
 
-function handleOutsideClick(){
+function handleOutsideClick() {
     appStore.setSidebarOpened(false)
 }
 </script>
 
 <style lang="less" scoped>
-.app-wrapper{
+.app-wrapper {
     position: relative;
     display: flex;
     height: 100%;
     width: 100%;
 
-    &:after{
-        content: '';
+    &:after {
+        content: "";
         display: table;
         clear: both;
     }
 }
 
-.closeSidebar{
-    .sidebar-container{
+.closeSidebar {
+    .sidebar-container {
         width: var(--sidebar-collapse-width) !important;
     }
 }
 
 // mobile responsive
-.mobile{
-    .sidebar-container{
+.mobile {
+    .sidebar-container {
         width: var(--sidebar-width) !important;
     }
 
-    &.closeSidebar{
-        .sidebar-container{
+    &.closeSidebar {
+        .sidebar-container {
             pointer-events: none;
             display: none;
         }
     }
 }
 
-.drawer-bg{
+.drawer-bg {
     background: #000;
     opacity: 0.3;
     width: 100%;
@@ -116,7 +116,7 @@ function handleOutsideClick(){
     z-index: 890;
 }
 
-.main-container{
+.main-container {
     position: relative;
     width: 100%;
 }

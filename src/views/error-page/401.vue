@@ -1,7 +1,3 @@
 <template>
-    <div class="errPage-container">
-        401
-    </div>
+    <div class="errPage-container">401</div>
 </template>
-
-

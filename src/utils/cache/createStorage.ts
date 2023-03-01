@@ -1,24 +1,24 @@
-import {CreateStorageParams} from '#/store'
-import {AesEncryption, useEncryption} from '@/utils/encrypt'
-import {isNullOrUnDef} from '@/utils/is'
+import {CreateStorageParams} from "#/store"
+import {AesEncryption, useEncryption} from "@/utils/encrypt"
+import {isNullOrUnDef} from "@/utils/is"
 
-export const createStorage = ({prefixKey = '', storage = sessionStorage, timeout = null, hasEncrypt = true}: Partial<CreateStorageParams> = {}) => {
+export const createStorage = ({prefixKey = "", storage = sessionStorage, timeout = null, hasEncrypt = true}: Partial<CreateStorageParams> = {}) => {
     const encryption = useEncryption()
 
-    const WebStorage = class WebStorage{
+    const WebStorage = class WebStorage {
         private storage: Storage
         private prefixKey?: string
         private encryption: AesEncryption
         private hasEncrypt: boolean
 
-        constructor(){
+        constructor() {
             this.storage = storage
             this.prefixKey = prefixKey
             this.encryption = encryption
             this.hasEncrypt = hasEncrypt
         }
 
-        private getKey(key: string){
+        private getKey(key: string) {
             return `${this.prefixKey}_${key}`.toUpperCase()
         }
 
@@ -29,11 +29,11 @@ export const createStorage = ({prefixKey = '', storage = sessionStorage, timeout
          * @param value
          * @param expire Expiration time in seconds
          */
-        set(key: string, value: any, expire: number | null = timeout){
+        set(key: string, value: any, expire: number | null = timeout) {
             const stringData = JSON.stringify({
                 value,
                 time: Date.now(),
-                expire: isNullOrUnDef(expire) ? null : new Date().getTime() + expire * 1000,
+                expire: isNullOrUnDef(expire) ? null : new Date().getTime() + expire * 1000
             })
 
             const stringifyValue = this.hasEncrypt ? this.encryption.encryptByAES(stringData) : stringData
@@ -46,19 +46,22 @@ export const createStorage = ({prefixKey = '', storage = sessionStorage, timeout
          * @param key
          * @param def 默认值
          */
-        get(key: string, def: any = null): any{
+        get(key: string, def: any = null): any {
             const val = this.storage.getItem(this.getKey(key))
-            if(!val) return def
+            if (!val) {
+                return def
+            }
 
-            try{
+            try {
                 const decVal = this.hasEncrypt ? this.encryption.decryptByAES(val) : val
                 const data = JSON.parse(decVal)
                 const {value, expire} = data
-                if(isNullOrUnDef(expire) || expire >= new Date().getTime()){ // 未过期
+                if (isNullOrUnDef(expire) || expire >= new Date().getTime()) {
+                    // 未过期
                     return value
                 }
                 this.remove(key)
-            }catch(e){
+            } catch (e) {
                 return def
             }
         }
@@ -68,14 +71,14 @@ export const createStorage = ({prefixKey = '', storage = sessionStorage, timeout
          *
          * @param key
          */
-        remove(key: string){
+        remove(key: string) {
             this.storage.removeItem(this.getKey(key))
         }
 
         /**
          * Delete all caches of this instance
          */
-        clear(): void{
+        clear(): void {
             this.storage.clear()
         }
     }

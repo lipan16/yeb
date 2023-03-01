@@ -1,17 +1,17 @@
-import type {App} from 'vue'
-import {createI18n} from 'vue-i18n'
+import type {App} from "vue"
+import {createI18n} from "vue-i18n"
 
-import {APP_LOCAL_CACHE_KEY} from '@/setting/KEY'
-import {SETTING} from '@/setting'
+import {APP_LOCAL_CACHE_KEY} from "@/setting/KEY"
+import {SETTING} from "@/setting"
 
 // element-ui built-in lang
-import elementEnLocale from 'element-plus/dist/locale/en.mjs'
-import elementZhLocale from 'element-plus/dist/locale/zh-cn.mjs'
+import elementEnLocale from "element-plus/dist/locale/en.mjs"
+import elementZhLocale from "element-plus/dist/locale/zh-cn.mjs"
 
 // User defined lang
-import enLocale from './en'
-import zhLocale from './zh'
-import {unref} from 'vue'
+import enLocale from "./en"
+import zhLocale from "./zh"
+import {unref} from "vue"
 
 export const APP_LOCALE_MESSAGES = {
     en: {
@@ -21,7 +21,7 @@ export const APP_LOCALE_MESSAGES = {
     zh: {
         ...zhLocale,
         ...elementZhLocale
-    },
+    }
 }
 
 const getLocale = () => {
@@ -36,33 +36,33 @@ const i18n = createI18n({
     silentTranslationWarn: true, // 是否取消本地化失败时输出的警告。
     missingWarn: false,
     silentFallbackWarn: true,
-    messages: APP_LOCALE_MESSAGES, // 本地化的语言环境信息
+    messages: APP_LOCALE_MESSAGES // 本地化的语言环境信息
 })
 
 // 修改本地语言
 export async function changeLocale(locale: string) {
-    const globalI18n = i18n.global;
-    const currentLocale = unref(globalI18n.locale);
+    const globalI18n = i18n.global
+    const currentLocale = unref(globalI18n.locale)
     if (currentLocale !== locale) {
         // 设置语言环境的 locale 信息
-        globalI18n.setLocaleMessage(locale, APP_LOCALE_MESSAGES[locale]);
-        if (i18n.mode === 'legacy') {
+        globalI18n.setLocaleMessage(locale, APP_LOCALE_MESSAGES[locale])
+        if (i18n.mode === "legacy") {
             // @ts-ignore
             i18n.global.locale = locale
         } else {
-            (i18n.global.locale as any).value = locale
+            ;(i18n.global.locale as any).value = locale
         }
-        document.querySelector('html')?.setAttribute('lang', locale);
+        document.querySelector("html")?.setAttribute("lang", locale)
     }
 }
 
 // 获取页面title
 export const getPageTitle = (key: any) => {
-    const globalI18n = i18n.global;
+    const globalI18n = i18n.global
     // @ts-ignore
-    let hasKey: boolean = globalI18n.te(`route.${key}`)
+    const hasKey: boolean = globalI18n.te(`route.${key}`)
     if (hasKey) {
-        let pageName: string = globalI18n.t(`route.${key}`);
+        const pageName: string = globalI18n.t(`route.${key}`)
         return `${pageName} - ${SETTING.title}`
     }
     return `${SETTING.title}`

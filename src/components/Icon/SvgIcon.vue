@@ -1,36 +1,36 @@
 <template>
     <svg aria-hidden="true" class="svg-icon" :style="getStyle">
-        <use :href="symbolId" :fill="color"/>
+        <use :href="symbolId" :fill="color" />
     </svg>
 </template>
 
 <script lang="ts">
-import {defineComponent, computed} from 'vue'
+import {defineComponent, computed} from "vue"
 
 export default defineComponent({
-    name: 'SvgIcon',
+    name: "SvgIcon",
     props: {
-        prefix: {type: String, default: 'icon'},
+        prefix: {type: String, default: "icon"},
         name: {type: String, require: true},
         size: {type: [Number, String], default: 16},
-        color: {type: String},
+        color: {type: String}
     },
-    setup(props){
+    setup(props) {
         const symbolId = computed(() => `#${props.prefix}-${props.name}`)
 
         const getStyle = computed(() => {
             const {size} = props
             let s = `${size}`
-            s = `${s.replace('px', '')}px`
+            s = `${s.replace("px", "")}px`
             return {width: s, height: s}
         })
 
         return {symbolId, getStyle}
-    },
+    }
 })
 </script>
 <style scoped>
-.svg-icon{
+.svg-icon {
     vertical-align: middle;
     position: relative;
     overflow: hidden;

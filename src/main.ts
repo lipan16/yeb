@@ -1,26 +1,26 @@
-import {createApp} from 'vue'
-import * as ElIcons from '@element-plus/icons-vue'
+import {createApp} from "vue"
+import * as ElIcons from "@element-plus/icons-vue"
 
-import './main.less'
-import App from './App.vue'
-import {setupI18n} from '@/lang'
-import {setupStore} from '@/store'
-import {router, setupRouter} from '@/router'
-import {useSso} from '@/hooks/web/useSso'
-import {registerGlobalComponent} from '@/components/registerGlobalComponent'
-import {setupRouterGuard} from '@/router/guard'
-import {setupGlobDirectives} from '@/directive'
+import "./main.less"
+import App from "./App.vue"
+import {setupI18n} from "@/lang"
+import {setupStore} from "@/store"
+import {router, setupRouter} from "@/router"
+import {useSso} from "@/hooks/web/useSso"
+import {registerGlobalComponent} from "@/components/registerGlobalComponent"
+import {setupRouterGuard} from "@/router/guard"
+import {setupGlobDirectives} from "@/directive"
 
 // 可伸缩布局
 // import "amfe-flexible"
 
 // 注册svg图片
-import 'virtual:svg-icons-register'
+import "virtual:svg-icons-register"
 
 // 生产环境 当服务端首页有更新时，自动更新html
-import '@/utils/autoUpdateHtml'
+import "@/utils/autoUpdateHtml"
 
-async function booting(){
+async function booting() {
     // 创建应用实例
     const app = createApp(App)
 
@@ -36,7 +36,7 @@ async function booting(){
     setupGlobDirectives(app)
 
     // 注册element plus所有图标
-    for(const [key, component] of Object.entries(ElIcons)){
+    for (const [key, component] of Object.entries(ElIcons)) {
         app.component(key, component)
     }
 
@@ -52,9 +52,7 @@ async function booting(){
     // 当路由准备好时再执行挂载( https://next.router.vuejs.org/api/#isready)
     await router.isReady()
 
-    app.mount('#app', true)
+    app.mount("#app", true)
 }
 
 booting().then()
-
-

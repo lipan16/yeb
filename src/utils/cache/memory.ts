@@ -1,87 +1,90 @@
-import {Cache} from '#/store'
+import {Cache} from "#/store"
 
-import {omit} from 'lodash'
-import {LOGIN_INFO_KEY, ROLES_KEY, TOKEN_KEY, USER_INFO_KEY} from '@/setting/KEY'
+import {omit} from "lodash"
+import {LOGIN_INFO_KEY, ROLES_KEY, TOKEN_KEY, USER_INFO_KEY} from "@/setting/KEY"
 
 // 保存时效
 const NOT_ALIVE = 0
 
-export class Memory<T = any, V = any>{
-    private cache: { [key in keyof T]?: Cache<V> } = {}
+export class Memory<T = any, V = any> {
+    private cache: {[key in keyof T]?: Cache<V>} = {}
     private alive: number
 
-    constructor(alive = NOT_ALIVE){
+    constructor(alive = NOT_ALIVE) {
         // Unit second
         this.alive = alive * 1000
     }
 
-    get getCache(){
+    get getCache() {
         return this.cache
     }
 
-    setCache(cache){
+    setCache(cache) {
         this.cache = cache
     }
 
-    get<K extends keyof T>(key: K){
+    get<K extends keyof T>(key: K) {
         return this.cache[key]
     }
 
-    set<K extends keyof T>(key: K, value: V, expires?: number){
+    set<K extends keyof T>(key: K, value: V, expires?: number) {
         let item = this.get(key)
 
-        if(!expires || (expires as number) <= 0){
+        if (!expires || (expires as number) <= 0) {
             expires = this.alive
         }
-        if(item){
-            if(item.timeoutId){
+        if (item) {
+            if (item.timeoutId) {
                 clearTimeout(item.timeoutId)
                 item.timeoutId = undefined
             }
             item.value = value
-        }else{
+        } else {
             item = {value, alive: expires}
             this.cache[key] = item
         }
 
-        if(!expires){
+        if (!expires) {
             return value
         }
         const now = new Date().getTime()
         item.time = now + this.alive
-        item.timeoutId = setTimeout(() => {
-            this.remove(key)
-        }, expires > now ? expires - now : expires)
+        item.timeoutId = setTimeout(
+            () => {
+                this.remove(key)
+            },
+            expires > now ? expires - now : expires
+        )
 
         return value
     }
 
-    remove<K extends keyof T>(key: K){
+    remove<K extends keyof T>(key: K) {
         const item = this.get(key)
         Reflect.deleteProperty(this.cache, key)
-        if(item){
+        if (item) {
             clearTimeout(item.timeoutId!)
             return item.value
         }
     }
 
-    resetCache(cache: { [K in keyof T]: Cache }){
-        Object.keys(cache).forEach((key) => {
+    resetCache(cache: {[K in keyof T]: Cache}) {
+        Object.keys(cache).forEach(key => {
             const k = key as any as keyof T
             const item = cache[k]
-            if(item && item.time){
+            if (item && item.time) {
                 const now = new Date().getTime()
                 const expire = item.time
-                if(expire > now){
+                if (expire > now) {
                     this.set(k, item.value, expire)
                 }
             }
         })
     }
 
-    clear(){
-        console.log('------clear memory cache------', this.cache)
-        Object.keys(this.cache).forEach((key) => {
+    clear() {
+        console.log("------clear memory cache------", this.cache)
+        Object.keys(this.cache).forEach(key => {
             const item = this.cache[key]
             item.timeoutId && clearTimeout(item.timeoutId)
         })

@@ -4,8 +4,8 @@
  * @param cls
  * @returns {boolean}
  */
-export function hasClass(ele, cls){
-    return !!ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'))
+export function hasClass(ele, cls) {
+    return !!ele.className.match(new RegExp("(\\s|^)" + cls + "(\\s|$)"))
 }
 
 /**
@@ -13,8 +13,10 @@ export function hasClass(ele, cls){
  * @param ele
  * @param cls
  */
-export function addClass(ele, cls){
-    if(!hasClass(ele, cls)) ele.className += ' ' + cls
+export function addClass(ele, cls) {
+    if (!hasClass(ele, cls)) {
+        ele.className += " " + cls
+    }
 }
 
 /**
@@ -22,10 +24,10 @@ export function addClass(ele, cls){
  * @param ele
  * @param cls
  */
-export function removeClass(ele, cls){
-    if(hasClass(ele, cls)){
-        const reg = new RegExp('(\\s|^)' + cls + '(\\s|$)')
-        ele.className = ele.className.replace(reg, ' ')
+export function removeClass(ele, cls) {
+    if (hasClass(ele, cls)) {
+        const reg = new RegExp("(\\s|^)" + cls + "(\\s|$)")
+        ele.className = ele.className.replace(reg, " ")
     }
 }
 
@@ -33,25 +35,24 @@ export function removeClass(ele, cls){
  * 获取url地址参数
  * @param paraName
  */
-export function getUrlParam(paraName){
-    let url = document.location.toString()
-    let arrObj = url.split('?')
+export function getUrlParam(paraName) {
+    const url = document.location.toString()
+    const arrObj = url.split("?")
 
-    if(arrObj.length > 1){
-        let arrPara = arrObj[1].split('&')
+    if (arrObj.length > 1) {
+        const arrPara = arrObj[1].split("&")
         let arr
 
-        for(let i = 0; i < arrPara.length; i++){
-            arr = arrPara[i].split('=')
+        for (let i = 0; i < arrPara.length; i++) {
+            arr = arrPara[i].split("=")
 
-            if(arr != null && arr[0] == paraName){
+            if (arr !== null && arr[0] === paraName) {
                 return arr[1]
             }
         }
-        return ''
-    }else{
-        return ''
+        return ""
     }
+    return ""
 }
 
 /**
@@ -61,22 +62,22 @@ export function getUrlParam(paraName){
  * @param pEnd 结束位置
  * @returns {string}
  */
-String.prototype['sliceByPoint'] = function(pStart: number, pEnd: number){
-    let result = '' // 截取的结果
+String.prototype.sliceByPoint = function (pStart: number, pEnd: number) {
+    let result = "" // 截取的结果
     let pIndex = 0 // 码点的指针
     let cIndex = 0 // 码元的指针
-    while(1){
-        if(pIndex >= pEnd || cIndex >= this.length){
+    while (true) {
+        if (pIndex >= pEnd || cIndex >= this.length) {
             break
         }
         // 获取字符的码点值
         const point = this.codePointAt(cIndex) as number
-        if(pIndex >= pStart){
+        if (pIndex >= pStart) {
             // 根据码点恢复字符
             result += String.fromCodePoint(point)
         }
         // 码点值大于0xFFFF 表示该字符存储占四个字节两个字符，码元的指针往后加2
-        cIndex += point > 0xFFFF ? 2 : 1
+        cIndex += point > 0xffff ? 2 : 1
         pIndex++
     }
     return result
@@ -87,17 +88,16 @@ String.prototype['sliceByPoint'] = function(pStart: number, pEnd: number){
 // '\uD83D'
 // console.log('😀死了'.slice(0, 1))
 
-export function toggleClassName(flag: boolean, clsName: string, target?: HTMLElement){
+export function toggleClassName(flag: boolean, clsName: string, target?: HTMLElement) {
     const targetEl = target || document.body
     let {className} = targetEl
-    className = className.replace(clsName, '')
+    className = className.replace(clsName, "")
     targetEl.className = (flag ? `${className} ${clsName}` : className).trim()
 }
 
-
-export function getRandomColor(){
+export function getRandomColor() {
     return `#${Math.floor(Math.random() * 0xffffff).toString(16)}`
 }
 
 // ts 类型校验：可以是任何类型，但不能是日期
-type BanDate<T> = T extends Date ? never : T;
+type BanDate<T> = T extends Date ? never : T

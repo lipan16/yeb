@@ -1,18 +1,18 @@
 <template>
     <a v-if="isExternal(to)" :href="to" target="_blank" rel="noopener">
-        <slot/>
+        <slot></slot>
     </a>
     <div v-else @click="push">
-        <slot/>
+        <slot></slot>
     </div>
 </template>
 
 <script lang="ts" setup>
-import {computed} from 'vue'
-import {isExternal} from '@/utils/validate'
-import {useRouter} from 'vue-router'
+import {computed} from "vue"
+import {isExternal} from "@/utils/validate"
+import {useRouter} from "vue-router"
 
-import {DeviceType, useAppStoreWithOut} from '@/store/modules/app'
+import {DeviceType, useAppStoreWithOut} from "@/store/modules/app"
 
 const appStore = useAppStoreWithOut()
 
@@ -22,14 +22,14 @@ const device = computed(() => appStore.device)
 const props = defineProps({
     to: {
         type: String,
-        required: true,
-    },
+        required: true
+    }
 })
 
 const router = useRouter()
 
-function push(){
-    if(device.value === DeviceType.mobile && sidebar.value){
+function push() {
+    if (device.value === DeviceType.mobile && sidebar.value) {
         appStore.setSidebarOpened(false)
     }
     router.push(props.to).catch(err => {
@@ -37,4 +37,3 @@ function push(){
     })
 }
 </script>
-

@@ -1,36 +1,32 @@
 <template>
-    <section v-show="loading" class="full-loading"
-             :class="{absolute, [theme]: !!theme}"
-             :style="[background ? `background-color: ${background}` : '']"
-    >
+    <section v-show="loading" class="full-loading" :class="{absolute, [theme]: !!theme}" :style="[background ? `background-color: ${background}` : '']">
         <div class="loading">
-            <div class="dot" v-for="dot in 36" :key="dot"/>
+            <div class="dot" v-for="dot in 36" :key="dot"></div>
         </div>
     </section>
 </template>
 
 <script lang="ts">
-import {PropType} from 'vue'
+import {PropType} from "vue"
 
 export default defineComponent({
     props: {
         absolute: {
             type: Boolean as PropType<boolean>,
-            default: false,
+            default: false
         },
         loading: {
             type: Boolean as PropType<boolean>,
-            default: true,
+            default: true
         },
         background: {
-            type: String as PropType<string>,
+            type: String as PropType<string>
         },
         theme: {
-            type: String as PropType<'dark' | 'light'>,
-        },
-    },
+            type: String as PropType<"dark" | "light">
+        }
+    }
 })
-
 </script>
 <style lang="less">
 @dots: 36; // 小球个数
@@ -39,17 +35,17 @@ export default defineComponent({
 @deg: 360deg / @dots;
 @ani-duration: 2000ms; // 动画时间
 
-.full-loading{
+.full-loading {
 }
 
-.loading{
+.loading {
     width: @containerSize;
     height: @containerSize;
     margin: 50px auto;
     position: relative;
     border-radius: 50%;
 
-    .dot{
+    .dot {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -60,19 +56,20 @@ export default defineComponent({
         perspective: 70px;
         transform-style: preserve-3d;
 
-        &::before, &::after{
-            content: '';
+        &::before,
+        &::after {
+            content: "";
             position: absolute;
             width: 100%;
             height: 100%;
             border-radius: 50%;
         }
-        &::before{
+        &::before {
             background-color: #000000;
             top: -100%;
             animation: blackMove @ani-duration infinite;
         }
-        &::after{
+        &::after {
             background-color: #3d5cf3;
             top: 100%;
             animation: whiteMove @ani-duration infinite;
@@ -89,36 +86,36 @@ each(range(@dots), {
     }
 });
 
-@keyframes blackMove{
-    0%{
+@keyframes blackMove {
+    0% {
         animation-timing-function: ease-in;
     }
-    25%{
+    25% {
         transform: translate3d(0, 100%, @ballSize);
         animation-timing-function: ease-out;
     }
-    50%{
+    50% {
         transform: translate3d(0, 200%, 0);
         animation-timing-function: ease-in;
     }
-    75%{
+    75% {
         transform: translate3d(0, 100%, -@ballSize);
         animation-timing-function: ease-out;
     }
 }
-@keyframes whiteMove{
-    0%{
+@keyframes whiteMove {
+    0% {
         animation-timing-function: ease-in;
     }
-    25%{
+    25% {
         transform: translate3d(0, -100%, -@ballSize);
         animation-timing-function: ease-out;
     }
-    50%{
+    50% {
         transform: translate3d(0, -200%, 0);
         animation-timing-function: ease-in;
     }
-    75%{
+    75% {
         transform: translate3d(0, -100%, @ballSize);
         animation-timing-function: ease-out;
     }

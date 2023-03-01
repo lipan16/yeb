@@ -1,7 +1,7 @@
-import {App} from 'vue'
+import {App} from "vue"
 
-import setupPermissionDirective from './permission'
+import setupPermissionDirective from "./permission"
 
-export function setupGlobDirectives(app: App){
+export function setupGlobDirectives(app: App) {
     setupPermissionDirective(app)
 }
