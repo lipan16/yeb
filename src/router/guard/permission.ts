@@ -1,15 +1,15 @@
-import NProgress from "nprogress"
-import {Router, RouteRecordRaw} from "vue-router"
-import {ElMessage} from "element-plus"
-import "nprogress/nprogress.css"
+import NProgress from 'nprogress'
+import {Router, RouteRecordRaw} from 'vue-router'
+import {ElMessage} from 'element-plus'
+import 'nprogress/nprogress.css'
 
-import {getPageTitle} from "@/lang"
-import {useUserStoreWithOut} from "@/store/modules/user"
-import {usePermissionStoreWithOut} from "@/store/modules/permission"
+import {getPageTitle} from '@/lang'
+import {useUserStoreWithOut} from '@/store/modules/user'
+import {usePermissionStoreWithOut} from '@/store/modules/permission'
 
 NProgress.configure({showSpinner: false})
 
-const whiteList = ["/login", "/auth-redirect"]
+const whiteList = ['/login', '/auth-redirect']
 
 export function createPermissionGuard(router: Router) {
     router.beforeEach(async (to, from, next) => {
@@ -20,9 +20,9 @@ export function createPermissionGuard(router: Router) {
         const permissionStore = usePermissionStoreWithOut()
 
         if (userStore.token) {
-            if (to.path === "/login") {
+            if (to.path === '/login') {
                 // 登录成功，跳转到首页
-                next({path: "/"})
+                next({path: '/'})
                 NProgress.done()
             } else {
                 // Check whether the user has obtained his permission roles
@@ -38,12 +38,12 @@ export function createPermissionGuard(router: Router) {
                     } catch (err) {
                         // 移除 token 并跳转登录页
                         userStore.resetToken()
-                        ElMessage.error(err || "Has Error")
+                        ElMessage.error(err || 'Has Error')
                         next(`/login?redirect=${to.path}`)
                         NProgress.done()
                     }
                 } else if (to.matched.length === 0) {
-                    from.name ? next({name: from.name as any}) : next("/401")
+                    from.name ? next({name: from.name as any}) : next('/401')
                 } else {
                     next()
                 }

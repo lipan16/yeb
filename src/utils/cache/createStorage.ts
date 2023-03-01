@@ -1,8 +1,8 @@
-import {CreateStorageParams} from "#/store"
-import {AesEncryption, useEncryption} from "@/utils/encrypt"
-import {isNullOrUnDef} from "@/utils/is"
+import {CreateStorageParams} from '#/store'
+import {AesEncryption, useEncryption} from '@/utils/encrypt'
+import {isNullOrUnDef} from '@/utils/is'
 
-export const createStorage = ({prefixKey = "", storage = sessionStorage, timeout = null, hasEncrypt = true}: Partial<CreateStorageParams> = {}) => {
+export const createStorage = ({prefixKey = '', storage = sessionStorage, timeout = null, hasEncrypt = true}: Partial<CreateStorageParams> = {}) => {
     const encryption = useEncryption()
 
     const WebStorage = class WebStorage {

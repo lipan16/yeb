@@ -10,7 +10,7 @@
                     <SvgIcon v-if="onlyOneChild.meta && onlyOneChild.meta.icon" :name="onlyOneChild.meta.icon" />
 
                     <template #title>
-                        {{ $t("route." + onlyOneChild.meta.title) }}
+                        {{ $t('route.' + onlyOneChild.meta.title) }}
                     </template>
                 </el-menu-item>
             </AppLink>
@@ -19,7 +19,7 @@
         <el-sub-menu v-else :index="resolvePath(item.path)" popper-class="yeb-el-menu--popup-container">
             <template #title>
                 <SvgIcon v-if="item.meta && item.meta.icon" :name="item.meta.icon" />
-                <span v-if="item.meta && item.meta.title">{{ $t("route." + item.meta.title) }}</span>
+                <span v-if="item.meta && item.meta.title">{{ $t('route.' + item.meta.title) }}</span>
             </template>
 
             <SidebarItem
@@ -35,9 +35,9 @@
 </template>
 
 <script setup lang="ts">
-import path from "path-browserify"
-import {isExternal} from "@/utils/validate"
-import AppLink from "@/layout/components/Sidebar/AppLink.vue"
+import path from 'path-browserify'
+import {isExternal} from '@/utils/validate'
+import AppLink from '@/layout/components/Sidebar/AppLink.vue'
 
 const props = defineProps({
     item: {
@@ -74,7 +74,7 @@ function hasOneShowingChild(children = [] as any, parent: any) {
     }
     // Show parent if there are no child router to display
     if (showingChildren.length === 0) {
-        onlyOneChild.value = {...parent, path: "", noShowingChildren: true}
+        onlyOneChild.value = {...parent, path: '', noShowingChildren: true}
         return true
     }
     return false

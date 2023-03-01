@@ -1,8 +1,8 @@
-import {UserInfo} from "#/user"
-import {LoginInfo, CreateStorageParams} from "#/store"
+import {UserInfo} from '#/user'
+import {LoginInfo, CreateStorageParams} from '#/store'
 
-import {pick} from "lodash"
-import {toRaw} from "vue"
+import {pick} from 'lodash'
+import {toRaw} from 'vue'
 
 import {
     APP_LOCAL_CACHE_KEY,
@@ -14,14 +14,14 @@ import {
     TENANT_ID,
     TOKEN_KEY,
     USER_INFO_KEY
-} from "@/setting/KEY"
-import {createStorage} from "@/utils/cache/createStorage"
-import {Memory} from "@/utils/cache/memory"
-import {Nullable} from "#/index"
+} from '@/setting/KEY'
+import {createStorage} from '@/utils/cache/createStorage'
+import {Memory} from '@/utils/cache/memory'
+import {Nullable} from '#/index'
 
 const createStorageOptions = (storage: Storage, options: Partial<CreateStorageParams> = {}) => {
     return createStorage({
-        prefixKey: "",
+        prefixKey: '',
         storage,
         hasEncrypt: enableStorageEncryption,
         timeout: DEFAULT_CACHE_TIME,
@@ -103,7 +103,7 @@ export class WebStorageCache {
     }
 }
 
-window.addEventListener("beforeunload", function () {
+window.addEventListener('beforeunload', function () {
     // TOKEN_KEY 在登录或注销时已经写入到storage了，此处为了解决同时打开多个窗口时token不同步的问题
     // pick(obj, key) 从obj中取出key的值，并封装object返回
     ls.set(APP_LOCAL_CACHE_KEY, pick(ls.get(APP_LOCAL_CACHE_KEY), [TOKEN_KEY, USER_INFO_KEY]))
@@ -128,6 +128,6 @@ function storageChange(e: any) {
     }
 }
 
-window.addEventListener("storage", storageChange)
+window.addEventListener('storage', storageChange)
 
 initWebStorageCache()

@@ -24,7 +24,7 @@
             >
                 <img class="avatar" src="@/assets/avatar.png" alt="" />
 
-                <div class="title">{{ $t("login.title") }}</div>
+                <div class="title">{{ $t('login.title') }}</div>
 
                 <el-form-item prop="username">
                     <el-input
@@ -72,7 +72,7 @@
                 <el-checkbox v-model="loginForm.keep" :label="$t('login.holdSession')" />
 
                 <el-button class="btn" :loading="loading" round type="primary" @click.native.prevent="handleLogin(refLoginForm)">
-                    {{ $t("login.title") }}
+                    {{ $t('login.title') }}
                 </el-button>
             </el-form>
         </div>
@@ -80,28 +80,28 @@
 </template>
 
 <script lang="ts" setup>
-import {useI18n} from "vue-i18n"
-import {clone} from "lodash"
-import {ElMessage, FormInstance, FormRules} from "element-plus"
-import {UserFilled, Lock} from "@element-plus/icons-vue"
+import {useI18n} from 'vue-i18n'
+import {clone} from 'lodash'
+import {ElMessage, FormInstance, FormRules} from 'element-plus'
+import {UserFilled, Lock} from '@element-plus/icons-vue'
 
-import AppLocalePicker from "@/components/Application/AppLocalePicker.vue"
-import AppDarkModeToggle from "@/components/Application/AppDarkModeToggle.vue"
-import AppLogo from "@/components/Application/AppLogo.vue"
-import {useUserStoreWithOut} from "@/store/modules/user"
-import {router} from "@/router"
-import {getUrlParam} from "@/utils"
-import {useEncryption} from "@/utils/encrypt"
+import AppLocalePicker from '@/components/Application/AppLocalePicker.vue'
+import AppDarkModeToggle from '@/components/Application/AppDarkModeToggle.vue'
+import AppLogo from '@/components/Application/AppLogo.vue'
+import {useUserStoreWithOut} from '@/store/modules/user'
+import {router} from '@/router'
+import {getUrlParam} from '@/utils'
+import {useEncryption} from '@/utils/encrypt'
 
 const userStore = useUserStoreWithOut()
 const {t} = useI18n()
 
 const refLoginForm = ref<FormInstance>()
 const loginForm = reactive({
-    username: "010287",
-    password: "cib@1234",
-    captcha: "xiaobing",
-    captcha_id: "xiaobing",
+    username: '010287',
+    password: 'cib@1234',
+    captcha: 'xiaobing',
+    captcha_id: 'xiaobing',
     keep: true
 })
 const loading = ref(false)
@@ -109,7 +109,7 @@ const loading = ref(false)
 // 校验规则
 const validateUsername = (rule, value, callback) => {
     if (!value) {
-        callback(new Error(t("login.please enter an account")))
+        callback(new Error(t('login.please enter an account')))
     } else {
         callback()
     }
@@ -117,7 +117,7 @@ const validateUsername = (rule, value, callback) => {
 
 const validatePassword = (rule, value, callback) => {
     if (value.length < 6) {
-        callback(new Error(t("login.password validate error")))
+        callback(new Error(t('login.password validate error')))
     } else {
         callback()
     }
@@ -125,26 +125,26 @@ const validatePassword = (rule, value, callback) => {
 
 const validateCaptcha = (rule, value, callback) => {
     if (value !== loginForm.captcha_id) {
-        callback(new Error(t("login.Please enter captcha")))
+        callback(new Error(t('login.Please enter captcha')))
     } else {
         callback()
     }
 }
 
 const rulesLoginForm = reactive<FormRules>({
-    username: [{required: true, trigger: "blur", validator: validateUsername}],
-    password: [{required: true, trigger: "blur", validator: validatePassword}],
-    captcha: [{required: true, trigger: "blur", validator: validateCaptcha}]
+    username: [{required: true, trigger: 'blur', validator: validateUsername}],
+    password: [{required: true, trigger: 'blur', validator: validatePassword}],
+    captcha: [{required: true, trigger: 'blur', validator: validateCaptcha}]
 })
 
 // 获取验证码
 const onChangeCaptcha = () => {
-    loginForm.captcha = "xiaobing"
+    loginForm.captcha = 'xiaobing'
 }
 
 async function handleLogin(form: FormInstance) {
     const encryption = useEncryption()
-    const redirectUrl = getUrlParam("redirect")
+    const redirectUrl = getUrlParam('redirect')
     // todo bug 使用toRaw方法后返回新对象，修改新对象会影响原reactive的对象
     const loginParams = clone(loginForm)
     loginParams.password = encryption.encryptByAES(loginParams.password)
@@ -155,17 +155,17 @@ async function handleLogin(form: FormInstance) {
             userStore
                 .login(loginParams)
                 .then(() => {
-                    ElMessage({type: "success", message: t("login.success")})
-                    router.replace(redirectUrl || "/")
+                    ElMessage({type: 'success', message: t('login.success')})
+                    router.replace(redirectUrl || '/')
                 })
                 .catch(err => {
-                    console.error("login error", err)
-                    ElMessage({type: "error", message: err.message || t("login.error")})
+                    console.error('login error', err)
+                    ElMessage({type: 'error', message: err.message || t('login.error')})
                     onChangeCaptcha()
                 })
         } else {
-            ElMessage({type: "warning", message: t("login.warning")})
-            console.error("error submit")
+            ElMessage({type: 'warning', message: t('login.warning')})
+            console.error('error submit')
             onChangeCaptcha()
         }
         loading.value = false
@@ -200,7 +200,7 @@ async function handleLogin(form: FormInstance) {
         z-index: 1;
 
         &:before {
-            content: "";
+            content: '';
             position: absolute;
             background-color: red;
             z-index: -2;
@@ -214,7 +214,7 @@ async function handleLogin(form: FormInstance) {
 
         &:after {
             position: absolute;
-            content: "";
+            content: '';
             width: calc(100% - 4px);
             height: calc(100% - 4px);
             left: 2px;
@@ -262,7 +262,7 @@ async function handleLogin(form: FormInstance) {
 
             &:before,
             &:after {
-                content: "";
+                content: '';
                 position: absolute;
                 left: 0;
                 right: 0;

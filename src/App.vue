@@ -4,6 +4,6 @@
     </el-config-provider>
 </template>
 <script lang="ts" setup>
-import {useAppStoreWithOut} from "@/store/modules/app"
-import {APP_LOCALE_MESSAGES} from "@/lang"
+import {useAppStoreWithOut} from '@/store/modules/app'
+import {APP_LOCALE_MESSAGES} from '@/lang'
 </script>

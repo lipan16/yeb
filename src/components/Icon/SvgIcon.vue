@@ -5,12 +5,12 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, computed} from "vue"
+import {defineComponent, computed} from 'vue'
 
 export default defineComponent({
-    name: "SvgIcon",
+    name: 'SvgIcon',
     props: {
-        prefix: {type: String, default: "icon"},
+        prefix: {type: String, default: 'icon'},
         name: {type: String, require: true},
         size: {type: [Number, String], default: 16},
         color: {type: String}
@@ -21,7 +21,7 @@ export default defineComponent({
         const getStyle = computed(() => {
             const {size} = props
             let s = `${size}`
-            s = `${s.replace("px", "")}px`
+            s = `${s.replace('px', '')}px`
             return {width: s, height: s}
         })
 

@@ -24,13 +24,13 @@
 </template>
 
 <script lang="ts" setup>
-import {useFullscreen} from "@vueuse/core"
+import {useFullscreen} from '@vueuse/core'
 
-import AppLocalePicker from "@/components/Application/AppLocalePicker.vue"
-import AppDarkModeToggle from "@/components/Application/AppDarkModeToggle.vue"
-import AppLogo from "@/components/Application/AppLogo.vue"
-import Breadcrumb from "@/layout/components/Navbar/Breadcrumb.vue"
-import {useAppStoreWithOut} from "@/store/modules/app"
+import AppLocalePicker from '@/components/Application/AppLocalePicker.vue'
+import AppDarkModeToggle from '@/components/Application/AppDarkModeToggle.vue'
+import AppLogo from '@/components/Application/AppLogo.vue'
+import Breadcrumb from '@/layout/components/Navbar/Breadcrumb.vue'
+import {useAppStoreWithOut} from '@/store/modules/app'
 
 const appStore = useAppStoreWithOut()
 

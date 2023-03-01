@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import {useTagsViewStoreWithOut} from "@/store/modules/tagsView"
+import {useTagsViewStoreWithOut} from '@/store/modules/tagsView'
 
 const tagsViewStore = useTagsViewStoreWithOut()
 </script>

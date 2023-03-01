@@ -5,7 +5,7 @@
  * @returns {boolean}
  */
 export function hasClass(ele, cls) {
-    return !!ele.className.match(new RegExp("(\\s|^)" + cls + "(\\s|$)"))
+    return !!ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'))
 }
 
 /**
@@ -15,7 +15,7 @@ export function hasClass(ele, cls) {
  */
 export function addClass(ele, cls) {
     if (!hasClass(ele, cls)) {
-        ele.className += " " + cls
+        ele.className += ' ' + cls
     }
 }
 
@@ -26,8 +26,8 @@ export function addClass(ele, cls) {
  */
 export function removeClass(ele, cls) {
     if (hasClass(ele, cls)) {
-        const reg = new RegExp("(\\s|^)" + cls + "(\\s|$)")
-        ele.className = ele.className.replace(reg, " ")
+        const reg = new RegExp('(\\s|^)' + cls + '(\\s|$)')
+        ele.className = ele.className.replace(reg, ' ')
     }
 }
 
@@ -37,22 +37,22 @@ export function removeClass(ele, cls) {
  */
 export function getUrlParam(paraName) {
     const url = document.location.toString()
-    const arrObj = url.split("?")
+    const arrObj = url.split('?')
 
     if (arrObj.length > 1) {
-        const arrPara = arrObj[1].split("&")
+        const arrPara = arrObj[1].split('&')
         let arr
 
         for (let i = 0; i < arrPara.length; i++) {
-            arr = arrPara[i].split("=")
+            arr = arrPara[i].split('=')
 
             if (arr !== null && arr[0] === paraName) {
                 return arr[1]
             }
         }
-        return ""
+        return ''
     }
-    return ""
+    return ''
 }
 
 /**
@@ -63,7 +63,7 @@ export function getUrlParam(paraName) {
  * @returns {string}
  */
 String.prototype.sliceByPoint = function (pStart: number, pEnd: number) {
-    let result = "" // 截取的结果
+    let result = '' // 截取的结果
     let pIndex = 0 // 码点的指针
     let cIndex = 0 // 码元的指针
     while (true) {
@@ -91,7 +91,7 @@ String.prototype.sliceByPoint = function (pStart: number, pEnd: number) {
 export function toggleClassName(flag: boolean, clsName: string, target?: HTMLElement) {
     const targetEl = target || document.body
     let {className} = targetEl
-    className = className.replace(clsName, "")
+    className = className.replace(clsName, '')
     targetEl.className = (flag ? `${className} ${clsName}` : className).trim()
 }
 

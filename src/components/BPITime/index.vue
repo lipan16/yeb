@@ -5,15 +5,15 @@
 </template>
 
 <script setup lang="ts">
-import {useIntervalFn} from "@vueuse/core"
-import {SETTING} from "@/setting"
-import moment, {Moment} from "moment"
+import {useIntervalFn} from '@vueuse/core'
+import {SETTING} from '@/setting'
+import moment, {Moment} from 'moment'
 
 const bpi = reactive({
-    realTime: "",
-    breakTime: "",
-    longTime: "",
-    value: ""
+    realTime: '',
+    breakTime: '',
+    longTime: '',
+    value: ''
 })
 const timeShowType = ref(true)
 const clickCount = ref(0)
@@ -48,7 +48,7 @@ const showTime = (type: boolean, begin1: Moment = dateTime, end1: Moment = momen
     const H = time.hours()
     const m = time.minutes()
     const s = time.seconds()
-    return (type ? D : y + "年" + M + "个月" + d) + "天" + H + "时" + m + "分" + s + "秒"
+    return (type ? D : y + '年' + M + '个月' + d) + '天' + H + '时' + m + '分' + s + '秒'
 }
 
 onMounted(() => {

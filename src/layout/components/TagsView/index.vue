@@ -11,7 +11,7 @@
                 @click.middle="!isAffix(tag) ? closeSelectedTag(tag) : ''"
                 @contextmenu.prevent="openMenu(tag, $event)"
             >
-                {{ $t("route." + tag.meta?.title) }}
+                {{ $t('route.' + tag.meta?.title) }}
                 <span v-if="!isAffix(tag)" class="icon-close" @click.prevent.stop="closeSelectedTag(tag)">
                     <SvgIcon name="close" />
                 </span>
@@ -21,40 +21,40 @@
         <ul v-show="visible" :style="{left: left + 'px', top: top + 'px'}" class="tags-view__menu">
             <li @click="refreshSelectedTag(selectedTag)">
                 <SvgIcon name="refresh" size="12" />
-                {{ $t("tagsView.refresh") }}
+                {{ $t('tagsView.refresh') }}
             </li>
             <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">
                 <SvgIcon name="close" size="12" />
-                {{ $t("tagsView.close") }}
+                {{ $t('tagsView.close') }}
             </li>
             <li @click="closeOtherTags">
                 <SvgIcon name="close_other" size="12" />
-                {{ $t("tagsView.closeOther") }}
+                {{ $t('tagsView.closeOther') }}
             </li>
             <li v-if="!isFirstView()" @click="closeLeftTags">
                 <SvgIcon name="close_left" size="12" />
-                {{ $t("tagsView.closeLeft") }}
+                {{ $t('tagsView.closeLeft') }}
             </li>
             <li v-if="!isLastView()" @click="closeRightTags">
                 <SvgIcon name="close_right" size="12" />
-                {{ $t("tagsView.closeRight") }}
+                {{ $t('tagsView.closeRight') }}
             </li>
             <li @click="closeAllTags(selectedTag)">
                 <SvgIcon name="close_all" size="12" />
-                {{ $t("tagsView.closeAll") }}
+                {{ $t('tagsView.closeAll') }}
             </li>
         </ul>
     </div>
 </template>
 
 <script setup lang="ts">
-import {getCurrentInstance, ComponentInternalInstance} from "vue"
-import {useRouter, useRoute} from "vue-router"
-import path from "path-browserify"
+import {getCurrentInstance, ComponentInternalInstance} from 'vue'
+import {useRouter, useRoute} from 'vue-router'
+import path from 'path-browserify'
 
-import {usePermissionStoreWithOut} from "@/store/modules/permission.js"
-import {TagView, useTagsViewStoreWithOut} from "@/store/modules/tagsView.js"
-import ScrollPane from "./ScrollPane.vue"
+import {usePermissionStoreWithOut} from '@/store/modules/permission.js'
+import {TagView, useTagsViewStoreWithOut} from '@/store/modules/tagsView.js'
+import ScrollPane from './ScrollPane.vue'
 
 const permissionStore = usePermissionStoreWithOut()
 const tagsViewStore = useTagsViewStoreWithOut()
@@ -84,13 +84,13 @@ watch(
 
 watch(visible, value => {
     if (value) {
-        document.body.addEventListener("click", closeMenu)
+        document.body.addEventListener('click', closeMenu)
     } else {
-        document.body.removeEventListener("click", closeMenu)
+        document.body.removeEventListener('click', closeMenu)
     }
 })
 
-function filterAffixTags(routes: any[], basePath = "/") {
+function filterAffixTags(routes: any[], basePath = '/') {
     let tags: TagView[] = []
 
     routes.forEach(route => {
@@ -155,7 +155,7 @@ function isAffix(tag: TagView) {
 
 function isFirstView() {
     try {
-        return (selectedTag.value as TagView).fullPath === tagsViewStore.visitedViews[1].fullPath || (selectedTag.value as TagView).fullPath === "/index"
+        return (selectedTag.value as TagView).fullPath === tagsViewStore.visitedViews[1].fullPath || (selectedTag.value as TagView).fullPath === '/index'
     } catch (err) {
         return false
     }
@@ -173,7 +173,7 @@ function refreshSelectedTag(view: TagView) {
     tagsViewStore.delCachedView(view)
     const {fullPath} = view
     nextTick(() => {
-        router.replace({path: "/redirect" + fullPath}).catch(err => {
+        router.replace({path: '/redirect' + fullPath}).catch(err => {
             console.warn(err)
         })
     })
@@ -186,11 +186,11 @@ function toLastView(visitedViews: TagView[], view?: any) {
     } else {
         // now the default is to redirect to the home page if there is no tags-view,
         // you can adjust it according to your needs.
-        if (view.name === "Dashboard") {
+        if (view.name === 'Dashboard') {
             // to reload home page
-            router.replace({path: "/redirect" + view.fullPath})
+            router.replace({path: '/redirect' + view.fullPath})
         } else {
-            router.push("/")
+            router.push('/')
         }
     }
 }
@@ -303,7 +303,7 @@ onMounted(() => {
                 border-color: var(--el-color-primary);
 
                 &::before {
-                    content: "";
+                    content: '';
                     background: #fff;
                     display: inline-block;
                     width: 8px;

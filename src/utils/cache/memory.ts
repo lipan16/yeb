@@ -1,7 +1,7 @@
-import {Cache} from "#/store"
+import {Cache} from '#/store'
 
-import {omit} from "lodash"
-import {LOGIN_INFO_KEY, ROLES_KEY, TOKEN_KEY, USER_INFO_KEY} from "@/setting/KEY"
+import {omit} from 'lodash'
+import {LOGIN_INFO_KEY, ROLES_KEY, TOKEN_KEY, USER_INFO_KEY} from '@/setting/KEY'
 
 // 保存时效
 const NOT_ALIVE = 0
@@ -83,7 +83,7 @@ export class Memory<T = any, V = any> {
     }
 
     clear() {
-        console.log("------clear memory cache------", this.cache)
+        console.log('------clear memory cache------', this.cache)
         Object.keys(this.cache).forEach(key => {
             const item = this.cache[key]
             item.timeoutId && clearTimeout(item.timeoutId)

@@ -12,12 +12,12 @@
     </el-dropdown>
 </template>
 <script lang="ts" setup>
-import {ref} from "vue"
-import {useAppStoreWithOut} from "@/store/modules/app"
-import {changeLocale} from "@/lang"
-import SvgIcon from "@/components/Icon/SvgIcon.vue"
+import {ref} from 'vue'
+import {useAppStoreWithOut} from '@/store/modules/app'
+import {changeLocale} from '@/lang'
+import SvgIcon from '@/components/Icon/SvgIcon.vue'
 
-const selectedKeys = ref<string>("")
+const selectedKeys = ref<string>('')
 
 const appStore = useAppStoreWithOut()
 

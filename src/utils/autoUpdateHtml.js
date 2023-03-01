@@ -8,7 +8,7 @@ let lastSrc // 上一次获取到的script地址
 const scriptReg = /\<scritp.*src=["'](?<src>[^"']+)/gm
 
 async function extractNewScripts() {
-    const html = await fetch("/?_timestamp=" + Date.now()).then(res => res.text())
+    const html = await fetch('/?_timestamp=' + Date.now()).then(res => res.text())
     scriptReg.lastIndex = 0
     const result = []
     let match
@@ -43,7 +43,7 @@ function autoRefresh() {
     setTimeout(async () => {
         const willUpdate = await needUpdate()
         if (willUpdate) {
-            const result = confirm("页面有更新，点击确定刷新页面")
+            const result = confirm('页面有更新，点击确定刷新页面')
             if (result) {
                 location.reload()
             }

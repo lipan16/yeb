@@ -6,15 +6,15 @@
     </div>
 </template>
 <script lang="ts" setup>
-import SvgIcon from "@/components/Icon/SvgIcon.vue"
-import {useDark, useToggle} from "@vueuse/core"
-import {computed} from "vue"
+import SvgIcon from '@/components/Icon/SvgIcon.vue'
+import {useDark, useToggle} from '@vueuse/core'
+import {computed} from 'vue'
 
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
 
 const getClass = computed(() => {
-    return isDark.value ? "dark" : ""
+    return isDark.value ? 'dark' : ''
 })
 </script>
 <style lang="less" scoped>

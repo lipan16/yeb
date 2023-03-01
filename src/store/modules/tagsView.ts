@@ -1,14 +1,14 @@
-import {defineStore} from "pinia"
-import {ref} from "vue"
-import {RouteLocationNormalized} from "vue-router"
+import {defineStore} from 'pinia'
+import {ref} from 'vue'
+import {RouteLocationNormalized} from 'vue-router'
 
-import {store} from "@/store"
+import {store} from '@/store'
 
 export interface TagView extends Partial<RouteLocationNormalized> {
     title?: string
 }
 
-export const useTagsViewStore = defineStore("tagsView", () => {
+export const useTagsViewStore = defineStore('tagsView', () => {
     /**
      * state
      *
@@ -22,9 +22,9 @@ export const useTagsViewStore = defineStore("tagsView", () => {
             return
         }
         if (view.meta && view.meta.affix) {
-            visitedViews.value.unshift(Object.assign({}, view, {title: view.meta?.title || "no-name"}))
+            visitedViews.value.unshift(Object.assign({}, view, {title: view.meta?.title || 'no-name'}))
         } else {
-            visitedViews.value.push(Object.assign({}, view, {title: view.meta?.title || "no-name"}))
+            visitedViews.value.push(Object.assign({}, view, {title: view.meta?.title || 'no-name'}))
         }
     }
 

@@ -8,11 +8,11 @@
 </template>
 
 <script lang="ts" setup>
-import {computed} from "vue"
-import {isExternal} from "@/utils/validate"
-import {useRouter} from "vue-router"
+import {computed} from 'vue'
+import {isExternal} from '@/utils/validate'
+import {useRouter} from 'vue-router'
 
-import {DeviceType, useAppStoreWithOut} from "@/store/modules/app"
+import {DeviceType, useAppStoreWithOut} from '@/store/modules/app'
 
 const appStore = useAppStoreWithOut()
 

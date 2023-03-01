@@ -8,27 +8,27 @@
         <div class="working">
             <img class="working-coffee" :src="coffeeSvg" alt="" />
             <div class="working-text">
-                {{ $t("dashboard.You have worked today") }}<span class="time">{{ workingTime.showTime }}</span>
+                {{ $t('dashboard.You have worked today') }}<span class="time">{{ workingTime.showTime }}</span>
             </div>
             <div @click="onclickWorkState" class="working-opt working-rest">
-                {{ workingTime.status ? $t("dashboard.have a bit of rest") : $t("dashboard.Continue to work") }}
+                {{ workingTime.status ? $t('dashboard.have a bit of rest') : $t('dashboard.Continue to work') }}
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import {useIntervalFn} from "@vueuse/core"
-import welcomeSvg from "@/assets/svg/welcome.svg"
-import coffeeSvg from "@/assets/svg/coffee.svg"
-import {useUserStoreWithOut} from "@/store/modules/user"
+import {useIntervalFn} from '@vueuse/core'
+import welcomeSvg from '@/assets/svg/welcome.svg'
+import coffeeSvg from '@/assets/svg/coffee.svg'
+import {useUserStoreWithOut} from '@/store/modules/user'
 
 defineProps<{msg: string}>()
 const userStore = useUserStoreWithOut()
 
 const workingTime = reactive({
     time: 0,
-    showTime: "",
+    showTime: '',
     status: true
 })
 
@@ -37,9 +37,9 @@ const {pause, resume, isActive} = useIntervalFn(() => {
     const H = Math.floor(workingTime.time / 3600)
     const m = Math.floor((workingTime.time - 3600 * H) / 60)
     const s = workingTime.time % 60
-    workingTime.showTime = H ? H + "时" : ""
-    workingTime.showTime += m ? m + "分" : ""
-    workingTime.showTime += s + "秒"
+    workingTime.showTime = H ? H + '时' : ''
+    workingTime.showTime += m ? m + '分' : ''
+    workingTime.showTime += s + '秒'
 }, 1000)
 
 const onclickWorkState = () => {

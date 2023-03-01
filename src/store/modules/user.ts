@@ -1,15 +1,15 @@
-import {UserInfo} from "#/user"
-import {LoginData} from "#/store"
+import {UserInfo} from '#/user'
+import {LoginData} from '#/store'
 
-import {defineStore} from "pinia"
+import {defineStore} from 'pinia'
 
-import {TOKEN_KEY} from "@/setting/KEY"
-import {getAuthCache, removeAuthCache, setAuthCache} from "@/utils/auth"
-import {store} from "@/store"
-import {resetRouter} from "@/router"
-import Api from "@/api"
+import {TOKEN_KEY} from '@/setting/KEY'
+import {getAuthCache, removeAuthCache, setAuthCache} from '@/utils/auth'
+import {store} from '@/store'
+import {resetRouter} from '@/router'
+import Api from '@/api'
 
-export const useUserStore = defineStore("user", () => {
+export const useUserStore = defineStore('user', () => {
     /** state
      *
      * token
@@ -19,9 +19,9 @@ export const useUserStore = defineStore("user", () => {
      * perms 用户权限编码集合 → 判断按钮权限
      * lastUpdateTime 上次更新时间
      */
-    const token = ref<string>(getAuthCache<string>(TOKEN_KEY) || "")
-    const nickname = ref<string>("")
-    const avatar = ref<string>("")
+    const token = ref<string>(getAuthCache<string>(TOKEN_KEY) || '')
+    const nickname = ref<string>('')
+    const avatar = ref<string>('')
     const roles = ref<Array<string>>([])
     const perms = ref<Array<string>>([])
     const lastUpdateTime = ref<number>(0)
@@ -44,10 +44,10 @@ export const useUserStore = defineStore("user", () => {
                 .getUserInfo()
                 .then(({data}) => {
                     if (!data) {
-                        return reject("Verification failed, please Login again.")
+                        return reject('Verification failed, please Login again.')
                     }
                     if (!data.roles || data.roles.length <= 0) {
-                        reject("getUserInfo: roles must be a non-null array!")
+                        reject('getUserInfo: roles must be a non-null array!')
                     }
                     lastUpdateTime.value = new Date().getTime()
                     nickname.value = data.nickname
@@ -73,9 +73,9 @@ export const useUserStore = defineStore("user", () => {
     // 重置
     function resetToken() {
         removeAuthCache(TOKEN_KEY)
-        token.value = ""
-        nickname.value = ""
-        avatar.value = ""
+        token.value = ''
+        nickname.value = ''
+        avatar.value = ''
         roles.value = []
         perms.value = []
     }

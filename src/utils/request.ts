@@ -1,7 +1,7 @@
-import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios"
-import {CancelRequestSource, RequestConfig, RequestInterceptors, YEBRequestConfig, YEBResponse} from "#/request"
+import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios'
+import {CancelRequestSource, RequestConfig, RequestInterceptors, YEBRequestConfig, YEBResponse} from '#/request'
 
-import {useUserStoreWithOut} from "@/store/modules/user"
+import {useUserStoreWithOut} from '@/store/modules/user'
 
 class YAxios {
     // 实例对象
@@ -30,12 +30,12 @@ class YAxios {
                 const userStore = useUserStoreWithOut()
                 if (userStore.token) {
                     // @ts-ignore
-                    config.headers["X-Access-Token"] = userStore.token
+                    config.headers['X-Access-Token'] = userStore.token
                 }
                 return config
             },
             (error: any) => {
-                console.error("Request1 request.use error", error)
+                console.error('Request1 request.use error', error)
             }
         )
         // 实例请求拦截器
@@ -49,7 +49,7 @@ class YAxios {
                 return res.data
             },
             (error: any) => {
-                console.error("Request1 response.use error", error)
+                console.error('Request1 response.use error', error)
             }
         )
     }
@@ -75,7 +75,7 @@ class YAxios {
                 .then(res => {
                     // 如果为单个请求设置了响应拦截器，这里使用单个响应拦截器
                     if (config.interceptors?.responseInterceptors) {
-                        console.log("this.instance.request response")
+                        console.log('this.instance.request response')
                         res = config.interceptors.responseInterceptors(res)
                     }
                     resolve(res)
@@ -91,7 +91,7 @@ class YAxios {
 
     // 取消请求
     cancelRequest(url: string | string[]) {
-        if (typeof url === "string") {
+        if (typeof url === 'string') {
             const sourceIndex = this.getSourceIndex(url)
             sourceIndex >= 0 && this.cancelRequestSourceList?.[sourceIndex][url]()
         } else {
@@ -131,7 +131,7 @@ const yAxios = new YAxios({
     baseURL: import.meta.env.BASE_URL,
     timeout: 5 * 1000,
     headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     },
     interceptors: {
         requestInterceptors: config => {
@@ -146,8 +146,8 @@ const yAxios = new YAxios({
 })
 
 const yebRequest = <D = any, T = any>(config: YEBRequestConfig<D, T>) => {
-    const {method = "get"} = config
-    if (method === "get" || method === "GET") {
+    const {method = 'get'} = config
+    if (method === 'get' || method === 'GET') {
         config.params = config.data
     }
     return yAxios.request<YEBResponse<T>>(config)

@@ -1,15 +1,15 @@
-import {RouteRecordRaw} from "vue-router"
-import {defineStore} from "pinia"
-import {store} from "@/store"
-import {constantRoutes} from "@/router"
-import Api from "@/api"
+import {RouteRecordRaw} from 'vue-router'
+import {defineStore} from 'pinia'
+import {store} from '@/store'
+import {constantRoutes} from '@/router'
+import Api from '@/api'
 
-const modules = import.meta.glob("../../views/**/**.vue")
-export const Layout = () => import("@/layout/index.vue")
+const modules = import.meta.glob('../../views/**/**.vue')
+export const Layout = () => import('@/layout/index.vue')
 
 const hasPermission = (roles: string[], route: RouteRecordRaw) => {
     if (route.meta && route.meta.roles) {
-        if (roles.includes("ROOT")) {
+        if (roles.includes('ROOT')) {
             return true
         }
         return roles.some(role => {
@@ -26,11 +26,11 @@ const filterAsyncRoutes = (routes: RouteRecordRaw[], roles: string[]) => {
     routes.forEach(route => {
         const tmp = {...route} as any
         if (hasPermission(roles, tmp)) {
-            if (tmp.component == "Layout") {
+            if (tmp.component == 'Layout') {
                 tmp.component = Layout
             } else {
                 const component = modules[`../../views/${tmp.component}.vue`] as any
-                console.log("tmp.component", tmp.component, component)
+                console.log('tmp.component', tmp.component, component)
                 if (component) {
                     tmp.component = component
                 } else {
@@ -47,7 +47,7 @@ const filterAsyncRoutes = (routes: RouteRecordRaw[], roles: string[]) => {
     return res
 }
 
-export const usePermissionStore = defineStore("permission", () => {
+export const usePermissionStore = defineStore('permission', () => {
     // state
     const routes = ref<RouteRecordRaw[]>([])
     const addRoutes = ref<RouteRecordRaw[]>([])

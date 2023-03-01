@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import {PropType} from "vue"
+import {PropType} from 'vue'
 
 export default defineComponent({
     props: {
@@ -23,7 +23,7 @@ export default defineComponent({
             type: String as PropType<string>
         },
         theme: {
-            type: String as PropType<"dark" | "light">
+            type: String as PropType<'dark' | 'light'>
         }
     }
 })
@@ -58,7 +58,7 @@ export default defineComponent({
 
         &::before,
         &::after {
-            content: "";
+            content: '';
             position: absolute;
             width: 100%;
             height: 100%;

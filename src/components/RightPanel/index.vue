@@ -13,11 +13,11 @@
 </template>
 
 <script setup lang="ts">
-import {onBeforeUnmount, onMounted, ref, watch} from "vue"
-import {toggleClassName} from "@/utils"
+import {onBeforeUnmount, onMounted, ref, watch} from 'vue'
+import {toggleClassName} from '@/utils'
 
-import {ElColorPicker} from "element-plus"
-import {useAppStoreWithOut} from "@/store/modules/app"
+import {ElColorPicker} from 'element-plus'
+import {useAppStoreWithOut} from '@/store/modules/app'
 import SvgIcon from '@/components/Icon/SvgIcon.vue'
 
 defineProps({
@@ -29,25 +29,25 @@ const appStore = useAppStoreWithOut()
 const show = ref(false)
 
 watch(show, value => {
-    toggleClassName(value, "showRightPanel")
+    toggleClassName(value, 'showRightPanel')
 
     if (value) {
         // 展开的时候给蒙层添加点击事件
-        window.addEventListener("click", closeMasks, {passive: true})
+        window.addEventListener('click', closeMasks, {passive: true})
     }
 })
 
 // RightPanel点击蒙层不关闭
 function closeMasks(evt: any) {
-    let parent = evt.target.closest(".theme-picker-dropdown")
+    let parent = evt.target.closest('.theme-picker-dropdown')
     if (parent) {
         return
     }
 
-    parent = evt.target.closest(".right-panel")
+    parent = evt.target.closest('.right-panel')
     if (!parent) {
         show.value = false
-        window.removeEventListener("click", closeMasks)
+        window.removeEventListener('click', closeMasks)
     }
 }
 
@@ -55,7 +55,7 @@ const rightPanel = ref(ElColorPicker)
 
 function insertToBody() {
     const elx = rightPanel.value as any
-    const body = document.querySelector("body") as any
+    const body = document.querySelector('body') as any
     body.insertBefore(elx, body.firstChild)
 }
 

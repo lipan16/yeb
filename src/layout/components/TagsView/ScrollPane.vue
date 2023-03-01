@@ -5,24 +5,24 @@
 </template>
 
 <script setup lang="ts">
-import {TagView, useTagsViewStoreWithOut} from "@/store/modules/tagsView"
+import {TagView, useTagsViewStoreWithOut} from '@/store/modules/tagsView'
 
 const tagAndTagSpacing = ref(4)
 const {proxy} = getCurrentInstance() as any
 
-const emits = defineEmits(["scroll"])
+const emits = defineEmits(['scroll'])
 const emitScroll = () => {
-    emits("scroll")
+    emits('scroll')
 }
 const tagsViewStore = useTagsViewStoreWithOut()
 
 const scrollWrapper = computed(() => proxy?.$refs.scrollContainer.$refs.wrapRef)
 
 onMounted(() => {
-    scrollWrapper.value.addEventListener("scroll", emitScroll, true)
+    scrollWrapper.value.addEventListener('scroll', emitScroll, true)
 })
 onBeforeUnmount(() => {
-    scrollWrapper.value.removeEventListener("scroll", emitScroll)
+    scrollWrapper.value.removeEventListener('scroll', emitScroll)
 })
 
 function handleScroll(e: WheelEvent) {
@@ -49,12 +49,12 @@ function moveToTarget(currentTag: TagView) {
     } else if (lastTag === currentTag) {
         $scrollWrapper.scrollLeft = $scrollWrapper.scrollWidth - $containerWidth
     } else {
-        const tagListDom = document.getElementsByClassName("tags-view__item")
+        const tagListDom = document.getElementsByClassName('tags-view__item')
         const currentIndex = tagsViewStore.visitedViews.findIndex(f => f === currentTag)
         let prevTag = null
         let nextTag = null
         for (const k in tagListDom) {
-            if (k !== "length" && Object.hasOwnProperty.call(tagListDom, k)) {
+            if (k !== 'length' && Object.hasOwnProperty.call(tagListDom, k)) {
                 if ((tagListDom[k] as any).dataset.path === tagsViewStore.visitedViews[currentIndex - 1].path) {
                     prevTag = tagListDom[k] as any
                 }

@@ -25,11 +25,11 @@
 </template>
 
 <script lang="ts" setup>
-import {useRoute} from "vue-router"
-import SidebarItem from "@/layout/components/Sidebar/SidebarItem.vue"
-import SidebarLogo from "@/layout/components/Sidebar/SidebarLogo.vue"
-import {useAppStoreWithOut} from "@/store/modules/app"
-import {usePermissionStoreWithOut} from "@/store/modules/permission"
+import {useRoute} from 'vue-router'
+import SidebarItem from '@/layout/components/Sidebar/SidebarItem.vue'
+import SidebarLogo from '@/layout/components/Sidebar/SidebarLogo.vue'
+import {useAppStoreWithOut} from '@/store/modules/app'
+import {usePermissionStoreWithOut} from '@/store/modules/permission'
 
 const route = useRoute()
 const appStore = useAppStoreWithOut()
@@ -88,7 +88,7 @@ const activeMenu = computed<string>(() => {
                         width: 3px;
                         height: 100%;
                         background-color: var(--sidebar-sub-menu-hover);
-                        content: "";
+                        content: '';
                         z-index: 1;
                     }
                 }

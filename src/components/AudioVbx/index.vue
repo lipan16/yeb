@@ -23,9 +23,9 @@ let timer // 动画帧id
 
 const audioObj = reactive({
     status: false,
-    title: "星月神话",
-    currentTime: "0:00",
-    totalTime: ""
+    title: '星月神话',
+    currentTime: '0:00',
+    totalTime: ''
 })
 
 const instance = getCurrentInstance()
@@ -33,7 +33,7 @@ onMounted(() => {
     cvsEle = instance?.refs.cvsEle
     audioEle = instance?.refs.audioEle
 
-    cvsCtx = cvsEle.getContext("2d")
+    cvsCtx = cvsEle.getContext('2d')
 
     audioEle.oncanplay = () => {
         if (!audioObj.totalTime) {
@@ -78,7 +78,7 @@ function draw() {
     analyser.getByteFrequencyData(dataArray)
     const len = dataArray.length / 2 // 过滤高频
     const barWidth = width / len / 2
-    cvsCtx.fillStyle = "#ea43f6"
+    cvsCtx.fillStyle = '#ea43f6'
 
     for (let i = 0; i < len; i++) {
         const data = dataArray[i]
@@ -108,8 +108,8 @@ const transTime = value => {
     const m = Math.floor(value / 60)
     const s = Math.floor(value % 60)
 
-    time = h === 0 ? "" : h + ":"
-    time += m + ":" + s.toString().padStart(2, "0")
+    time = h === 0 ? '' : h + ':'
+    time += m + ':' + s.toString().padStart(2, '0')
     return time
 }
 </script>

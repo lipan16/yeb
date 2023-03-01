@@ -1,9 +1,9 @@
-import type {App, Directive, DirectiveBinding} from "vue"
+import type {App, Directive, DirectiveBinding} from 'vue'
 
 const loadingDirective: Directive = {
     mounted(el: Element, binding: DirectiveBinding<any>) {
-        console.log("loadingDirective", el)
-        console.log("loadingDirective", binding)
+        console.log('loadingDirective', el)
+        console.log('loadingDirective', binding)
     },
     updated(el, binding) {
         const instance = el.instance
@@ -20,5 +20,5 @@ const loadingDirective: Directive = {
 }
 
 export default function setupLoadingDirective(app: App) {
-    app.directive("loading", loadingDirective)
+    app.directive('loading', loadingDirective)
 }

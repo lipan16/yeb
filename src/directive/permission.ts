@@ -1,5 +1,5 @@
-import type {App, Directive, DirectiveBinding} from "vue"
-import {useUserStoreWithOut} from "@/store/modules/user"
+import type {App, Directive, DirectiveBinding} from 'vue'
+import {useUserStoreWithOut} from '@/store/modules/user'
 
 const authDirective: Directive = {
     mounted(el: Element, binding: DirectiveBinding<any>) {
@@ -21,5 +21,5 @@ const authDirective: Directive = {
 }
 
 export default function setupPermissionDirective(app: App) {
-    app.directive("auth", authDirective)
+    app.directive('auth', authDirective)
 }

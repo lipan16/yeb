@@ -89,14 +89,14 @@
 </template>
 
 <script setup lang="ts">
-import {useAppStoreWithOut} from "@/store/modules/app"
-import {SETTING} from "@/setting/index.js"
-import {toggleClassName} from "@/utils"
+import {useAppStoreWithOut} from '@/store/modules/app'
+import {SETTING} from '@/setting/index.js'
+import {toggleClassName} from '@/utils'
 
 const appStore = useAppStoreWithOut()
 
 function sysThemeChange(value: any) {
-    appStore.setProjectConfig({key: "theme", value})
+    appStore.setProjectConfig({key: 'theme', value})
 }
 
 function themeChange(key: string, value: string) {
@@ -107,11 +107,11 @@ const headerTheme = computed(() => appStore.projectConfig.headerTheme)
 const sidebarTheme = computed(() => appStore.projectConfig.sidebarTheme)
 
 function grayModeSwitchChange(value) {
-    toggleClassName(value, "gray-mode", document.documentElement)
+    toggleClassName(value, 'gray-mode', document.documentElement)
 }
 
 function colorWeakSwitchChange(value) {
-    toggleClassName(value, "color-weak", document.documentElement)
+    toggleClassName(value, 'color-weak', document.documentElement)
 }
 </script>
 

@@ -19,12 +19,12 @@
 </template>
 
 <script setup lang="ts">
-import {computed, watchEffect} from "vue"
-import {useWindowSize} from "@vueuse/core"
+import {computed, watchEffect} from 'vue'
+import {useWindowSize} from '@vueuse/core'
 
-import RightPanel from "@/components/RightPanel/index.vue"
-import {AppMain, Navbar, Settings, Sidebar, TagsView} from "./components"
-import {DeviceType, useAppStoreWithOut} from "@/store/modules/app"
+import RightPanel from '@/components/RightPanel/index.vue'
+import {AppMain, Navbar, Settings, Sidebar, TagsView} from './components'
+import {DeviceType, useAppStoreWithOut} from '@/store/modules/app'
 
 const {width} = useWindowSize()
 const appStore = useAppStoreWithOut()
@@ -51,7 +51,7 @@ const classObj = computed(() => ({
  * 小屏（>=768px）
  */
 watchEffect(() => {
-    console.log("watchEffect", width.value)
+    console.log('watchEffect', width.value)
 
     if (width.value < 768) {
         appStore.toggleDevice(DeviceType.mobile)
@@ -80,7 +80,7 @@ function handleOutsideClick() {
     width: 100%;
 
     &:after {
-        content: "";
+        content: '';
         display: table;
         clear: both;
     }

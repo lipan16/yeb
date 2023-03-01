@@ -1,17 +1,17 @@
-import type {App} from "vue"
-import {createI18n} from "vue-i18n"
+import type {App} from 'vue'
+import {createI18n} from 'vue-i18n'
 
-import {APP_LOCAL_CACHE_KEY} from "@/setting/KEY"
-import {SETTING} from "@/setting"
+import {APP_LOCAL_CACHE_KEY} from '@/setting/KEY'
+import {SETTING} from '@/setting'
 
 // element-ui built-in lang
-import elementEnLocale from "element-plus/dist/locale/en.mjs"
-import elementZhLocale from "element-plus/dist/locale/zh-cn.mjs"
+import elementEnLocale from 'element-plus/dist/locale/en.mjs'
+import elementZhLocale from 'element-plus/dist/locale/zh-cn.mjs'
 
 // User defined lang
-import enLocale from "./en"
-import zhLocale from "./zh"
-import {unref} from "vue"
+import enLocale from './en'
+import zhLocale from './zh'
+import {unref} from 'vue'
 
 export const APP_LOCALE_MESSAGES = {
     en: {
@@ -46,13 +46,13 @@ export async function changeLocale(locale: string) {
     if (currentLocale !== locale) {
         // 设置语言环境的 locale 信息
         globalI18n.setLocaleMessage(locale, APP_LOCALE_MESSAGES[locale])
-        if (i18n.mode === "legacy") {
+        if (i18n.mode === 'legacy') {
             // @ts-ignore
             i18n.global.locale = locale
         } else {
             ;(i18n.global.locale as any).value = locale
         }
-        document.querySelector("html")?.setAttribute("lang", locale)
+        document.querySelector('html')?.setAttribute('lang', locale)
     }
 }
 
