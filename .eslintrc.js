@@ -40,9 +40,9 @@ module.exports = {
 
         'no-var': 'error',
         // 禁止出现console
-        'no-console': 'warn',
+        'no-console': process.env.NODE_ENV === 'develop' ? 'off' : 'warn',
         // 禁用debugger
-        'no-debugger': 'error',
+        'no-debugger': process.env.NODE_ENV === 'develop' ? 'off' : 'error',
         // 禁止出现重复的 case 标签
         'no-duplicate-case': 'error',
         // 禁止出现空语句块
@@ -99,13 +99,13 @@ module.exports = {
         // 'jsx-quotes': 'warn',
         // 强制可嵌套的块的最大深度4
         'max-depth': 'warn',
-        // 强制最大行数 300
+        // 强制最大行数 500
         'max-lines': ['warn', {max: 500}],
-        // 强制函数最大代码行数 50
+        // 强制函数最大代码行数 70
         // 'max-lines-per-function': ['warn', { max: 70 }],
-        // 强制函数块最多允许的的语句数量20
+        // 强制函数块最多允许的的语句数量100
         'max-statements': ['warn', 100],
-        // 强制回调函数最大嵌套深度
+        // 强制回调函数最大嵌套深度3
         'max-nested-callbacks': ['warn', 3],
         // 强制函数定义中最多允许的参数数量
         'max-params': ['warn', 5],

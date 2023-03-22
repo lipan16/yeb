@@ -83,7 +83,6 @@ String.prototype.sliceByPoint = function (pStart: number, pEnd: number) {
     }
     return result
 }
-
 // 😀
 // console.log('😀死了'.sliceByPoint(0, 1))
 // '\uD83D'
@@ -124,3 +123,15 @@ export function dataMasking(data = '', type = 'default') {
             return data
     }
 }
+
+export function closuresTest(){
+    let index = 0
+    function add(){
+        index++
+        console.log(index)
+    }
+    return add
+}
+let test = closuresTest() // 函数名是一个标识（指向函数的指针），而()才是执行函数
+test() // 1
+test() // 2 第二次调用index变量还在内存中
