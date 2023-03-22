@@ -28,7 +28,7 @@ export default defineConfig(({mode, command}: ConfigEnv): UserConfig => {
         plugins: [
             vue(),
             eslintPlugin({
-                include: ['src/**/*.ts', 'src/**/*.vue', 'src/*.ts', 'src/*.vue']
+                include: isBuild ? ['src/**/*.ts', 'src/**/*.vue', 'src/*.ts', 'src/*.vue'] : ''
             }),
             viteMockServe({
                 supportTs: true,

@@ -1,8 +1,7 @@
 module.exports = {
     root: true, // eslint 一旦发现配置文件中有root：true，就会停止在父级目录中寻找
-
     env: {
-        node: false,
+        node: true,
         browser: true,
         es2021: true,
         'vue/setup-compiler-macros': true
@@ -24,6 +23,14 @@ module.exports = {
         defineExpose: 'readonly',
         withDefaults: 'readonly'
     },
+    overrides: [
+        {
+            files: ['*.ts', '*.tsx', '*.vue'],
+            rules: {
+                'no-undef': 'off',
+            },
+        },
+    ],
     // 自定义规则
     rules: {
         '@typescript-eslint/ban-ts-ignore': 'off',
@@ -37,7 +44,41 @@ module.exports = {
         '@typescript-eslint/ban-types': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
+        '@typescript-eslint/no-redeclare': 'error',
+        'vue/custom-event-name-casing': 'off',
+        'vue/attributes-order': 'off',
+        'vue/one-component-per-file': 'off',
+        'vue/html-closing-bracket-newline': 'off',
+        'vue/max-attributes-per-line': 'off',
+        'vue/multiline-html-element-content-newline': 'off',
+        'vue/singleline-html-element-content-newline': 'off',
+        'vue/attribute-hyphenation': 'off',
+        'vue/html-self-closing': 'off',
+        'vue/no-multiple-template-root': 'off',
+        'vue/require-default-prop': 'off',
+        'vue/no-v-model-argument': 'off',
+        'vue/no-arrow-functions-in-watch': 'off',
+        'vue/no-template-key': 'off',
+        'vue/no-v-html': 'off',
+        'vue/comment-directive': 'off',
+        'vue/no-parsing-error': 'off',
+        'vue/no-deprecated-v-on-native-modifier': 'off',
+        'vue/multi-word-component-names': 'off',
 
+        'no-useless-escape': 'off',
+        'no-sparse-arrays': 'off',
+        'no-prototype-builtins': 'off',
+        'no-constant-condition': 'off',
+        'no-use-before-define': 'off',
+        'no-restricted-globals': 'off',
+        'no-restricted-syntax': 'off',
+        'generator-star-spacing': 'off',
+        // 禁止在 return、throw、continue 和 break 语句之后出现不可达代码
+        'no-unreachable': 'error',
+        'no-multiple-template-root': 'off',
+        'no-unused-vars': 'off',
+        'no-v-model-argument': 'off',
+        'no-case-declarations': 'off',
         'no-var': 'error',
         // 禁止出现console
         'no-console': process.env.NODE_ENV === 'develop' ? 'off' : 'warn',
@@ -51,8 +92,6 @@ module.exports = {
         'no-extra-parens': 'off',
         // 禁止对 function 声明重新赋值
         'no-func-assign': 'warn',
-        // 禁止在 return、throw、continue 和 break 语句之后出现不可达代码
-        'no-unreachable': 'error',
         // 强制所有控制语句使用一致的括号风格
         curly: 'warn',
         // 要求 switch 语句中有 default 分支
@@ -70,7 +109,7 @@ module.exports = {
         // 禁止使用多个空格
         'no-multi-spaces': 'warn',
         // 禁止多次声明同一变量
-        'no-redeclare': 'warn',
+        'no-redeclare': 'error',
         // 禁止在 return 语句中使用赋值语句
         'no-return-assign': 'warn',
         // 禁用不必要的 return await
@@ -139,49 +178,16 @@ module.exports = {
         'arrow-spacing': 'warn',
         'prefer-const': 'warn',
         'prefer-rest-params': 'warn',
-        'no-useless-escape': 'off',
         'no-irregular-whitespace': 'warn',
-        'no-prototype-builtins': 'warn',
         'no-fallthrough': 'warn',
         'no-extra-boolean-cast': 'warn',
-        'no-case-declarations': 'warn',
         'no-async-promise-executor': 'warn',
-
-        'vue/custom-event-name-casing': 'off',
-        'vue/multi-word-component-names': 'off',
         'vue/script-setup-uses-vars': 'error',
-        'vue/no-deprecated-v-on-native-modifier': 'off',
-        'no-use-before-define': 'off',
         'no-undef': 'warn',
-        'no-unused-vars': 'warn',
         'space-before-function-paren': 'off',
-        'vue/attributes-order': 'off',
-        'vue/one-component-per-file': 'off',
-        'vue/html-closing-bracket-newline': 'off',
-        'vue/max-attributes-per-line': 'off',
-        'vue/multiline-html-element-content-newline': 'off',
-        'vue/singleline-html-element-content-newline': 'off',
-        'vue/attribute-hyphenation': 'off',
-        'vue/require-default-prop': 'off',
-        'vue/html-self-closing': [
-            'error',
-            {
-                html: {
-                    void: 'always',
-                    normal: 'never',
-                    component: 'always'
-                },
-                svg: 'always',
-                math: 'always'
-            }
-        ],
         'vue/v-on-event-hyphenation': 'off',
         'vue/component-definition-name-casing': 'off',
-        'vue/no-arrow-functions-in-watch': 'off',
-        'vue/no-v-html': 'off',
-        'vue/comment-directive': 'off',
         'vue/require-prop-types': 'off',
-        'no-sparse-arrays': 'off',
         'vue/html-indent': 'off'
     }
 }

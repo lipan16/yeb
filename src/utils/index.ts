@@ -132,6 +132,22 @@ export function closuresTest(){
     }
     return add
 }
-let test = closuresTest() // 函数名是一个标识（指向函数的指针），而()才是执行函数
-test() // 1
-test() // 2 第二次调用index变量还在内存中
+// let test = closuresTest() // 函数名是一个标识（指向函数的指针），而()才是执行函数
+// test() // 1
+// test() // 2 第二次调用index变量还在内存中
+
+
+// 加千分位符
+export const moneyFormat = money => {
+    const num = Number(money)
+    if(isNaN(num)){
+        return money
+    }
+    const res1 = num.toLocaleString('en')
+    const res2 = Intl.NumberFormat().format(num)
+    const res3 = num.toString().replace(/(?!^)(?=(\d{3})+\.)/g, ',')
+    const res4 = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+    return res1
+}
+

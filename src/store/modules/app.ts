@@ -7,6 +7,7 @@ import {SETTING} from '@/setting'
 import {PayLoadObject} from '#/store'
 
 export enum DeviceType {
+    // eslint-disable-next-line no-unused-vars
     mobile,
     desktop
 }
