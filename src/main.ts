@@ -10,6 +10,7 @@ import {useSso} from '@/hooks/web/useSso'
 import {registerGlobalComponent} from '@/components/registerGlobalComponent'
 import {setupRouterGuard} from '@/router/guard'
 import {setupGlobDirectives} from '@/directive'
+import {registerThirdComp} from '@/utils/registerThirdComp'
 
 // 可伸缩布局
 // import "amfe-flexible"
@@ -48,6 +49,9 @@ async function booting() {
 
     // 配置路由
     setupRouter(app)
+
+    // 注册第三方组件
+    registerThirdComp(app)
 
     // 当路由准备好时再执行挂载( https://next.router.vuejs.org/api/#isready)
     await router.isReady()

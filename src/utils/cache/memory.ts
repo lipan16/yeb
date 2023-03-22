@@ -16,6 +16,7 @@ export class Memory<T = any, V = any> {
     }
 
     get getCache() {
+        // 构造器中get方法语法糖
         return this.cache
     }
 

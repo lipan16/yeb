@@ -107,7 +107,7 @@ export default defineConfig(({mode, command}: ConfigEnv): UserConfig => {
             }
         },
         build: {
-            minify: 'esbuild',
+            minify: 'terser',
             target: 'es2015',
             cssTarget: 'chrome80',
             cssCodeSplit: false,

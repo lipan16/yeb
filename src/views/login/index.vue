@@ -1,67 +1,73 @@
 <template>
     <div class="login flex-list">
-        <div id="login-three-container"></div>
+
+        <Particles
+          id="particles"
+          :particlesInit="particlesInit"
+          :particlesLoaded="particlesLoaded"
+          :options="particlesConfig[0]"
+        />
 
         <div class="login-header flex-inline">
-            <AppDarkModeToggle />
-            <AppLocalePicker />
-            <AppLogo />
+            <AppDarkModeToggle/>
+            <AppLocalePicker/>
+            <AppLogo/>
         </div>
 
         <div class="login-content flex-grow">
             <div class="head">
-                <img src="@/assets/login_header.png" alt="" />
+                <img src="@/assets/login_header.png" alt=""/>
             </div>
             <el-form
-                ref="refLoginForm"
-                @keyup.enter="handleLogin(refLoginForm)"
-                :model="loginForm"
-                :rules="rulesLoginForm"
-                class="login-form"
-                auto-complete="on"
-                label-position="left"
-                size="large"
+              ref="refLoginForm"
+              @keyup.enter="handleLogin(refLoginForm)"
+              :model="loginForm"
+              :rules="rulesLoginForm"
+              class="login-form"
+              auto-complete="on"
+              label-position="left"
+              size="large"
             >
-                <img class="avatar" src="@/assets/avatar.png" alt="" />
+                <img class="avatar" src="@/assets/avatar.png" alt=""/>
 
                 <div class="title">{{ $t('login.title') }}</div>
 
                 <el-form-item prop="username">
                     <el-input
-                        ref="username"
-                        :prefix-icon="UserFilled"
-                        v-model="loginForm.username"
-                        :placeholder="$t('login.username')"
-                        type="text"
-                        tabindex="1"
-                        auto-complete="on"
-                        clearable
+                      ref="username"
+                      :prefix-icon="UserFilled"
+                      v-model="loginForm.username"
+                      :placeholder="$t('login.username')"
+                      type="text"
+                      tabindex="1"
+                      auto-complete="on"
+                      clearable
                     />
                 </el-form-item>
 
                 <el-form-item prop="password">
                     <el-input
-                        ref="password"
-                        :prefix-icon="Lock"
-                        v-model="loginForm.password"
-                        type="password"
-                        :placeholder="$t('login.password')"
-                        tabindex="2"
-                        auto-complete="on"
-                        show-password
-                        clearable
+                      ref="password"
+                      :prefix-icon="Lock"
+                      v-model="loginForm.password"
+                      type="password"
+                      :placeholder="$t('login.password')"
+                      tabindex="2"
+                      auto-complete="on"
+                      show-password
+                      clearable
                     />
                 </el-form-item>
 
                 <el-form-item class="login-captcha" prop="captcha">
                     <el-input
-                        ref="captcha"
-                        v-model="loginForm.captcha"
-                        type="text"
-                        :placeholder="$t('login.captcha')"
-                        tabindex="3"
-                        clearable
-                        @keyup.enter.native="handleLogin(refLoginForm)"
+                      ref="captcha"
+                      v-model="loginForm.captcha"
+                      type="text"
+                      :placeholder="$t('login.captcha')"
+                      tabindex="3"
+                      clearable
+                      @keyup.enter.native="handleLogin(refLoginForm)"
                     />
                     <div class="captcha">
                         {{ loginForm.captcha_id }}
@@ -69,7 +75,7 @@
                     </div>
                 </el-form-item>
 
-                <el-checkbox v-model="loginForm.keep" :label="$t('login.holdSession')" />
+                <el-checkbox v-model="loginForm.keep" :label="$t('login.holdSession')"/>
 
                 <el-button class="btn" :loading="loading" round type="primary" @click.native.prevent="handleLogin(refLoginForm)">
                     {{ $t('login.title') }}
@@ -84,6 +90,7 @@ import {useI18n} from 'vue-i18n'
 import {clone} from 'lodash'
 import {ElMessage, FormInstance, FormRules} from 'element-plus'
 import {UserFilled, Lock} from '@element-plus/icons-vue'
+import {loadFull} from 'tsparticles'
 
 import AppLocalePicker from '@/components/Application/AppLocalePicker.vue'
 import AppDarkModeToggle from '@/components/Application/AppDarkModeToggle.vue'
@@ -92,9 +99,18 @@ import {useUserStoreWithOut} from '@/store/modules/user'
 import {router} from '@/router'
 import {getUrlParam} from '@/utils'
 import {useEncryption} from '@/utils/encrypt'
+import {particlesConfig} from './config/particles-config'
 
 const userStore = useUserStoreWithOut()
 const {t} = useI18n()
+
+const particlesInit = async engine => {
+    await loadFull(engine)
+}
+
+const particlesLoaded = async container => {
+    console.log('Particles container loaded', container)
+}
 
 const refLoginForm = ref<FormInstance>()
 const loginForm = reactive({
@@ -108,25 +124,25 @@ const loading = ref(false)
 
 // 校验规则
 const validateUsername = (rule, value, callback) => {
-    if (!value) {
+    if(!value){
         callback(new Error(t('login.please enter an account')))
-    } else {
+    }else{
         callback()
     }
 }
 
 const validatePassword = (rule, value, callback) => {
-    if (value.length < 6) {
+    if(value.length < 6){
         callback(new Error(t('login.password validate error')))
-    } else {
+    }else{
         callback()
     }
 }
 
 const validateCaptcha = (rule, value, callback) => {
-    if (value !== loginForm.captcha_id) {
+    if(value !== loginForm.captcha_id){
         callback(new Error(t('login.Please enter captcha')))
-    } else {
+    }else{
         callback()
     }
 }
@@ -142,7 +158,7 @@ const onChangeCaptcha = () => {
     loginForm.captcha = 'xiaobing'
 }
 
-async function handleLogin(form: FormInstance) {
+async function handleLogin(form: FormInstance){
     const encryption = useEncryption()
     const redirectUrl = getUrlParam('redirect')
     // todo bug 使用toRaw方法后返回新对象，修改新对象会影响原reactive的对象
@@ -150,20 +166,20 @@ async function handleLogin(form: FormInstance) {
     loginParams.password = encryption.encryptByAES(loginParams.password)
 
     await form.validate(valid => {
-        if (valid) {
+        if(valid){
             loading.value = true
             userStore
-                .login(loginParams)
-                .then(() => {
-                    ElMessage({type: 'success', message: t('login.success')})
-                    router.replace(redirectUrl || '/')
-                })
-                .catch(err => {
-                    console.error('login error', err)
-                    ElMessage({type: 'error', message: err.message || t('login.error')})
-                    onChangeCaptcha()
-                })
-        } else {
+            .login(loginParams)
+            .then(() => {
+                ElMessage({type: 'success', message: t('login.success')})
+                router.replace(redirectUrl || '/')
+            })
+            .catch(err => {
+                console.error('login error', err)
+                ElMessage({type: 'error', message: err.message || t('login.error')})
+                onChangeCaptcha()
+            })
+        }else{
             ElMessage({type: 'warning', message: t('login.warning')})
             console.error('error submit')
             onChangeCaptcha()
@@ -174,24 +190,24 @@ async function handleLogin(form: FormInstance) {
 </script>
 
 <style lang="less" scoped>
-.login {
+.login{
     height: 100%;
     width: 100%;
     position: relative;
 }
 
-.login-header {
+.login-header{
     justify-content: flex-end;
     margin-right: 20px;
 }
 
-.login-content {
+.login-content{
     height: 100%;
     width: 430px;
     margin: 0 auto;
     padding-top: 32px;
 
-    .head {
+    .head{
         background: #ccccff;
         position: relative;
         overflow: hidden;
@@ -199,7 +215,7 @@ async function handleLogin(form: FormInstance) {
         border: none;
         z-index: 1;
 
-        &:before {
+        &:before{
             content: '';
             position: absolute;
             background-color: red;
@@ -212,7 +228,7 @@ async function handleLogin(form: FormInstance) {
             animation: rotate 3s infinite linear;
         }
 
-        &:after {
+        &:after{
             position: absolute;
             content: '';
             width: calc(100% - 4px);
@@ -222,14 +238,14 @@ async function handleLogin(form: FormInstance) {
             z-index: -1;
         }
 
-        img {
+        img{
             display: block;
             width: 100%;
             user-select: none;
         }
     }
 
-    .login-form {
+    .login-form{
         position: relative;
         border: 0 2px 12px 0 var(--border-shadow);
         background: var(--box-bg);
@@ -237,7 +253,7 @@ async function handleLogin(form: FormInstance) {
         padding: 50px 32px;
         z-index: 2;
 
-        .avatar {
+        .avatar{
             display: block;
             position: absolute;
             height: 100px;
@@ -248,7 +264,7 @@ async function handleLogin(form: FormInstance) {
             user-select: none;
         }
 
-        .title {
+        .title{
             position: relative;
             text-align: center;
             color: var(--text);
@@ -261,7 +277,7 @@ async function handleLogin(form: FormInstance) {
             cursor: pointer;
 
             &:before,
-            &:after {
+            &:after{
                 content: '';
                 position: absolute;
                 left: 0;
@@ -272,60 +288,60 @@ async function handleLogin(form: FormInstance) {
                 transition: transform 0.5s ease;
             }
 
-            &:before {
+            &:before{
                 top: 0;
                 transform-origin: center right;
             }
 
-            &:hover::before {
+            &:hover::before{
                 transform-origin: center left;
                 transform: scaleX(1);
             }
 
-            &:after {
+            &:after{
                 bottom: 0;
                 transform-origin: center left;
             }
 
-            &:hover::after {
+            &:hover::after{
                 transform-origin: center right;
                 transform: scaleX(1);
             }
         }
 
-        .login-captcha {
-            .el-form-item__content {
-                .el-input {
+        .login-captcha{
+            .el-form-item__content{
+                .el-input{
                     width: 60%;
                 }
 
-                .captcha {
+                .captcha{
                     width: 40%;
                     text-align: center;
                 }
             }
         }
 
-        .btn {
+        .btn{
             width: 100%;
             text-align: center;
             margin-top: 16px;
             --el-button-bg-color: var(--el-color-primary);
 
-            &:hover {
+            &:hover{
             }
         }
     }
 }
 
-@keyframes rotate {
-    to {
+@keyframes rotate{
+    to{
         transform: rotate(1turn);
     }
 }
 
-@media screen and (max-width: 768px) {
-    .login-content {
+@media screen and (max-width: 768px){
+    .login-content{
         padding-top: 10px;
         width: 340px;
     }

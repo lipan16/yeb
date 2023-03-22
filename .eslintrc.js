@@ -2,9 +2,9 @@ module.exports = {
     root: true, // eslint 一旦发现配置文件中有root：true，就会停止在父级目录中寻找
 
     env: {
+        node: false,
         browser: true,
         es2021: true,
-        node: true,
         'vue/setup-compiler-macros': true
     },
     parser: 'vue-eslint-parser',
@@ -15,7 +15,7 @@ module.exports = {
     },
     extends: ['plugin:vue/vue3-essential', 'plugin:vue/vue3-recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
     plugins: ['vue', '@typescript-eslint'],
-    // 解决defineProps is not defined
+    // 解决全局变量被识别为错误
     globals: {
         window: true,
         NodeJS: true,
@@ -94,7 +94,7 @@ module.exports = {
         // 强制使用骆驼拼写法命名约定
         camelcase: 'warn',
         // 强制使用一致的缩进
-        indent: [1, 4, {SwitchCase: 1}],
+        indent: ['warn', 4, {SwitchCase: 1}],
         // 强制在 JSX 属性中一致地使用双引号或单引号
         // 'jsx-quotes': 'warn',
         // 强制可嵌套的块的最大深度4

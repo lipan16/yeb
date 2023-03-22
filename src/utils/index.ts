@@ -43,8 +43,8 @@ export function getUrlParam(paraName) {
         const arrPara = arrObj[1].split('&')
         let arr
 
-        for (let i = 0; i < arrPara.length; i++) {
-            arr = arrPara[i].split('=')
+        for (const element of arrPara) {
+            arr = element.split('=')
 
             if (arr !== null && arr[0] === paraName) {
                 return arr[1]
@@ -62,6 +62,7 @@ export function getUrlParam(paraName) {
  * @param pEnd 结束位置
  * @returns {string}
  */
+// ts-ignore
 String.prototype.sliceByPoint = function (pStart: number, pEnd: number) {
     let result = '' // 截取的结果
     let pIndex = 0 // 码点的指针
@@ -101,3 +102,25 @@ export function getRandomColor() {
 
 // ts 类型校验：可以是任何类型，但不能是日期
 type BanDate<T> = T extends Date ? never : T
+
+// 数据前端脱敏
+export function dataMasking(data = '', type = 'default') {
+    switch (type) {
+        case 'phone':
+            return data.replace(/(\d{3})\d*(\d{4})/, '$1****$2') // 手机号脱敏
+        case 'name':
+            let name = ''
+            if (data.length <= 3) {
+                name = '*' + data.substring(1, data.length)
+            } else if (data.length > 3 && data.length <= 6) {
+                name = '**' + data.substring(2, data.length)
+            } else if (data.length > 6) {
+                name = data.substring(0, 2) + '****' + data.substring(6, data.length)
+            }
+            return name
+        case 'card':
+            return data.replace(/^(.{4})(?:\w+)(.{4})$/, '$1****$2')
+        default:
+            return data
+    }
+}
