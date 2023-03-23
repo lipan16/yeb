@@ -128,19 +128,15 @@ export function dataMasking(data = '', type = 'default'){
 
 export function closuresTest(){
     let index = 0
-
     function add(){
         index++
-        console.log(index)
     }
-
     return add
 }
 
 // let test = closuresTest() // 函数名是一个标识（指向函数的指针），而()才是执行函数
 // test() // 1
 // test() // 2 第二次调用index变量还在内存中
-
 
 // 加千分位符
 export const moneyFormat = money => {
@@ -160,13 +156,16 @@ export const moneyFormat = money => {
 export const debounce = (fn, wait) => {
     let timer = null
     return function(){
-        let that = this
-        let args = arguments
+        // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
+        const that = this
+        const args = arguments
         if(timer){
             clearTimeout(timer)
             timer = null
         }
 
+        // @ts-ignore
         timer = setTimeout(() => {
             fn.apply(that, args)
         }, wait)
@@ -177,9 +176,11 @@ export const debounce = (fn, wait) => {
 export const throttle = (fn, delay) => {
     let preTime = Date.now()
     return function(){
-        let that = this
-        let args = arguments
-        let nowTime = Date.now()
+        // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
+        const that = this
+        const args = arguments
+        const nowTime = Date.now()
 
         if(nowTime - preTime >= delay){
             preTime = Date.now()
