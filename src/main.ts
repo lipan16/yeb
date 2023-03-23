@@ -12,9 +12,6 @@ import {setupRouterGuard} from '@/router/guard'
 import {setupGlobDirectives} from '@/directive'
 import {registerThirdComp} from '@/utils/registerThirdComp'
 
-// 可伸缩布局
-// import "amfe-flexible"
-
 // 注册svg图片
 import 'virtual:svg-icons-register'
 

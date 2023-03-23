@@ -1,5 +1,9 @@
 <template>
-    <div>404</div>
+    <div class="errPage-container">
+        <SvgIcon name="401" size="350"/>
+    </div>
 </template>
-<script lang="ts" setup></script>
-<style lang="less" scoped></style>
+<script setup lang="ts">
+import SvgIcon from '@/components/Icon/SvgIcon.vue'
+</script>
+

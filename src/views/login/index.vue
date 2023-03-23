@@ -168,13 +168,10 @@ async function handleLogin(form: FormInstance){
     await form.validate(valid => {
         if(valid){
             loading.value = true
-            userStore
-            .login(loginParams)
-            .then(() => {
+            userStore.login(loginParams).then(() => {
                 ElMessage({type: 'success', message: t('login.success')})
                 router.replace(redirectUrl || '/')
-            })
-            .catch(err => {
+            }).catch(err => {
                 console.error('login error', err)
                 ElMessage({type: 'error', message: err.message || t('login.error')})
                 onChangeCaptcha()
