@@ -1,10 +1,12 @@
+import {delay} from 'lodash'
+
 /**
  * Check if an element has a class
  * @param ele
  * @param cls
  * @returns {boolean}
  */
-export function hasClass(ele, cls) {
+export function hasClass(ele, cls){
     return !!ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'))
 }
 
@@ -13,8 +15,8 @@ export function hasClass(ele, cls) {
  * @param ele
  * @param cls
  */
-export function addClass(ele, cls) {
-    if (!hasClass(ele, cls)) {
+export function addClass(ele, cls){
+    if(!hasClass(ele, cls)){
         ele.className += ' ' + cls
     }
 }
@@ -24,8 +26,8 @@ export function addClass(ele, cls) {
  * @param ele
  * @param cls
  */
-export function removeClass(ele, cls) {
-    if (hasClass(ele, cls)) {
+export function removeClass(ele, cls){
+    if(hasClass(ele, cls)){
         const reg = new RegExp('(\\s|^)' + cls + '(\\s|$)')
         ele.className = ele.className.replace(reg, ' ')
     }
@@ -35,18 +37,18 @@ export function removeClass(ele, cls) {
  * 获取url地址参数
  * @param paraName
  */
-export function getUrlParam(paraName) {
+export function getUrlParam(paraName){
     const url = document.location.toString()
     const arrObj = url.split('?')
 
-    if (arrObj.length > 1) {
+    if(arrObj.length > 1){
         const arrPara = arrObj[1].split('&')
         let arr
 
-        for (const element of arrPara) {
+        for(const element of arrPara){
             arr = element.split('=')
 
-            if (arr !== null && arr[0] === paraName) {
+            if(arr !== null && arr[0] === paraName){
                 return arr[1]
             }
         }
@@ -63,17 +65,17 @@ export function getUrlParam(paraName) {
  * @returns {string}
  */
 // ts-ignore
-String.prototype.sliceByPoint = function (pStart: number, pEnd: number) {
+String.prototype.sliceByPoint = function(pStart: number, pEnd: number){
     let result = '' // 截取的结果
     let pIndex = 0 // 码点的指针
     let cIndex = 0 // 码元的指针
-    while (true) {
-        if (pIndex >= pEnd || cIndex >= this.length) {
+    while(true){
+        if(pIndex >= pEnd || cIndex >= this.length){
             break
         }
         // 获取字符的码点值
         const point = this.codePointAt(cIndex) as number
-        if (pIndex >= pStart) {
+        if(pIndex >= pStart){
             // 根据码点恢复字符
             result += String.fromCodePoint(point)
         }
@@ -88,14 +90,14 @@ String.prototype.sliceByPoint = function (pStart: number, pEnd: number) {
 // '\uD83D'
 // console.log('😀死了'.slice(0, 1))
 
-export function toggleClassName(flag: boolean, clsName: string, target?: HTMLElement) {
+export function toggleClassName(flag: boolean, clsName: string, target?: HTMLElement){
     const targetEl = target || document.body
     let {className} = targetEl
     className = className.replace(clsName, '')
     targetEl.className = (flag ? `${className} ${clsName}` : className).trim()
 }
 
-export function getRandomColor() {
+export function getRandomColor(){
     return `#${Math.floor(Math.random() * 0xffffff).toString(16)}`
 }
 
@@ -103,17 +105,17 @@ export function getRandomColor() {
 type BanDate<T> = T extends Date ? never : T
 
 // 数据前端脱敏
-export function dataMasking(data = '', type = 'default') {
-    switch (type) {
+export function dataMasking(data = '', type = 'default'){
+    switch(type){
         case 'phone':
             return data.replace(/(\d{3})\d*(\d{4})/, '$1****$2') // 手机号脱敏
         case 'name':
             let name = ''
-            if (data.length <= 3) {
+            if(data.length <= 3){
                 name = '*' + data.substring(1, data.length)
-            } else if (data.length > 3 && data.length <= 6) {
+            }else if(data.length > 3 && data.length <= 6){
                 name = '**' + data.substring(2, data.length)
-            } else if (data.length > 6) {
+            }else if(data.length > 6){
                 name = data.substring(0, 2) + '****' + data.substring(6, data.length)
             }
             return name
@@ -126,12 +128,15 @@ export function dataMasking(data = '', type = 'default') {
 
 export function closuresTest(){
     let index = 0
+
     function add(){
         index++
         console.log(index)
     }
+
     return add
 }
+
 // let test = closuresTest() // 函数名是一个标识（指向函数的指针），而()才是执行函数
 // test() // 1
 // test() // 2 第二次调用index变量还在内存中
@@ -151,3 +156,34 @@ export const moneyFormat = money => {
     return res1
 }
 
+// 防抖 n秒后在执行，如果n秒内被重新触发，则重新计时
+export const debounce = (fn, wait) => {
+    let timer = null
+    return function(){
+        let that = this
+        let args = arguments
+        if(timer){
+            clearTimeout(timer)
+            timer = null
+        }
+
+        timer = setTimeout(() => {
+            fn.apply(that, args)
+        }, wait)
+    }
+}
+
+// 节流 在单位时间内，只有一次能生效
+export const throttle = (fn, delay) => {
+    let preTime = Date.now()
+    return function(){
+        let that = this
+        let args = arguments
+        let nowTime = Date.now()
+
+        if(nowTime - preTime >= delay){
+            preTime = Date.now()
+            return fn.apply(that, args)
+        }
+    }
+}
