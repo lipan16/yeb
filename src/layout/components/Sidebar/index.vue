@@ -1,15 +1,15 @@
 <template>
     <div :class="{'has-logo': sidebarLogo, 'sidebar-container': true}" :style="{backgroundColor: appStore.projectConfig.sidebarTheme}">
-        <SidebarLogo v-show="sidebarLogo" :collapse="isCollapse" />
+        <SidebarLogo v-show="sidebarLogo" :collapse="isCollapse"/>
         <el-scrollbar wrap-class="scrollbar-wrapper">
             <el-menu
-                mode="vertical"
-                :default-active="activeMenu"
-                :collapse="isCollapse"
-                :unique-opened="true"
-                :collapse-transition="false"
-                :router="true"
-                :style="{
+              mode="vertical"
+              :default-active="activeMenu"
+              :collapse="isCollapse"
+              :unique-opened="true"
+              :collapse-transition="false"
+              :router="true"
+              :style="{
                     '--el-menu-bg-color': appStore.projectConfig.sidebarTheme,
                     '--el-menu-hover-bg-color': appStore.projectConfig.sidebarTheme,
                     '--el-menu-hover-color': appStore.projectConfig.theme,
@@ -18,7 +18,7 @@
                     '--text-color': appStore.projectConfig.theme
                 }"
             >
-                <SidebarItem v-for="route in permissionStore.routes" :key="route.path" :item="route" :base-path="route.path" :is-collapse="isCollapse" />
+                <SidebarItem v-for="route in permissionStore.routes" :key="route.path" :item="route" :base-path="route.path" :is-collapse="isCollapse"/>
             </el-menu>
         </el-scrollbar>
     </div>
@@ -39,7 +39,7 @@ const sidebarLogo = computed(() => appStore.projectConfig.sidebarLogo)
 const isCollapse = computed(() => !appStore.sidebarOpened)
 const activeMenu = computed<string>(() => {
     const {meta, path} = route
-    if (meta?.activeMenu) {
+    if(meta?.activeMenu){
         return meta.activeMenu as string
     }
     return path
@@ -47,13 +47,13 @@ const activeMenu = computed<string>(() => {
 </script>
 
 <style lang="less">
-.has-logo {
-    .el-scrollbar {
+.has-logo{
+    .el-scrollbar{
         height: calc(100% - 50px) !important;
     }
 }
 
-.sidebar-container {
+.sidebar-container{
     flex-shrink: 0;
     height: 100%;
     width: var(--sidebar-width) !important;
@@ -61,27 +61,35 @@ const activeMenu = computed<string>(() => {
     font-size: 0;
     z-index: 899;
     overflow-y: visible;
+    position: relative;
 
-    .el-scrollbar {
+    .el-scrollbar{
         height: 100%;
         overflow-y: visible;
 
-        .scrollbar-wrapper {
+        .scrollbar-wrapper{
             overflow-x: hidden !important;
 
-            .el-menu {
+            .el-menu{
                 border: none;
                 height: 100%;
                 width: 100% !important;
 
-                .svg-icon {
+                .svg-icon{
                     margin-right: 16px;
                 }
             }
 
-            .el-menu--collapse {
-                .is-active {
-                    &:before {
+            // 折叠状态下样式
+            .el-menu--collapse{
+                position: relative;
+
+                .is-active{
+                    .el-sub-menu__title{
+                        color: var(--el-menu-hover-color) !important;
+                    }
+
+                    &:before{
                         position: absolute;
                         top: 0;
                         left: 0;
@@ -93,25 +101,27 @@ const activeMenu = computed<string>(() => {
                     }
                 }
 
-                .svg-icon {
+                .svg-icon{
                     margin-right: 0;
                 }
 
-                .el-menu-tooltip__trigger {
+                .el-menu-tooltip__trigger{
                     padding: 0 !important;
                     justify-content: center;
                 }
 
-                .el-sub-menu {
-                    .el-sub-menu__title {
+                .el-sub-menu{
+                    position: relative;
+
+                    .el-sub-menu__title{
                         padding: 0 !important;
                         justify-content: center;
 
-                        span {
+                        span{
                             display: none;
                         }
 
-                        .el-sub-menu__icon-arrow {
+                        .el-sub-menu__icon-arrow{
                             display: none;
                         }
                     }
@@ -120,21 +130,20 @@ const activeMenu = computed<string>(() => {
         }
 
         // menu hover
-        .submenu-title-noDropdown,
-        .el-sub-menu__title {
-            &:hover {
+        .submenu-title-noDropdown, .el-sub-menu__title{
+            &:hover{
                 color: var(--el-menu-hover-color) !important;
             }
         }
 
-        .el-sub-menu .el-menu-item {
+        .el-sub-menu .el-menu-item{
             background-color: var(--sidebar-sub-menu-bg) !important;
 
-            &.is-active {
+            &.is-active{
                 background-color: rgba(255, 92, 147, 0.1) !important;
             }
 
-            &:hover {
+            &:hover{
                 color: var(--el-menu-hover-color) !important;
             }
         }

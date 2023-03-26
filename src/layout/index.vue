@@ -79,11 +79,11 @@ function handleOutsideClick() {
     height: 100%;
     width: 100%;
 
-    &:after {
-        content: '';
-        display: table;
-        clear: both;
-    }
+    //&:after {
+    //    content: '';
+    //    display: table;
+    //    clear: both;
+    //}
 }
 
 .closeSidebar {

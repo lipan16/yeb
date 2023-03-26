@@ -2,7 +2,7 @@
     <div class="sidebar-logo-container">
         <router-link key="collapse" class="sidebar-logo-link flex-inline" to="/">
             <SvgIcon class="sidebar-logo" name="yeb" size="32" :color="appStore.projectConfig.theme" />
-            <span v-show="!collapse" class="sidebar-title" :style="{color: appStore.projectConfig.theme}">{{ $t('title') }}</span>
+            <span v-if="!collapse" class="sidebar-title" :style="{color: appStore.projectConfig.theme}">{{ $t('title') }}</span>
         </router-link>
         <!--<transition name="sidebarLogoFade">-->
         <!--    <router-link v-if="collapse" key="collapse" class="sidebar-logo-link flex-inline" to="/">-->
@@ -53,6 +53,7 @@ const appStore = useAppStoreWithOut()
 
         .sidebar-logo {
             vertical-align: middle;
+            flex-shrink: 0;
         }
 
         .sidebar-title {
