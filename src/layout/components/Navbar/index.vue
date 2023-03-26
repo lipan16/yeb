@@ -41,17 +41,38 @@ const {isFullscreen, toggle} = useFullscreen()
 <style lang="less" scoped>
 .navbar {
     color: var(--text);
-    background-image: linear-gradient(to right, #ff3300 0%, #eb4402 25%, #ffc404 50%, #d35d2f 75%, #ff3300 100%);
-    background-size: 200%;
-    animation: colorGradient 2s infinite;
+    position: relative;
+    //-webkit-box-reflect: below 0 linear-gradient(transparent, #0005);
+    //background-image: linear-gradient(90deg,#fb0094,#0000ff,#00ff00,#ffff00,#fb0094,#0000ff,#00ff00,#ffff00,#fb0094);
+    //background-size: 500%;
+    //animation: colorGradient 20s linear infinite;
+
+    &::before{
+        content: '';
+        position: absolute;
+        //inset: 0;
+        background: linear-gradient(90deg,#fb0094,#0000ff,#00ff00,#ffff00,#fb0094,#0000ff,#00ff00,#ffff00,#fb0094);
+        opacity: .3;
+        animation: colorGradient 20s linear infinite;
+        background-size: 500%;
+    }
+    &::after{
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg,#fb0094,#0000ff,#00ff00,#ffff00,#fb0094,#0000ff,#00ff00,#ffff00,#fb0094);
+        animation: colorGradient 20s linear infinite;
+        background-size: 500%;
+        filter: blur(48px);
+    }
 }
 
 @keyframes colorGradient {
     0% {
-        background-position: 100% 0;
+        background-position: 0 0;
     }
-    100% {
-        background-position: 0% 0;
+    0% {
+        background-position: 500% 0;
     }
 }
 
