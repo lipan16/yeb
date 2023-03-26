@@ -1,5 +1,5 @@
 <template>
-    <div class="app-dark-mode" :class="getClass" @click="toggleDark()">
+    <div class="app-dark-mode" :class="getClass" @click="toggleDark()" :style="{'borderColor': appStore.projectConfig.theme}">
         <div class="inner"></div>
         <SvgIcon size="14" name="sun" />
         <SvgIcon size="14" name="moon" />
@@ -9,6 +9,7 @@
 import SvgIcon from '@/components/Icon/SvgIcon.vue'
 import {useDark, useToggle} from '@vueuse/core'
 import {computed} from 'vue'
+import {useAppStoreWithOut} from '@/store/modules/app'
 
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
@@ -16,6 +17,8 @@ const toggleDark = useToggle(isDark)
 const getClass = computed(() => {
     return isDark.value ? 'dark' : ''
 })
+
+const appStore = useAppStoreWithOut()
 </script>
 <style lang="less" scoped>
 .app-dark-mode {

@@ -4,16 +4,6 @@
             <SvgIcon class="sidebar-logo" name="yeb" size="32" :color="appStore.projectConfig.theme" />
             <span v-if="!collapse" class="sidebar-title" :style="{color: appStore.projectConfig.theme}">{{ $t('title') }}</span>
         </router-link>
-        <!--<transition name="sidebarLogoFade">-->
-        <!--    <router-link v-if="collapse" key="collapse" class="sidebar-logo-link flex-inline" to="/">-->
-        <!--        <SvgIcon class="sidebar-logo" name="yeb" size="32"/>-->
-        <!--        <span v-show="!collapse" class="sidebar-title" :style="{color: appStore.projectConfig.theme}">{{ $t('title') }}</span>-->
-        <!--    </router-link>-->
-        <!--    <router-link v-else key="expand" class="sidebar-logo-link flex-inline" to="/">-->
-        <!--        <SvgIcon class="sidebar-logo" name="yeb" size="32"/>-->
-        <!--        <span class="sidebar-title" :style="{color: appStore.projectConfig.theme}">{{ $t('title') }}</span>-->
-        <!--    </router-link>-->
-        <!--</transition>-->
     </div>
 </template>
 

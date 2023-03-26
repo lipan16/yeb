@@ -42,6 +42,7 @@ const {isFullscreen, toggle} = useFullscreen()
 .navbar{
     color: var(--text);
     position: relative;
+    z-index: 1;
     //-webkit-box-reflect: below 0 linear-gradient(transparent, #0005);
     //background-image: linear-gradient(90deg,#fb0094,#0000ff,#00ff00,#ffff00,#fb0094,#0000ff,#00ff00,#ffff00,#fb0094);
     //background-size: 500%;
@@ -55,6 +56,7 @@ const {isFullscreen, toggle} = useFullscreen()
         opacity: .3;
         animation: colorGradient 20s linear infinite;
         background-size: 500%;
+        z-index: -1;
     }
 
     &::after{
@@ -65,6 +67,7 @@ const {isFullscreen, toggle} = useFullscreen()
         animation: colorGradient 20s linear infinite;
         background-size: 500%;
         filter: blur(48px);
+        z-index: -1;
     }
 }
 
