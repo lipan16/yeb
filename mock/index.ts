@@ -46,7 +46,7 @@ const menuList = [
             {
                 path: 'menu',
                 component: 'system/menu/index',
-                name: 'cmenu',
+                name: 'menu',
                 meta: {
                     title: 'menuManagement',
                     icon: 'menu',
@@ -163,7 +163,7 @@ const menuList = [
             title: 'link',
             icon: 'link',
             hidden: false,
-            alwaysShow: true,
+            // alwaysShow: true,
             roles: ['ADMIN'],
             keepAlive: true
         },
@@ -213,6 +213,32 @@ const menuList = [
                 meta: {
                     title: 'uploader',
                     icon: '',
+                    hidden: false,
+                    alwaysShow: false,
+                    roles: ['ADMIN'],
+                    keepAlive: true
+                }
+            }
+        ]
+    },
+    {
+        path: '/iframe',
+        component: 'Layout',
+        redirect: '/iframe/nodejs',
+        meta: {
+            roles: ['ADMIN'],
+            type: 'iframe'
+        },
+        children: [
+            {
+                path: 'nodejs',
+                component: 'iframe/index',
+                name: 'nodejs',
+                meta: {
+                    icon: 'iframe',
+                    title: 'nodejs',
+                    link: 'https://nodejs.org/zh-cn/',
+                    affix: false,
                     hidden: false,
                     alwaysShow: false,
                     roles: ['ADMIN'],

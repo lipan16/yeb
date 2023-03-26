@@ -1,6 +1,6 @@
 <template>
     <div class="error-page-401">
-        <SvgIcon name="401" />
+        <SvgIcon name="401" size="350"/>
     </div>
 </template>
 <script setup lang="ts">

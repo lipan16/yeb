@@ -18,7 +18,8 @@ export default {
         document: 'Document',
         components: 'Components',
         tinymce: 'Tinymce',
-        uploader: 'Uploader'
+        uploader: 'Uploader',
+        nodejs: 'iframe-nodejs'
     },
     navbar: {
         logOut: 'Log Out',

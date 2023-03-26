@@ -18,7 +18,8 @@ export default {
         document: '文档',
         components: '组件',
         tinymce: '富文本编辑器',
-        uploader: '上传组件'
+        uploader: '上传组件',
+        nodejs: 'iframe-nodejs'
     },
     navbar: {
         logOut: '退出登录',

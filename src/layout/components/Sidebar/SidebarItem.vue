@@ -1,17 +1,10 @@
 <template>
     <div v-if="!item.meta || !item.meta.hidden">
-        <template
-            v-if="
-                hasOneShowingChild(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChildren) && (!item.meta || !item.meta.alwaysShow)
-            "
-        >
+        <template v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChildren) && (!item.meta || !item.meta.alwaysShow)">
             <AppLink v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
                 <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown': !isNest}">
                     <SvgIcon v-if="onlyOneChild.meta && onlyOneChild.meta.icon" :name="onlyOneChild.meta.icon" />
-
-                    <template #title>
-                        {{ $t('route.' + onlyOneChild.meta.title) }}
-                    </template>
+                    <template #title>{{ $t('route.' + onlyOneChild.meta.title) }}</template>
                 </el-menu-item>
             </AppLink>
         </template>
@@ -38,6 +31,7 @@
 import path from 'path-browserify'
 import {isExternal} from '@/utils/validate'
 import AppLink from '@/layout/components/Sidebar/AppLink.vue'
+import SvgIcon from '@/components/Icon/SvgIcon.vue'
 
 const props = defineProps({
     item: {
