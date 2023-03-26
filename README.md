@@ -15,7 +15,6 @@
 
 ### rem 适配：
 
-npm i postcss-pxtorem autoprefixer amfe-flexible --save-dev
-postcss-pxtorem 是 PostCSS 的插件，用于将像素单元生成 rem 单位
-autoprefixer 浏览器前缀处理插件
-amfe-flexible 可伸缩布局方案 替代了原先的 lib-flexible 选用了当前众多浏览器兼容的 viewport
+## route配置
+
+path:配置的路径或者第三方跳转地址，component：配置组件，redirect：重定向地址，meat：icon：图标，title：标题，link：iframe时的地址，hidden：是否在侧边栏显示，alwayShow：是否显示子路由，roles：能看到此路由的角色列表，keepAlive：是否缓存，affix：是否固定到tagVIew栏
