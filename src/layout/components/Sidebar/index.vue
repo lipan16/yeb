@@ -77,6 +77,7 @@ const activeMenu = computed<string>(() => {
 
                 .svg-icon{
                     margin-right: 16px;
+                    flex-shrink: 0;
                 }
             }
 
