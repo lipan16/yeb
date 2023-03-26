@@ -51,8 +51,6 @@ const classObj = computed(() => ({
  * 小屏（>=768px）
  */
 watchEffect(() => {
-    console.log('watchEffect', width.value)
-
     if (width.value < 768) {
         appStore.toggleDevice(DeviceType.mobile)
         appStore.setSidebarOpened(false)

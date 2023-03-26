@@ -1,5 +1,5 @@
 <template>
-    <div class="errPage-container">
+    <div class="error-page-401">
         <SvgIcon name="401" />
     </div>
 </template>
@@ -7,7 +7,7 @@
 import SvgIcon from '@/components/Icon/SvgIcon.vue'
 </script>
 <style lang="less" scoped>
-.errPage-container{
+.error-page-401{
     margin: 10px auto;
     text-align: center;
 }
