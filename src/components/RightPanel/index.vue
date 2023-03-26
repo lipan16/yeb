@@ -29,7 +29,7 @@ const appStore = useAppStoreWithOut()
 const show = ref(false)
 
 watch(show, value => {
-    toggleClassName(value, 'showRightPanel')
+    toggleClassName(value, 'showRightPanel', document.getElementById('app'))
 
     if (value) {
         // 展开的时候给蒙层添加点击事件
@@ -53,14 +53,14 @@ function closeMasks(evt: any) {
 
 const rightPanel = ref(ElColorPicker)
 
-function insertToBody() {
+function insertToApp() {
     const elx = rightPanel.value as any
-    const body = document.querySelector('body') as any
-    body.insertBefore(elx, body.firstChild)
+    const app = document.getElementById('app') as any
+    app.insertBefore(elx, app.firstChild)
 }
 
 onMounted(() => {
-    insertToBody()
+    insertToApp()
 })
 
 onBeforeUnmount(() => {
