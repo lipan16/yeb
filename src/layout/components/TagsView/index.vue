@@ -1,5 +1,5 @@
 <template>
-    <div class="tags-view__container">
+    <div class="tags-view">
         <ScrollPane ref="scrollPaneRef" class="tags-view__wrapper" @scroll="handleScroll">
             <router-link
                 v-for="tag in tagsViewStore.visitedViews"
@@ -264,14 +264,15 @@ onMounted(() => {
 </script>
 
 <style lang="less" scoped>
-.tags-view__container {
-    height: 34px;
-    width: 100%;
+.tags-view {
     background: var(--bg-color);
     border-bottom: 1px solid #d8dce5;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
 
     .tags-view__wrapper {
+        height: 34px;
+        padding: 0 16px;
+
         .tags-view__item {
             display: inline-block;
             position: relative;
@@ -282,16 +283,7 @@ onMounted(() => {
             background: #fff;
             padding: 0 8px;
             font-size: 12px;
-            margin-left: 5px;
-            margin-top: 4px;
-
-            &:first-of-type {
-                margin-left: 15px;
-            }
-
-            &:last-of-type {
-                margin-right: 15px;
-            }
+            margin: 2px;
 
             &:hover {
                 color: var(--el-color-primary);

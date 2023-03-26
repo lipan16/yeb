@@ -24,8 +24,6 @@
 </template>
 
 <script lang="ts" setup>
-import {useFullscreen} from '@vueuse/core'
-
 import AppLocalePicker from '@/components/Application/AppLocalePicker.vue'
 import AppDarkModeToggle from '@/components/Application/AppDarkModeToggle.vue'
 import AppLogo from '@/components/Application/AppLogo.vue'
@@ -43,7 +41,20 @@ const {isFullscreen, toggle} = useFullscreen()
 <style lang="less" scoped>
 .navbar {
     color: var(--text);
+    background-image: linear-gradient(to right, #ff3300 0%, #eb4402 25%, #ffc404 50%, #d35d2f 75%, #ff3300 100%);
+    background-size: 200%;
+    animation: colorGradient 2s infinite;
 }
+
+@keyframes colorGradient {
+    0% {
+        background-position: 100% 0;
+    }
+    100% {
+        background-position: 0% 0;
+    }
+}
+
 .hamburger {
     display: inline-block;
     vertical-align: middle;
