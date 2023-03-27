@@ -29,7 +29,7 @@ import {DeviceType, useAppStoreWithOut} from '@/store/modules/app'
 const {width} = useWindowSize()
 const appStore = useAppStoreWithOut()
 
-const showTagsView = computed(() => appStore.projectConfig.tagsView)
+const showTagsView = computed(() => appStore.projectConfig.showTagsView)
 const showSettings = computed(() => appStore.projectConfig.showSettings)
 
 const classObj = computed(() => ({

@@ -1,10 +1,10 @@
 <template>
-    <div :class="{'has-logo': sidebarLogo, 'sidebar-container': true}" :style="{backgroundColor: appStore.projectConfig.sidebarTheme}">
-        <SidebarLogo v-show="sidebarLogo" :collapse="isCollapse"/>
+    <div :class="{'has-logo': showSidebarLogo, 'sidebar-container': true}" :style="{backgroundColor: appStore.projectConfig.sidebarTheme}">
+        <SidebarLogo v-show="showSidebarLogo" :collapse="isCollapse"/>
         <el-scrollbar wrap-class="scrollbar-wrapper">
             <el-menu
               mode="vertical"
-              :default-active="activeMenu"
+              :default-active="defaultActiveMenu"
               :collapse="isCollapse"
               :unique-opened="true"
               :collapse-transition="false"
@@ -25,25 +25,25 @@
 </template>
 
 <script lang="ts" setup>
-import {useRoute} from 'vue-router'
 import SidebarItem from '@/layout/components/Sidebar/SidebarItem.vue'
 import SidebarLogo from '@/layout/components/Sidebar/SidebarLogo.vue'
 import {useAppStoreWithOut} from '@/store/modules/app'
 import {usePermissionStoreWithOut} from '@/store/modules/permission'
 
 const route = useRoute()
+const router = useRouter()
 const appStore = useAppStoreWithOut()
 const permissionStore = usePermissionStoreWithOut()
 
-const sidebarLogo = computed(() => appStore.projectConfig.sidebarLogo)
+const showSidebarLogo = computed(() => appStore.projectConfig.showSidebarLogo)
 const isCollapse = computed(() => !appStore.sidebarOpened)
-const activeMenu = computed<string>(() => {
-    const {meta, path} = route
-    if(meta?.activeMenu){
-        return meta.activeMenu as string
-    }
-    return path
+
+// 是否有默认激活菜单
+const defaultActiveMenu = computed<string>(() => {
+    const {path} = route // router.currentRoute.value.path
+    return router.getRoutes().find(f => f.meta?.isDefaultActive)?.path || path
 })
+
 </script>
 
 <style lang="less">

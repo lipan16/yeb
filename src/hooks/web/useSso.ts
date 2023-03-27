@@ -1,17 +1,18 @@
 // 单点登录核心类
-import {SETTING} from '@/setting'
 import {TOKEN_KEY} from '@/setting/KEY'
 import {getAuthCache} from '@/utils/auth'
 import {getUrlParam} from '@/utils'
+import {useAppStoreWithOut} from '@/store/modules/app'
 
 export function useSso() {
     const locationUrl = window.location.origin
+    const {projectConfig} = useAppStoreWithOut()
 
     /**
      * 单点登录
      */
     async function ssoLogin() {
-        if (SETTING.openSso) {
+        if (projectConfig.openSso) {
             // 是否开启sso
             const token = getAuthCache<string>(TOKEN_KEY)
             const ticket = getUrlParam('ticket')
@@ -29,7 +30,7 @@ export function useSso() {
                     // return userStore.afterLoginAction(true, {});
                     // })
                 } else {
-                    window.location.href = SETTING.ssoUrl + '/login?service=' + locationUrl
+                    window.location.href = projectConfig.ssoUrl + '/login?service=' + locationUrl
                 }
             }
         }
@@ -39,7 +40,7 @@ export function useSso() {
      * 退出登录
      */
     async function ssoLogOut() {
-        window.location.href = SETTING.ssoUrl + '/logout?service=' + locationUrl
+        window.location.href = projectConfig.ssoUrl + '/logout?service=' + locationUrl
     }
 
     return {ssoLogin, ssoLogOut}

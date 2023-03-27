@@ -7,7 +7,6 @@ import {SETTING} from '@/setting'
 import {PayLoadObject} from '#/store'
 
 export enum DeviceType {
-    // eslint-disable-next-line no-unused-vars
     mobile,
     desktop
 }
@@ -15,19 +14,28 @@ export enum DeviceType {
 const useAppStore = defineStore({
     id: 'app',
     state: () => ({
+        title: SETTING.title,
         device: DeviceType.desktop,
         // 语言
         local: '',
         pageLoading: false,
         projectConfig: {
+            permissionCacheType: SETTING.permissionCacheType,
+
             theme: SETTING.theme,
-            headerTheme: SETTING.headerTheme,
-            showSettings: SETTING.showSettings,
-            tagsView: SETTING.tagsView,
-            sidebarLogo: SETTING.sidebarLogo,
-            sidebarTheme: SETTING.sidebarTheme,
             grayMode: SETTING.grayMode,
-            colorWeak: SETTING.colorWeak
+            colorWeak: SETTING.colorWeak,
+
+            headerTheme: SETTING.headerTheme,
+            sidebarTheme: SETTING.sidebarTheme,
+
+            showSettings: SETTING.showSettings,
+            showTagsView: SETTING.showTagsView,
+
+            showSidebarLogo: SETTING.showSidebarLogo,
+
+            openSso: SETTING.openSso,
+            ssoUrl: SETTING.ssoUrl
         },
         // 侧边栏状态
         sidebarOpened: true,

@@ -6,8 +6,8 @@ export const SETTING = {
     title: import.meta.env.VITE_APP_TITLE,
     // 是否展示设置按钮
     showSettings: true,
-    tagsView: true,
-    sidebarLogo: true,
+    showTagsView: true,
+    showSidebarLogo: true,
     theme: '#fd726d',
     APP_PRESET_BG_COLOR: ['#0960bd', '#1890ff', '#009688', '#536dfe', '#ff5c93', '#ee4f12', '#0096c7', '#9c27b0', '#ff9800'],
     headerTheme: '#ffffff',

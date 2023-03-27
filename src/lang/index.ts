@@ -1,31 +1,24 @@
+import {unref} from 'vue'
 import type {App} from 'vue'
 import {createI18n} from 'vue-i18n'
 
-import {APP_LOCAL_CACHE_KEY} from '@/setting/KEY'
-import {SETTING} from '@/setting'
+import {useAppStoreWithOut} from '@/store/modules/app'
 
-// element-ui built-in lang
 import elementEnLocale from 'element-plus/dist/locale/en.mjs'
 import elementZhLocale from 'element-plus/dist/locale/zh-cn.mjs'
-
 // User defined lang
 import enLocale from './en'
 import zhLocale from './zh'
-import {unref} from 'vue'
 
 export const APP_LOCALE_MESSAGES = {
-    en: {
-        ...enLocale,
-        ...elementEnLocale
-    },
-    zh: {
-        ...zhLocale,
-        ...elementZhLocale
-    }
+    en: {...enLocale,...elementEnLocale},
+    zh: {...zhLocale,...elementZhLocale}
 }
 
+const appStore = useAppStoreWithOut()
+
 const getLocale = () => {
-    return localStorage.getItem(APP_LOCAL_CACHE_KEY) || SETTING.local
+    return appStore.getLocal
 }
 
 const i18n = createI18n({
@@ -63,9 +56,9 @@ export const getPageTitle = (key: any) => {
     const hasKey: boolean = globalI18n.te(`route.${key}`)
     if (hasKey) {
         const pageName: string = globalI18n.t(`route.${key}`)
-        return `${pageName} - ${SETTING.title}`
+        return `${pageName} - ${appStore.title}`
     }
-    return `${SETTING.title}`
+    return `${appStore.title}`
 }
 
 export const setupI18n = (app: App<Element>) => {

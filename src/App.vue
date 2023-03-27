@@ -1,6 +1,7 @@
 <template>
     <el-config-provider :locale="APP_LOCALE_MESSAGES[useAppStoreWithOut().getLocal]">
         <RouterView />
+        <div>global</div>
     </el-config-provider>
 </template>
 <script lang="ts" setup>

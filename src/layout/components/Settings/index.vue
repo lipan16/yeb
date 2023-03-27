@@ -46,7 +46,7 @@
         <div class="switch-item">
             <span>开启 Tags-View</span>
             <el-switch
-                v-model="appStore.projectConfig.tagsView"
+                v-model="appStore.projectConfig.showTagsView"
                 active-text="开"
                 inactive-text="关"
                 inline-prompt
@@ -56,7 +56,7 @@
         <div class="switch-item">
             <span>侧边栏 Logo</span>
             <el-switch
-                v-model="appStore.projectConfig.sidebarLogo"
+                v-model="appStore.projectConfig.showSidebarLogo"
                 active-text="开"
                 inactive-text="关"
                 inline-prompt
@@ -90,7 +90,7 @@
 
 <script setup lang="ts">
 import {useAppStoreWithOut} from '@/store/modules/app'
-import {SETTING} from '@/setting/index.js'
+import {SETTING} from '@/setting'
 import {toggleClassName} from '@/utils'
 
 const appStore = useAppStoreWithOut()

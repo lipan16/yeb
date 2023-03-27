@@ -1,7 +1,8 @@
 import {StorageKeys, WebStorageCache} from '@/utils/cache'
-import {SETTING} from '@/setting'
+import {useAppStoreWithOut} from '@/store/modules/app'
 
-const isLocal = SETTING.permissionCacheType === 'local'
+const {projectConfig} = useAppStoreWithOut()
+const isLocal = projectConfig.permissionCacheType === 'local'
 
 export function getAuthCache<T>(key: StorageKeys) {
     const fn = isLocal ? WebStorageCache.getLocal : WebStorageCache.getSession
