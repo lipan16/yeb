@@ -7,7 +7,7 @@ import pkcs7 from 'crypto-js/pad-pkcs7'
 import Base64 from 'crypto-js/enc-base64'
 import md5 from 'crypto-js/md5'
 
-import {cacheCipher} from '@/setting/KEY'
+import {cacheCipher} from '@/setting/cacheKey'
 
 export class AesEncryption {
     private key

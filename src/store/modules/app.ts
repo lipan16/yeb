@@ -2,7 +2,7 @@ import {defineStore} from 'pinia'
 import {set} from 'lodash'
 
 import {store} from '@/store'
-import {APP_LOCAL_CACHE_KEY} from '@/setting/KEY'
+import {LOCAL__KEY} from '@/setting/cacheKey'
 import {SETTING} from '@/setting'
 import {PayLoadObject} from '#/store'
 
@@ -45,13 +45,13 @@ const useAppStore = defineStore({
     }),
     getters: {
         getLocal(): string {
-            return this.local || localStorage.getItem(APP_LOCAL_CACHE_KEY) || SETTING.local
+            return this.local || localStorage.getItem(LOCAL__KEY) || SETTING.local
         }
     },
     actions: {
         setLocal(local: string) {
             this.local = local
-            localStorage.setItem(APP_LOCAL_CACHE_KEY, local)
+            localStorage.setItem(LOCAL__KEY, local)
         },
         setProjectConfig(payload: PayLoadObject) {
             set(this.projectConfig, payload.key, payload.value)

@@ -12,21 +12,20 @@ export const enableStorageEncryption = false
 
 // token key
 export const TOKEN_KEY = 'TOKEN__'
-
+// login info key
+export const LOGIN_INFO_KEY = 'LOGIN__INFO__'
 // user info key
 export const USER_INFO_KEY = 'USER__INFO__'
-
 // role info key
 export const ROLES_KEY = 'ROLES__KEY__'
-
-// base global local key
-export const APP_LOCAL_CACHE_KEY = 'APP__LOCAL__KEY__'
-
-// base global session key
-export const APP_SESSION_CACHE_KEY = 'APP__SESSION__KEY__'
-
 // 租户 key
 export const TENANT_ID = 'TENANT_ID'
 
-// login info key
-export const LOGIN_INFO_KEY = 'LOGIN__INFO__'
+// local lang key
+export const LOCAL__KEY = 'LOCAL__KEY__'
+
+// base global local key
+export const APP_LOCAL_CACHE_KEY = 'APP__LOCAL__CACHE__KEY__'
+
+// base global session key
+export const APP_SESSION_CACHE_KEY = 'APP__SESSION__CACHE__KEY__'

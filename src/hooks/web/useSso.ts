@@ -1,5 +1,5 @@
 // 单点登录核心类
-import {TOKEN_KEY} from '@/setting/KEY'
+import {TOKEN_KEY} from '@/setting/cacheKey'
 import {getAuthCache} from '@/utils/auth'
 import {getUrlParam} from '@/utils'
 import {useAppStoreWithOut} from '@/store/modules/app'

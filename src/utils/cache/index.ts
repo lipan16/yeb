@@ -9,12 +9,12 @@ import {
     APP_SESSION_CACHE_KEY,
     DEFAULT_CACHE_TIME,
     enableStorageEncryption,
-    LOGIN_INFO_KEY,
-    ROLES_KEY,
-    TENANT_ID,
     TOKEN_KEY,
-    USER_INFO_KEY
-} from '@/setting/KEY'
+    LOGIN_INFO_KEY,
+    USER_INFO_KEY,
+    ROLES_KEY,
+    TENANT_ID
+} from '@/setting/cacheKey'
 import {createStorage} from '@/utils/cache/createStorage'
 import {Memory} from '@/utils/cache/memory'
 import {Nullable} from '#/index'
