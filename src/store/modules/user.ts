@@ -3,7 +3,7 @@ import {LoginData} from '#/store'
 
 import {defineStore} from 'pinia'
 
-import {TOKEN_KEY} from '@/setting/KEY'
+import {TOKEN_KEY, USER_INFO_KEY} from '@/setting/cacheKey'
 import {getAuthCache, removeAuthCache, setAuthCache} from '@/utils/auth'
 import {store} from '@/store'
 import {resetRouter} from '@/router'
@@ -29,7 +29,7 @@ export const useUserStore = defineStore('user', () => {
     // actions
 
     // 登录
-    function login(loginData: LoginData) {
+    function login(loginData: LoginData){
         return Api.auth.login(loginData).then(response => {
             const {accessToken} = response.data
             token.value = accessToken
@@ -38,32 +38,30 @@ export const useUserStore = defineStore('user', () => {
     }
 
     // 获取信息(用户昵称、头像、角色集合、权限集合)
-    function getUserInfo() {
+    function getUserInfo(){
         return new Promise<UserInfo>((resolve, reject) => {
-            Api.auth
-                .getUserInfo()
-                .then(({data}) => {
-                    if (!data) {
-                        return reject('Verification failed, please Login again.')
-                    }
-                    if (!data.roles || data.roles.length <= 0) {
-                        reject('getUserInfo: roles must be a non-null array!')
-                    }
-                    lastUpdateTime.value = new Date().getTime()
-                    nickname.value = data.nickname
-                    avatar.value = data.avatar
-                    roles.value = data.roles
-                    perms.value = data.perms
-                    resolve(data)
-                })
-                .catch(error => {
-                    reject(error)
-                })
+            Api.auth.getUserInfo().then(({data}) => {
+                if(!data){
+                    return reject('Verification failed, please Login again.')
+                }
+                if(!data.roles || data.roles.length <= 0){
+                    reject('getUserInfo: roles must be a non-null array!')
+                }
+                lastUpdateTime.value = new Date().getTime()
+                nickname.value = data.nickname
+                avatar.value = data.avatar
+                roles.value = data.roles
+                perms.value = data.perms
+                setAuthCache(USER_INFO_KEY, data)
+                resolve(data)
+            }).catch(error => {
+                reject(error)
+            })
         })
     }
 
     // 注销
-    function logout() {
+    function logout(){
         return Api.auth.logout().then(() => {
             resetRouter()
             resetToken()
@@ -71,7 +69,7 @@ export const useUserStore = defineStore('user', () => {
     }
 
     // 重置
-    function resetToken() {
+    function resetToken(){
         removeAuthCache(TOKEN_KEY)
         token.value = ''
         nickname.value = ''
@@ -95,6 +93,6 @@ export const useUserStore = defineStore('user', () => {
 })
 
 // 非setup Need to be used outside the setup
-export function useUserStoreWithOut() {
+export function useUserStoreWithOut(){
     return useUserStore(store)
 }

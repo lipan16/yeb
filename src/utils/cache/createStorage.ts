@@ -19,7 +19,7 @@ export const createStorage = ({prefixKey = '', storage = sessionStorage, timeout
         }
 
         private getKey(key: string) {
-            return `${this.prefixKey}_${key}`.toUpperCase()
+            return (this.prefixKey ? `${this.prefixKey}__${key}` : key).toUpperCase()
         }
 
         /**

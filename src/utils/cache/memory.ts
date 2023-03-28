@@ -1,7 +1,7 @@
 import {Cache} from '#/store'
 
 import {omit} from 'lodash'
-import {LOGIN_INFO_KEY, ROLES_KEY, TOKEN_KEY, USER_INFO_KEY} from '@/setting/KEY'
+import {LOGIN_INFO_KEY, ROLES_KEY, TOKEN_KEY, USER_INFO_KEY} from '@/setting/cacheKey'
 
 // 保存时效
 const NOT_ALIVE = 0
