@@ -1,34 +1,22 @@
 <template>
     <div class="sidebar-logo-container">
         <router-link key="collapse" class="sidebar-logo-link flex-inline" to="/">
-            <SvgIcon class="sidebar-logo" name="yeb" size="32" :color="appStore.projectConfig.theme" />
-            <span v-if="!collapse" class="sidebar-title" :style="{color: appStore.projectConfig.theme}">{{ $t('title') }}</span>
+            <SvgIcon class="sidebar-logo" name="yeb" size="32" />
+            <span v-if="!collapse" class="sidebar-title">{{ $t('title') }}</span>
         </router-link>
     </div>
 </template>
 
 <script lang="ts" setup>
-import {useAppStoreWithOut} from '@/store/modules/app'
-
 defineProps({
     collapse: {type: Boolean, required: true}
 })
-const appStore = useAppStoreWithOut()
+// background-color: v-bind('appStore.projectConfig.sidebarTheme');
 </script>
-
 <style lang="less" scoped>
-.sidebarLogoFade-enter-active {
-    transition: opacity 0.1s;
-}
-
-.sidebarLogoFade-enter,
-.sidebarLogoFade-leave-to {
-    //opacity: 0;
-}
-
 .sidebar-logo-container {
     padding: 10px;
-    background-color: v-bind('appStore.projectConfig.sidebarTheme');
+    background-color: var(--yeb-sidebar-bg-color);
     position: relative;
     width: 100%;
     height: 50px;
@@ -39,14 +27,15 @@ const appStore = useAppStoreWithOut()
     .sidebar-logo-link {
         height: 100%;
         width: 100%;
-        //padding-left: 12px;
 
         .sidebar-logo {
             vertical-align: middle;
             flex-shrink: 0;
+            color: var(--theme);
         }
 
         .sidebar-title {
+            color: var(--theme);
             margin-left: 12px;
             font-weight: 600;
             font-size: 16px;

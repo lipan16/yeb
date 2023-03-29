@@ -91,15 +91,20 @@
 <script setup lang="ts">
 import {useAppStoreWithOut} from '@/store/modules/app'
 import {SETTING} from '@/setting'
-import {toggleClassName} from '@/utils'
+import {setDomStyleProperty, toggleClassName} from '@/utils'
 
 const appStore = useAppStoreWithOut()
 
-function sysThemeChange(value: any) {
+function sysThemeChange(value: string) {
+    setDomStyleProperty('--theme', value)
+    setDomStyleProperty('--el-color-primary', value)
     appStore.setProjectConfig({key: 'theme', value})
 }
 
 function themeChange(key: string, value: string) {
+    if(key === 'sidebarTheme') {
+        setDomStyleProperty('--yeb-sidebar-bg-color', value)
+    }
     appStore.setProjectConfig({key, value})
 }
 
