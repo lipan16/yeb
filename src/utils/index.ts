@@ -1,5 +1,3 @@
-import {delay} from 'lodash'
-
 /**
  * Check if an element has a class
  * @param ele
@@ -44,7 +42,6 @@ export function getUrlParam(paraName){
     if(arrObj.length > 1){
         const arrPara = arrObj[1].split('&')
         let arr
-
         for(const element of arrPara){
             arr = element.split('=')
 
@@ -90,6 +87,7 @@ String.prototype.sliceByPoint = function(pStart: number, pEnd: number){
 // '\uD83D'
 // console.log('😀死了'.slice(0, 1))
 
+// 对target dom添加或者删除类名
 export function toggleClassName(flag: boolean, clsName: string, target?: HTMLElement){
     const targetEl = target || document.body
     let {className} = targetEl
@@ -97,6 +95,11 @@ export function toggleClassName(flag: boolean, clsName: string, target?: HTMLEle
     targetEl.className = (flag ? `${className} ${clsName}` : className).trim()
 }
 
+// 为document设置一个新得css属性
+export function setDomStyleProperty(key: string, value: string, target?: HTMLElement){
+    const targetEle = target || document.documentElement
+    targetEle.style.setProperty(key, value)
+}
 export function getRandomColor(){
     return `#${Math.floor(Math.random() * 0xffffff).toString(16)}`
 }
