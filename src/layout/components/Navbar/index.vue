@@ -14,7 +14,8 @@
                 />
             </svg>
         </div>
-        <Breadcrumb/>
+        <Breadcrumb v-show="appStore.projectConfig.showBreadcrumb"/>
+        <div class="strong"/>
         <BPITime/>
         <AppDarkModeToggle/>
         <SvgIcon :name="isFullscreen ? 'fullscreen-exit' : 'fullscreen'" @click="toggle" style="margin: 0 8px"/>
@@ -28,6 +29,7 @@ import AppLocalePicker from '@/components/Application/AppLocalePicker.vue'
 import AppDarkModeToggle from '@/components/Application/AppDarkModeToggle.vue'
 import AppLogo from '@/components/Application/AppLogo.vue'
 import Breadcrumb from '@/layout/components/Navbar/Breadcrumb.vue'
+import BPITime from '@/components/BPITime/index.vue'
 import {useAppStoreWithOut} from '@/store/modules/app'
 
 const appStore = useAppStoreWithOut()
@@ -43,6 +45,7 @@ const {isFullscreen, toggle} = useFullscreen()
     color: var(--text);
     position: relative;
     z-index: 1;
+    height: 50px;
     //-webkit-box-reflect: below 0 linear-gradient(transparent, #0005);
     //background-image: linear-gradient(90deg,#fb0094,#0000ff,#00ff00,#ffff00,#fb0094,#0000ff,#00ff00,#ffff00,#fb0094);
     //background-size: 500%;

@@ -30,8 +30,8 @@ const useAppStore = defineStore({
             sidebarTheme: SETTING.sidebarTheme,
 
             showSettings: SETTING.showSettings,
+            showBreadcrumb: SETTING.showBreadcrumb,
             showTagsView: SETTING.showTagsView,
-
             showSidebarLogo: SETTING.showSidebarLogo,
 
             openSso: SETTING.openSso,

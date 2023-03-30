@@ -8,6 +8,7 @@ export const SETTING = {
     showSettings: true,
     showTagsView: true,
     showSidebarLogo: true,
+    showBreadcrumb: false, // 显示导航栏面包屑
     theme: '#fd726d',
     APP_PRESET_BG_COLOR: ['#0960bd', '#1890ff', '#009688', '#536dfe', '#ff5c93', '#ee4f12', '#0096c7', '#9c27b0', '#ff9800'],
     headerTheme: '#ffffff',
