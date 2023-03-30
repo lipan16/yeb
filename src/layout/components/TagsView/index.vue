@@ -270,7 +270,7 @@ onMounted(() => {
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
 
     .tags-view__wrapper {
-        height: 34px;
+        height: 36px;
         padding: 0 16px;
 
         .tags-view__item {
@@ -278,12 +278,13 @@ onMounted(() => {
             position: relative;
             cursor: pointer;
             line-height: 28px;
+            height: 28px;
             border: 1px solid #d8dce5;
             color: #495060;
             background: #fff;
             padding: 0 8px;
             font-size: 12px;
-            margin: 2px;
+            margin: 4px 4px 2px;
 
             &:hover {
                 color: var(--el-color-primary);
@@ -291,8 +292,8 @@ onMounted(() => {
 
             &.active {
                 background-color: var(--el-color-primary);
-                color: var(--el-color-primary-light-9);
                 border-color: var(--el-color-primary);
+                color: var(--el-color-primary-light-9);
 
                 &::before {
                     content: '';
@@ -311,13 +312,14 @@ onMounted(() => {
                 text-align: center;
 
                 &:hover {
-                    background-color: #ccc;
-                    color: #fff;
+                    background-color: rgba(243, 124, 124, 0.3);
+                    color: #f80000;
                 }
             }
         }
     }
 
+    // tags 右键弹出的小菜单
     .tags-view__menu {
         margin: 0;
         background: #fff;

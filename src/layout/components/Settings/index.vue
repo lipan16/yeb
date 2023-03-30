@@ -44,6 +44,16 @@
         </div>
 
         <div class="switch-item">
+            <span>开启 Breadcrumb</span>
+            <el-switch
+                v-model="appStore.projectConfig.showBreadcrumb"
+                active-text="开"
+                inactive-text="关"
+                inline-prompt
+                :style="{'--el-switch-on-color': appStore.projectConfig.theme}"
+            />
+        </div>
+        <div class="switch-item">
             <span>开启 Tags-View</span>
             <el-switch
                 v-model="appStore.projectConfig.showTagsView"

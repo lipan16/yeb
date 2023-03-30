@@ -58,7 +58,7 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .bpi-time {
-    margin-left: auto;
+    //margin-left: auto;
     padding: 0 4px;
     flex-shrink: 0;
     user-select: none;
