@@ -1,5 +1,5 @@
 import {UserInfo} from '#/user'
-import {LoginInfo, CreateStorageParams} from '#/store'
+import {LoginInfo} from '#/store'
 
 import {pick} from 'lodash'
 import {toRaw} from 'vue'
@@ -8,26 +8,16 @@ import {
     APP_LOCAL_CACHE_KEY,
     APP_SESSION_CACHE_KEY,
     DEFAULT_CACHE_TIME,
-    enableStorageEncryption,
     TOKEN_KEY,
     LOGIN_INFO_KEY,
     USER_INFO_KEY,
     ROLES_KEY,
     TENANT_ID
 } from '@/setting/cacheKey'
-import {createStorage} from '@/utils/cache/createStorage'
+import {createYebStorageOptions} from '@/utils/cache/createStorage'
 import {Memory} from '@/utils/cache/memory'
 import {Nullable} from '#/index'
 
-const createStorageOptions = (storage: Storage, options: Partial<CreateStorageParams> = {}) => {
-    return createStorage({
-        prefixKey: '',
-        storage,
-        hasEncrypt: enableStorageEncryption,
-        timeout: DEFAULT_CACHE_TIME,
-        ...options
-    })
-}
 
 interface BasicStore {
     [TOKEN_KEY]: string | number | null | undefined
@@ -41,8 +31,8 @@ export type StorageKeys = keyof BasicStore
 
 const localMemory = new Memory(DEFAULT_CACHE_TIME)
 const sessionMemory = new Memory(DEFAULT_CACHE_TIME)
-const ls = createStorageOptions(localStorage)
-const ss = createStorageOptions(sessionStorage)
+const ls = createYebStorageOptions(localStorage)
+const ss = createYebStorageOptions(sessionStorage)
 
 function initWebStorageCache() {
     const localCache = ls.get(APP_LOCAL_CACHE_KEY)
@@ -104,10 +94,12 @@ export class WebStorageCache {
 }
 
 window.addEventListener('beforeunload', function () {
-    // TOKEN_KEY 在登录或注销时已经写入到storage了，此处为了解决同时打开多个窗口时token不同步的问题
+    // TOKEN_KEY 在登录或注销时已经写入到storage了，此处为了解决同时打开多个窗口时token不同步的问题, 采用取出相关信息并重新赋值
     // pick(obj, key) 从obj中取出key的值，并封装object返回
-    ls.set(APP_LOCAL_CACHE_KEY, pick(ls.get(APP_LOCAL_CACHE_KEY), [TOKEN_KEY, USER_INFO_KEY]))
-    ss.set(APP_SESSION_CACHE_KEY, pick(ss.get(APP_SESSION_CACHE_KEY), [TOKEN_KEY, USER_INFO_KEY]))
+    // TOKEN_KEY, USER_INFO_KEY, ROLES_KEY, LOGIN_INFO_KEY
+    const FilterStorageKey = [LOGIN_INFO_KEY, TOKEN_KEY, USER_INFO_KEY, 'workingTime'] // 刷新之后仍然需要的key
+    ls.set(APP_LOCAL_CACHE_KEY, pick(ls.get(APP_LOCAL_CACHE_KEY), FilterStorageKey))
+    ss.set(APP_SESSION_CACHE_KEY, pick(ss.get(APP_SESSION_CACHE_KEY), FilterStorageKey))
 })
 
 function storageChange(e: any) {

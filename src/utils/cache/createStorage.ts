@@ -1,8 +1,9 @@
-import {CreateStorageParams} from '#/store'
+import {YebStorageParams} from '#/store'
 import {AesEncryption, useEncryption} from '@/utils/encrypt'
 import {isNullOrUnDef} from '@/utils/is'
+import {DEFAULT_CACHE_TIME, enableStorageEncryption} from '@/setting/cacheKey'
 
-export const createStorage = ({prefixKey = '', storage = sessionStorage, timeout = null, hasEncrypt = true}: Partial<CreateStorageParams> = {}) => {
+const createYebStorage = ({prefixKey = '', storage = sessionStorage, timeout = null, hasEncrypt = true}: Partial<YebStorageParams> = {}) => {
     const encryption = useEncryption()
 
     const WebStorage = class WebStorage {
@@ -33,7 +34,7 @@ export const createStorage = ({prefixKey = '', storage = sessionStorage, timeout
             const stringData = JSON.stringify({
                 value,
                 time: Date.now(),
-                expire: isNullOrUnDef(expire) ? null : new Date().getTime() + expire * 1000
+                expire: isNullOrUnDef(expire) ? null : Date.now() + expire * 1000
             })
 
             const stringifyValue = this.hasEncrypt ? this.encryption.encryptByAES(stringData) : stringData
@@ -56,7 +57,7 @@ export const createStorage = ({prefixKey = '', storage = sessionStorage, timeout
                 const decVal = this.hasEncrypt ? this.encryption.decryptByAES(val) : val
                 const data = JSON.parse(decVal)
                 const {value, expire} = data
-                if (isNullOrUnDef(expire) || expire >= new Date().getTime()) {
+                if (isNullOrUnDef(expire) || expire >= Date.now()) {
                     // 未过期
                     return value
                 }
@@ -84,4 +85,14 @@ export const createStorage = ({prefixKey = '', storage = sessionStorage, timeout
     }
 
     return new WebStorage()
+}
+
+export const createYebStorageOptions = (storage: Storage, options: Partial<YebStorageParams> = {}) => {
+    return createYebStorage({
+        prefixKey: '',
+        storage,
+        hasEncrypt: enableStorageEncryption,
+        timeout: DEFAULT_CACHE_TIME,
+        ...options
+    })
 }
