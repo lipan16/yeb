@@ -43,18 +43,15 @@ export const constantRoutes: RouteRecordRaw[] = [
         path: '/',
         component: Layout,
         redirect: '/dashboard',
-        children: [
-            {
-                path: 'dashboard',
-                component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
-                name: 'Dashboard',
-                meta: {
-                    title: 'dashboard',
-                    icon: 'homepage',
-                    affix: true
-                }
+        children: [{
+            path: 'dashboard',
+            component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
+            meta: {
+                title: 'dashboard',
+                icon: 'homepage',
+                affix: true
             }
-        ]
+        }]
     }
 ]
 
@@ -66,16 +63,16 @@ export const router = createRouter({
 })
 
 // 重置路由
-export function resetRouter() {
+export function resetRouter(){
     const permissionStore = usePermissionStoreWithOut()
     permissionStore.routes.forEach(route => {
         const name = route.name
-        if (name && router.hasRoute(name)) {
+        if(name && router.hasRoute(name)){
             router.removeRoute(name)
         }
     })
 }
 
-export function setupRouter(app: App<Element>) {
+export function setupRouter(app: App<Element>){
     app.use(router)
 }

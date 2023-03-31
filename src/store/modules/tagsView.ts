@@ -1,47 +1,45 @@
 import {defineStore} from 'pinia'
 import {ref} from 'vue'
-import {RouteLocationNormalized} from 'vue-router'
 
 import {store} from '@/store'
+import {TagView} from '#/store'
 
-export interface TagView extends Partial<RouteLocationNormalized> {
-    title?: string
-}
-
-export const useTagsViewStore = defineStore('tagsView', () => {
+const tagsViewStore = defineStore('tagsView', () => {
     /**
      * state
      *
+     * visitedViews 访问的view
+     * cachedViews 缓存的view
      */
     const visitedViews = ref<TagView[]>([])
-    const cachedViews = ref<string[]>([])
+    const cachedViews = ref<TagView[]>([])
 
     // actions
-    function addVisitedView(view: TagView) {
-        if (visitedViews.value.some(v => v.path === view.path)) {
+    function addVisitedView(route: TagView) {
+        if(visitedViews.value.some(v => v.path === route.path)){
             return
         }
-        if (view.meta && view.meta.affix) {
-            visitedViews.value.unshift(Object.assign({}, view, {title: view.meta?.title || 'no-name'}))
-        } else {
-            visitedViews.value.push(Object.assign({}, view, {title: view.meta?.title || 'no-name'}))
+        if(route.meta && route.meta.affix){
+            visitedViews.value.unshift({...route})
+        }else{
+            visitedViews.value.push({...route})
         }
     }
 
-    function addCachedView(view: TagView) {
-        const viewName = view.name as string
+    function addCachedView(route: TagView) {
+        const viewName = route.name as string
         if (cachedViews.value.includes(viewName)) {
             return
         }
-        if (view.meta?.keepAlive) {
+        if (route.meta?.keepAlive) {
             cachedViews.value.push(viewName)
         }
     }
 
-    function delVisitedView(view: TagView) {
+    function delVisitedView(route: TagView) {
         return new Promise(resolve => {
             for (const [i, v] of visitedViews.value.entries()) {
-                if (v.path === view.path) {
+                if (v.path === route.path) {
                     visitedViews.value.splice(i, 1)
                     break
                 }
@@ -50,8 +48,8 @@ export const useTagsViewStore = defineStore('tagsView', () => {
         })
     }
 
-    function delCachedView(view: TagView) {
-        const viewName = view.name as string
+    function delCachedView(route: TagView) {
+        const viewName = route.name as string
         return new Promise(resolve => {
             const index = cachedViews.value.indexOf(viewName)
             index > -1 && cachedViews.value.splice(index, 1)
@@ -59,15 +57,15 @@ export const useTagsViewStore = defineStore('tagsView', () => {
         })
     }
 
-    function delOtherVisitedViews(view: TagView) {
+    function delOtherVisitedViews(route: TagView) {
         return new Promise(resolve => {
-            visitedViews.value = visitedViews.value.filter(v => v.meta?.affix || v.path === view.path)
+            visitedViews.value = visitedViews.value.filter(v => v.meta?.affix || v.path === route.path)
             resolve([...visitedViews.value])
         })
     }
 
-    function delOtherCachedViews(view: TagView) {
-        const viewName = view.name as string
+    function delOtherCachedViews(route: TagView) {
+        const viewName = route.name as string
         return new Promise(resolve => {
             const index = cachedViews.value.indexOf(viewName)
             if (index > -1) {
@@ -80,24 +78,24 @@ export const useTagsViewStore = defineStore('tagsView', () => {
         })
     }
 
-    function updateVisitedView(view: TagView) {
+    function updateVisitedView(route: TagView) {
         for (let v of visitedViews.value) {
-            if (v.path === view.path) {
-                v = Object.assign(v, view)
+            if (v.path === route.path) {
+                v = Object.assign(v, route)
                 break
             }
         }
     }
 
-    function addView(view: TagView) {
-        addVisitedView(view)
-        addCachedView(view)
+    function addView(route: TagView) {
+        addVisitedView(route)
+        addCachedView(route)
     }
 
-    function delView(view: TagView) {
+    function delView(route: TagView) {
         return new Promise(resolve => {
-            delVisitedView(view)
-            delCachedView(view)
+            delVisitedView(route)
+            delCachedView(route)
             resolve({
                 visitedViews: [...visitedViews.value],
                 cachedViews: [...cachedViews.value]
@@ -105,10 +103,10 @@ export const useTagsViewStore = defineStore('tagsView', () => {
         })
     }
 
-    function delOtherViews(view: TagView) {
+    function delOtherViews(route: TagView) {
         return new Promise(resolve => {
-            delOtherVisitedViews(view)
-            delOtherCachedViews(view)
+            delOtherVisitedViews(route)
+            delOtherCachedViews(route)
             resolve({
                 visitedViews: [...visitedViews.value],
                 cachedViews: [...cachedViews.value]
@@ -116,9 +114,9 @@ export const useTagsViewStore = defineStore('tagsView', () => {
         })
     }
 
-    function delLeftViews(view: TagView) {
+    function delLeftViews(route: TagView) {
         return new Promise(resolve => {
-            const currIndex = visitedViews.value.findIndex(v => v.path === view.path)
+            const currIndex = visitedViews.value.findIndex(v => v.path === route.path)
             if (currIndex === -1) {
                 return
             }
@@ -140,9 +138,9 @@ export const useTagsViewStore = defineStore('tagsView', () => {
         })
     }
 
-    function delRightViews(view: TagView) {
+    function delRightViews(route: TagView) {
         return new Promise(resolve => {
-            const currIndex = visitedViews.value.findIndex(v => v.path === view.path)
+            const currIndex = visitedViews.value.findIndex(v => v.path === route.path)
             if (currIndex === -1) {
                 return
             }
@@ -211,5 +209,5 @@ export const useTagsViewStore = defineStore('tagsView', () => {
 })
 
 export function useTagsViewStoreWithOut() {
-    return useTagsViewStore(store)
+    return tagsViewStore(store)
 }
