@@ -9,7 +9,7 @@ import {store} from '@/store'
 import {resetRouter} from '@/router'
 import Api from '@/api'
 
-export const useUserStore = defineStore('user', () => {
+const userStore = defineStore('user', () => {
     /** state
      *
      * token
@@ -94,5 +94,5 @@ export const useUserStore = defineStore('user', () => {
 
 // 非setup Need to be used outside the setup
 export function useUserStoreWithOut(){
-    return useUserStore(store)
+    return userStore(store)
 }

@@ -47,7 +47,7 @@ const filterAsyncRoutes = (routes: RouteRecordRaw[], roles: string[]) => {
     return res
 }
 
-export const usePermissionStore = defineStore('permission', () => {
+const permissionStore = defineStore('permission', () => {
     // state
     const routes = ref<RouteRecordRaw[]>([])
     const addRoutes = ref<RouteRecordRaw[]>([])
@@ -76,5 +76,5 @@ export const usePermissionStore = defineStore('permission', () => {
 
 // 非setup
 export function usePermissionStoreWithOut(){
-    return usePermissionStore(store)
+    return permissionStore(store)
 }

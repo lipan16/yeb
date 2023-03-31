@@ -1,5 +1,6 @@
 import type {PropertyPath} from 'lodash'
 import {Nullable} from '#/index'
+import {RouteLocationNormalized} from 'vue-router'
 
 export interface EncryptionParams {
     key: string
@@ -55,4 +56,9 @@ export interface LoginResponseData {
     accessToken: string
     user_id: number
     name: string
+}
+
+export interface TagView extends Partial<RouteLocationNormalized>{
+    fullPath: string,
+    meta: object
 }

@@ -5,7 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import {TagView, useTagsViewStoreWithOut} from '@/store/modules/tagsView'
+import {TagView} from '#/store'
+import {useTagsViewStoreWithOut} from '@/store/modules/tagsView'
 
 const tagAndTagSpacing = ref(4)
 const {proxy} = getCurrentInstance() as any

@@ -11,7 +11,7 @@ export enum DeviceType {
     desktop
 }
 
-const useAppStore = defineStore({
+const appStore = defineStore({
     id: 'app',
     state: () => ({
         title: SETTING.title,
@@ -67,5 +67,5 @@ const useAppStore = defineStore({
 
 // Need to be used outside the setup
 export function useAppStoreWithOut() {
-    return useAppStore(store)
+    return appStore(store)
 }
