@@ -31,7 +31,6 @@ export function createPermissionGuard(router: Router) {
                         const {roles} = await userStore.getUserInfo()
                         // 获取菜单
                         const accessRoutes: RouteRecordRaw[] = await permissionStore.generateRoutes(roles)
-                        console.log('accessRoutes', accessRoutes)
                         accessRoutes.forEach((route: any) => {
                             router.addRoute(route)
                         })

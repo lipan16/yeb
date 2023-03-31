@@ -7,7 +7,7 @@ export interface EncryptionParams {
     iv: string
 }
 
-export interface CreateStorageParams extends EncryptionParams {
+export interface YebStorageParams extends EncryptionParams {
     prefixKey: string
     storage: Storage
     hasEncrypt: boolean

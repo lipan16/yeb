@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
     AppLogo: typeof import('./src/components/Application/AppLogo.vue')['default']
     AudioVbx: typeof import('./src/components/AudioVbx/index.vue')['default']
     BPITime: typeof import('./src/components/BPITime/index.vue')['default']
+    ElBacktop: typeof import('element-plus/es')['ElBacktop']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
