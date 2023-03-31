@@ -3,10 +3,11 @@
         <router-view v-slot="{Component, route}">
             <transition name="router-fade" mode="out-in">
                 <keep-alive :include="tagsViewStore.cachedViews">
-                    <component :is="Component" :key="route.fullPath" />
+                    <component :is="Component" :key="route.fullPath"/>
                 </keep-alive>
             </transition>
         </router-view>
+        <el-backtop target=".app-main"/>
     </section>
 </template>
 
@@ -16,7 +17,7 @@ import {useTagsViewStoreWithOut} from '@/store/modules/tagsView'
 const tagsViewStore = useTagsViewStoreWithOut()
 </script>
 <style scoped lang="less">
-.app-main {
+.app-main{
     width: 100%;
     position: relative;
     overflow-y: auto;
