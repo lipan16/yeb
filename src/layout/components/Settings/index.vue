@@ -64,6 +64,16 @@
             />
         </div>
         <div class="switch-item">
+            <span>开启 Tags-View Icon</span>
+            <el-switch
+                v-model="appStore.projectConfig.showTagsViewIcon"
+                active-text="开"
+                inactive-text="关"
+                inline-prompt
+                :style="{'--el-switch-on-color': appStore.projectConfig.theme}"
+            />
+        </div>
+        <div class="switch-item">
             <span>侧边栏 Logo</span>
             <el-switch
                 v-model="appStore.projectConfig.showSidebarLogo"

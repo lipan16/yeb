@@ -11,9 +11,10 @@
               @click.middle="!isAffix(tag) ? closeSelectedTag(tag) : ''"
               @contextmenu.prevent="openMenu(tag, $event)"
             >
-                <span>{{ $t('route.' + tag.meta?.title) }}</span>
+                <SvgIcon v-if="appStore.projectConfig.showTagsViewIcon && tag.meta.icon" :name="tag.meta.icon" size="12" />
+                <span class="tag-title">{{ $t('route.' + tag.meta?.title) }}</span>
                 <span v-if="!isAffix(tag)" class="icon-close" @click.prevent.stop="closeSelectedTag(tag)">
-                    <SvgIcon name="close"/>
+                    <SvgIcon name="close" size="12"/>
                 </span>
             </router-link>
         </ScrollPane>
@@ -56,6 +57,7 @@ import ScrollPane from './ScrollPane.vue'
 import {useTagsViewStoreWithOut} from '@/store/modules/tagsView'
 import {usePermissionStoreWithOut} from '@/store/modules/permission'
 import {TagView} from '#/store'
+import {useAppStoreWithOut} from '@/store/modules/app'
 
 const {proxy} = getCurrentInstance() as ComponentInternalInstance
 const router = useRouter()
@@ -63,6 +65,7 @@ const route = useRoute()
 
 const permissionStore = usePermissionStoreWithOut()
 const tagsViewStore = useTagsViewStoreWithOut()
+const appStore = useAppStoreWithOut()
 
 const visible = ref(false)
 const selectedTag = ref({})
@@ -282,6 +285,14 @@ onMounted(() => {
             font-size: 12px;
             margin: 4px 4px 2px;
 
+            .svg-icon{
+                margin-bottom: 2px;
+            }
+
+            .tag-title{
+                margin: 0 2px;
+            }
+
             &:hover{
                 color: var(--el-color-primary);
             }
@@ -299,7 +310,7 @@ onMounted(() => {
                     height: 8px;
                     border-radius: 50%;
                     position: relative;
-                    margin-right: 5px;
+                    margin-right: 4px;
                 }
             }
 
@@ -308,7 +319,7 @@ onMounted(() => {
                 text-align: center;
 
                 &:hover{
-                    background-color: rgba(243, 124, 124, 0.3);
+                    background-color: var(--yeb-sidebar-active-bg-color);
                     color: #f80000;
                 }
             }

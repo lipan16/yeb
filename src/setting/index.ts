@@ -7,6 +7,7 @@ export const SETTING = {
     // 是否展示设置按钮
     showSettings: true,
     showTagsView: true,
+    showTagsViewIcon: true,
     showSidebarLogo: true,
     showBreadcrumb: false, // 显示导航栏面包屑
     theme: '#fd726d',

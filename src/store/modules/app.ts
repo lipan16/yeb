@@ -32,6 +32,7 @@ const appStore = defineStore({
             showSettings: SETTING.showSettings,
             showBreadcrumb: SETTING.showBreadcrumb,
             showTagsView: SETTING.showTagsView,
+            showTagsViewIcon: SETTING.showTagsViewIcon,
             showSidebarLogo: SETTING.showSidebarLogo,
 
             openSso: SETTING.openSso,
