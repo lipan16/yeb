@@ -100,6 +100,7 @@ export function setDomStyleProperty(key: string, value: string, target?: HTMLEle
     const targetEle = target || document.documentElement
     targetEle.style.setProperty(key, value)
 }
+
 export function getRandomColor(){
     return `#${Math.floor(Math.random() * 0xffffff).toString(16)}`
 }

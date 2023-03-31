@@ -2,45 +2,45 @@
     <div class="tags-view">
         <ScrollPane ref="scrollPaneRef" class="tags-view__wrapper" @scroll="handleScroll">
             <router-link
-                v-for="tag in tagsViewStore.visitedViews"
-                :key="tag.path"
-                :data-path="tag.path"
-                :class="isActive(tag) ? 'active' : ''"
-                :to="{path: tag.path, query: tag.query}"
-                class="tags-view__item"
-                @click.middle="!isAffix(tag) ? closeSelectedTag(tag) : ''"
-                @contextmenu.prevent="openMenu(tag, $event)"
+              v-for="tag in tagsViewStore.visitedViews"
+              :key="tag.path"
+              :data-path="tag.path"
+              :class="isActive(tag) ? 'active' : ''"
+              :to="{path: tag.path, query: tag.query}"
+              class="tags-view__item"
+              @click.middle="!isAffix(tag) ? closeSelectedTag(tag) : ''"
+              @contextmenu.prevent="openMenu(tag, $event)"
             >
-                {{ $t('route.' + tag.meta?.title) }}
+                <span>{{ $t('route.' + tag.meta?.title) }}</span>
                 <span v-if="!isAffix(tag)" class="icon-close" @click.prevent.stop="closeSelectedTag(tag)">
-                    <SvgIcon name="close" />
+                    <SvgIcon name="close"/>
                 </span>
             </router-link>
         </ScrollPane>
 
         <ul v-show="visible" :style="{left: left + 'px', top: top + 'px'}" class="tags-view__menu">
             <li @click="refreshSelectedTag(selectedTag)">
-                <SvgIcon name="refresh" size="12" />
+                <SvgIcon name="refresh" size="12"/>
                 {{ $t('tagsView.refresh') }}
             </li>
             <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">
-                <SvgIcon name="close" size="12" />
+                <SvgIcon name="close" size="12"/>
                 {{ $t('tagsView.close') }}
             </li>
             <li @click="closeOtherTags">
-                <SvgIcon name="close_other" size="12" />
+                <SvgIcon name="close_other" size="12"/>
                 {{ $t('tagsView.closeOther') }}
             </li>
             <li v-if="!isFirstView()" @click="closeLeftTags">
-                <SvgIcon name="close_left" size="12" />
+                <SvgIcon name="close_left" size="12"/>
                 {{ $t('tagsView.closeLeft') }}
             </li>
             <li v-if="!isLastView()" @click="closeRightTags">
-                <SvgIcon name="close_right" size="12" />
+                <SvgIcon name="close_right" size="12"/>
                 {{ $t('tagsView.closeRight') }}
             </li>
             <li @click="closeAllTags(selectedTag)">
-                <SvgIcon name="close_all" size="12" />
+                <SvgIcon name="close_all" size="12"/>
                 {{ $t('tagsView.closeAll') }}
             </li>
         </ul>
@@ -52,16 +52,17 @@ import {getCurrentInstance, ComponentInternalInstance} from 'vue'
 import {useRouter, useRoute} from 'vue-router'
 import path from 'path-browserify'
 
-import {usePermissionStoreWithOut} from '@/store/modules/permission.js'
-import {TagView, useTagsViewStoreWithOut} from '@/store/modules/tagsView.js'
 import ScrollPane from './ScrollPane.vue'
-
-const permissionStore = usePermissionStoreWithOut()
-const tagsViewStore = useTagsViewStoreWithOut()
+import {useTagsViewStoreWithOut} from '@/store/modules/tagsView'
+import {usePermissionStoreWithOut} from '@/store/modules/permission'
+import {TagView} from '#/store'
 
 const {proxy} = getCurrentInstance() as ComponentInternalInstance
 const router = useRouter()
 const route = useRoute()
+
+const permissionStore = usePermissionStoreWithOut()
+const tagsViewStore = useTagsViewStoreWithOut()
 
 const visible = ref(false)
 const selectedTag = ref({})
@@ -70,22 +71,18 @@ const left = ref(0)
 const top = ref(0)
 const affixTags = ref<TagView[]>([])
 
-watch(
-    route,
-    () => {
-        addTags()
-        moveToCurrentTag()
-    },
-    {
-        //初始化立即执行
-        immediate: true
-    }
-)
+watch(route, () => {
+    addTags()
+    moveToCurrentTag()
+}, {
+    //初始化立即执行
+    immediate: true
+})
 
 watch(visible, value => {
-    if (value) {
+    if(value){
         document.body.addEventListener('click', closeMenu)
-    } else {
+    }else{
         document.body.removeEventListener('click', closeMenu)
     }
 })
@@ -94,19 +91,18 @@ function filterAffixTags(routes: any[], basePath = '/') {
     let tags: TagView[] = []
 
     routes.forEach(route => {
-        if (route.meta && route.meta.affix) {
+        if(route.meta && route.meta.affix){
             const tagPath = path.resolve(basePath, route.path)
             tags.push({
                 fullPath: tagPath,
                 path: tagPath,
-                name: route.name,
                 meta: {...route.meta}
             })
         }
 
-        if (route.children) {
+        if(route.children){
             const childTags = filterAffixTags(route.children, route.path)
-            if (childTags.length >= 1) {
+            if(childTags.length >= 1){
                 tags = tags.concat(childTags)
             }
         }
@@ -114,30 +110,30 @@ function filterAffixTags(routes: any[], basePath = '/') {
     return tags
 }
 
-function initTags() {
-    const tags = filterAffixTags(permissionStore.routes)
+function initTags(){
+    const tags = filterAffixTags(permissionStore.routes) // 从全部路由中过滤出固定的路由
     affixTags.value = tags
-    for (const tag of tags) {
-        // Must have tag name
-        if ((tag as TagView).name) {
+    for(const tag of tags){
+        // Must have route meta title
+        if(tag.meta.title){
             tagsViewStore.addVisitedView(tag)
         }
     }
 }
 
-function addTags() {
-    if (route.name) {
+function addTags(){
+    if(route.name){
         tagsViewStore.addView(route)
     }
 }
 
-function moveToCurrentTag() {
+function moveToCurrentTag(){
     nextTick(() => {
-        for (const r of tagsViewStore.visitedViews) {
-            if (r.path === route.path) {
+        for(const r of tagsViewStore.visitedViews){
+            if(r.path === route.path){
                 scrollPaneRef.value.moveToTarget(r)
                 // when query is different then update
-                if (r.fullPath !== route.fullPath) {
+                if(r.fullPath !== route.fullPath){
                     tagsViewStore.updateVisitedView(route)
                 }
             }
@@ -145,31 +141,31 @@ function moveToCurrentTag() {
     })
 }
 
-function isActive(tag: TagView) {
+function isActive(tag: TagView){
     return tag.path === route.path
 }
 
-function isAffix(tag: TagView) {
+function isAffix(tag: TagView){
     return tag.meta && tag.meta.affix
 }
 
-function isFirstView() {
-    try {
+function isFirstView(){
+    try{
         return (selectedTag.value as TagView).fullPath === tagsViewStore.visitedViews[1].fullPath || (selectedTag.value as TagView).fullPath === '/index'
-    } catch (err) {
+    }catch(err){
         return false
     }
 }
 
-function isLastView() {
-    try {
+function isLastView(){
+    try{
         return (selectedTag.value as TagView).fullPath === tagsViewStore.visitedViews[tagsViewStore.visitedViews.length - 1].fullPath
-    } catch (err) {
+    }catch(err){
         return false
     }
 }
 
-function refreshSelectedTag(view: TagView) {
+function refreshSelectedTag(view: TagView){
     tagsViewStore.delCachedView(view)
     const {fullPath} = view
     nextTick(() => {
@@ -179,69 +175,69 @@ function refreshSelectedTag(view: TagView) {
     })
 }
 
-function toLastView(visitedViews: TagView[], view?: any) {
+function toLastView(visitedViews: TagView[], view?: any){
     const latestView = visitedViews.slice(-1)[0]
-    if (latestView && latestView.fullPath) {
+    if(latestView && latestView.fullPath){
         router.push(latestView.fullPath)
-    } else {
+    }else{
         // now the default is to redirect to the home page if there is no tags-view,
         // you can adjust it according to your needs.
-        if (view.name === 'Dashboard') {
+        if(view.name === 'Dashboard'){
             // to reload home page
             router.replace({path: '/redirect' + view.fullPath})
-        } else {
+        }else{
             router.push('/')
         }
     }
 }
 
-function closeSelectedTag(view: TagView) {
+function closeSelectedTag(view: TagView){
     tagsViewStore.delView(view).then((res: any) => {
-        if (isActive(view)) {
+        if(isActive(view)){
             toLastView(res.visitedViews, view)
         }
     })
 }
 
-function closeLeftTags() {
+function closeLeftTags(){
     tagsViewStore.delLeftViews(selectedTag.value).then((res: any) => {
-        if (!res.visitedViews.find((item: any) => item.fullPath === route.fullPath)) {
+        if(!res.visitedViews.find((item: any) => item.fullPath === route.fullPath)){
             toLastView(res.visitedViews)
         }
     })
 }
 
-function closeRightTags() {
+function closeRightTags(){
     tagsViewStore.delRightViews(selectedTag.value).then((res: any) => {
-        if (!res.visitedViews.find((item: any) => item.fullPath === route.fullPath)) {
+        if(!res.visitedViews.find((item: any) => item.fullPath === route.fullPath)){
             toLastView(res.visitedViews)
         }
     })
 }
 
-function closeOtherTags() {
+function closeOtherTags(){
     router.push(selectedTag.value)
     tagsViewStore.delOtherViews(selectedTag.value).then(() => {
         moveToCurrentTag()
     })
 }
 
-function closeAllTags(view: TagView) {
+function closeAllTags(view: TagView){
     tagsViewStore.delAllViews().then((res: any) => {
         toLastView(res.visitedViews, view)
     })
 }
 
-function openMenu(tag: TagView, e: MouseEvent) {
+function openMenu(tag: TagView, e: MouseEvent){
     const menuMinWidth = 105
     const offsetLeft = proxy?.$el.getBoundingClientRect().left // container margin left
     const offsetWidth = proxy?.$el.offsetWidth // container width
     const maxLeft = offsetWidth - menuMinWidth // left boundary
     const l = e.clientX - offsetLeft + 15 // 15: margin right
 
-    if (l > maxLeft) {
+    if(l > maxLeft){
         left.value = maxLeft
-    } else {
+    }else{
         left.value = l
     }
 
@@ -250,11 +246,11 @@ function openMenu(tag: TagView, e: MouseEvent) {
     selectedTag.value = tag
 }
 
-function closeMenu() {
+function closeMenu(){
     visible.value = false
 }
 
-function handleScroll() {
+function handleScroll(){
     closeMenu()
 }
 
@@ -264,16 +260,16 @@ onMounted(() => {
 </script>
 
 <style lang="less" scoped>
-.tags-view {
+.tags-view{
     background: var(--bg-color);
     border-bottom: 1px solid #d8dce5;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
 
-    .tags-view__wrapper {
+    .tags-view__wrapper{
         height: 36px;
         padding: 0 16px;
 
-        .tags-view__item {
+        .tags-view__item{
             display: inline-block;
             position: relative;
             cursor: pointer;
@@ -286,16 +282,16 @@ onMounted(() => {
             font-size: 12px;
             margin: 4px 4px 2px;
 
-            &:hover {
+            &:hover{
                 color: var(--el-color-primary);
             }
 
-            &.active {
+            &.active{
                 background-color: var(--el-color-primary);
                 border-color: var(--el-color-primary);
                 color: var(--el-color-primary-light-9);
 
-                &::before {
+                &::before{
                     content: '';
                     background: #fff;
                     display: inline-block;
@@ -307,11 +303,11 @@ onMounted(() => {
                 }
             }
 
-            .icon-close {
+            .icon-close{
                 border-radius: 50%;
                 text-align: center;
 
-                &:hover {
+                &:hover{
                     background-color: rgba(243, 124, 124, 0.3);
                     color: #f80000;
                 }
@@ -320,7 +316,7 @@ onMounted(() => {
     }
 
     // tags 右键弹出的小菜单
-    .tags-view__menu {
+    .tags-view__menu{
         margin: 0;
         background: #fff;
         z-index: 3000;
@@ -333,12 +329,12 @@ onMounted(() => {
         color: #333;
         box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3);
 
-        li {
+        li{
             margin: 0;
             padding: 7px 16px;
             cursor: pointer;
 
-            &:hover {
+            &:hover{
                 background: #eee;
             }
         }
