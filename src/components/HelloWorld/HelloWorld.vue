@@ -22,6 +22,7 @@ import {useIntervalFn} from '@vueuse/core'
 import welcomeSvg from '@/assets/svg/welcome.svg'
 import coffeeSvg from '@/assets/svg/coffee.svg'
 import {useUserStoreWithOut} from '@/store/modules/user'
+import {getAuthCache, setAuthCache} from '@/utils/auth'
 
 defineProps<{msg: string}>()
 const userStore = useUserStoreWithOut()
@@ -45,6 +46,17 @@ const {pause, resume, isActive} = useIntervalFn(() => {
 const onclickWorkState = () => {
     workingTime.status = !workingTime.status
 }
+onMounted(() => {
+    const timeCache = getAuthCache('workingTime')
+    if(timeCache){
+        workingTime.time = timeCache?.time
+        workingTime.showTime = timeCache?.showTime
+        workingTime.status = timeCache?.status
+    }
+})
+onBeforeUnmount(() => {
+    setAuthCache('workingTime', workingTime)
+})
 </script>
 
 <style lang="less" scoped>
