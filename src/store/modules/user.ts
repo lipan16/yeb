@@ -2,8 +2,9 @@ import {UserInfo} from '#/user'
 import {LoginData} from '#/store'
 
 import {defineStore} from 'pinia'
+import {omit} from 'lodash'
 
-import {TOKEN_KEY, USER_INFO_KEY} from '@/setting/cacheKey'
+import {LOGIN_INFO_KEY, TOKEN_KEY, USER_INFO_KEY} from '@/setting/cacheKey'
 import {getAuthCache, removeAuthCache, setAuthCache} from '@/utils/auth'
 import {store} from '@/store'
 import {resetRouter} from '@/router'
@@ -30,6 +31,7 @@ const userStore = defineStore('user', () => {
 
     // 登录
     function login(loginData: LoginData){
+        setAuthCache(LOGIN_INFO_KEY, omit(loginData, ['password']))
         return Api.auth.login(loginData).then(response => {
             const {accessToken} = response.data
             token.value = accessToken

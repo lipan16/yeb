@@ -100,6 +100,8 @@ import {router} from '@/router'
 import {getUrlParam} from '@/utils'
 import {useEncryption} from '@/utils/encrypt'
 import {particlesConfig} from './config/particles-config'
+import {USER_INFO_KEY} from '@/setting/cacheKey'
+import {getAuthCache} from '@/utils/auth'
 
 const userStore = useUserStoreWithOut()
 const {t} = useI18n()
@@ -114,13 +116,29 @@ const particlesLoaded = async container => {
 
 const refLoginForm = ref<FormInstance>()
 const loginForm = reactive({
-    username: '010287',
-    password: 'cib@1234',
+    username: '201811',
+    password: 'lipan@xb',
     captcha: 'xiaobing',
     captcha_id: 'xiaobing',
     keep: true
 })
 const loading = ref(false)
+
+onBeforeMount(() => {
+    const userInfo = getAuthCache(USER_INFO_KEY)
+    if(userInfo){
+        loginForm.username = userInfo.username
+        loginForm.captcha = userInfo.captcha
+        loginForm.captcha_id = userInfo.captcha_id
+        loginForm.keep = userInfo.keep
+    }else{
+        loginForm.username = '201811'
+        loginForm.captcha = 'xiaobing'
+        loginForm.captcha_id = 'xiaobing'
+        loginForm.keep = true
+    }
+    loginForm.password = 'lipan@xb'
+})
 
 // 校验规则
 const validateUsername = (rule, value, callback) => {
@@ -184,6 +202,7 @@ async function handleLogin(form: FormInstance){
         loading.value = false
     })
 }
+
 </script>
 
 <style lang="less" scoped>
