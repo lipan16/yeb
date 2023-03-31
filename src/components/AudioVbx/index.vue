@@ -78,7 +78,7 @@ function draw() {
     analyser.getByteFrequencyData(dataArray)
     const len = dataArray.length / 2 // 过滤高频
     const barWidth = width / len / 2
-    cvsCtx.fillStyle = '#ea43f6'
+    cvsCtx.fillStyle = '#fd726d'
 
     for (let i = 0; i < len; i++) {
         const data = dataArray[i]

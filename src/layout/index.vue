@@ -106,6 +106,7 @@ function handleOutsideClick() {
 .mobile {
     .sidebar-container {
         width: var(--yeb-sidebar-width) !important;
+        z-index: 900;
     }
 
     &.closeSidebar {
