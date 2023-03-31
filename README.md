@@ -26,7 +26,6 @@ npm run build
 ## todo
 
 * tagsView 支持缓存, 支持拖拽，切换动画
-* localStorage 缓存无效问题
 * 用户管理页实现
 * rem 适配
 
