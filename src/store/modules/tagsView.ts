@@ -27,12 +27,11 @@ const tagsViewStore = defineStore('tagsView', () => {
     }
 
     function addCachedView(route: TagView) {
-        const viewName = route.name as string
-        if (cachedViews.value.includes(viewName)) {
+        if (cachedViews.value.some(v => v.path === route.path)) {
             return
         }
         if (route.meta?.keepAlive) {
-            cachedViews.value.push(viewName)
+            cachedViews.value.push(route)
         }
     }
 
@@ -49,10 +48,13 @@ const tagsViewStore = defineStore('tagsView', () => {
     }
 
     function delCachedView(route: TagView) {
-        const viewName = route.name as string
         return new Promise(resolve => {
-            const index = cachedViews.value.indexOf(viewName)
-            index > -1 && cachedViews.value.splice(index, 1)
+            for (const [i, v] of cachedViews.value.entries()) {
+                if (v.path === route.path) {
+                    cachedViews.value.splice(i, 1)
+                    break
+                }
+            }
             resolve([...cachedViews.value])
         })
     }
@@ -65,15 +67,8 @@ const tagsViewStore = defineStore('tagsView', () => {
     }
 
     function delOtherCachedViews(route: TagView) {
-        const viewName = route.name as string
         return new Promise(resolve => {
-            const index = cachedViews.value.indexOf(viewName)
-            if (index > -1) {
-                cachedViews.value = cachedViews.value.slice(index, index + 1)
-            } else {
-                // if index = -1, there is no cached tags
-                cachedViews.value = []
-            }
+            cachedViews.value = cachedViews.value.filter(v => v.path === route.path)
             resolve([...cachedViews.value])
         })
     }
@@ -126,10 +121,7 @@ const tagsViewStore = defineStore('tagsView', () => {
                     return true
                 }
 
-                const cacheIndex = cachedViews.value.indexOf(item.name as string)
-                if (cacheIndex > -1) {
-                    cachedViews.value.splice(cacheIndex, 1)
-                }
+                delCachedView(item)
                 return false
             })
             resolve({
@@ -150,10 +142,7 @@ const tagsViewStore = defineStore('tagsView', () => {
                     return true
                 }
 
-                const cacheIndex = cachedViews.value.indexOf(item.name as string)
-                if (cacheIndex > -1) {
-                    cachedViews.value.splice(cacheIndex, 1)
-                }
+                delCachedView(item)
                 return false
             })
             resolve({
