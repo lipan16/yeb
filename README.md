@@ -18,19 +18,17 @@ npm run build
 ```
 
 ## done
-
 * 基本登录功能
 * 动画
 * 动态背景色
 
 ## todo
-
+* vw 适配
+* 更新提升，赞助等页面
 * tagsView 支持缓存, 支持拖拽，切换动画
 * 用户管理页实现
-* rem 适配
 
 ### route配置
-
 * path:配置的路径或者第三方跳转地址
 * component：配置组件
 * redirect：重定向地址
@@ -45,7 +43,6 @@ npm run build
     * affix：是否固定到tagVIew栏
 
 ### 设置背景色
-
 **定义全局变量，挂载在body下, 修改变量**
 
 ### 缓存使用说明 默认使用localStorage
