@@ -1,8 +1,8 @@
 <template>
     <div class="app-dark-mode" :class="getClass" @click="toggleDark()" :style="{'borderColor': appStore.projectConfig.theme}">
         <div class="inner"></div>
-        <SvgIcon size="14" name="sun" />
-        <SvgIcon size="14" name="moon" />
+        <SvgIcon size="14" name="sun"/>
+        <SvgIcon size="14" name="moon"/>
     </div>
 </template>
 <script lang="ts" setup>
@@ -21,34 +21,34 @@ const getClass = computed(() => {
 const appStore = useAppStoreWithOut()
 </script>
 <style lang="less" scoped>
-.app-dark-mode {
+.app-dark-mode{
     position: relative;
     display: flex;
     width: 50px;
-    height: 26px;
-    padding: 0 6px;
+    height: 24px;
+    padding: 0 4px;
     cursor: pointer;
-    border: 1px solid;
     flex-shrink: 0;
     background-color: var(--box-bg);
     border-radius: 30px;
     justify-content: space-between;
     align-items: center;
+    margin: 0 6px;
 
-    .inner {
+    .inner{
         position: absolute;
         z-index: 1;
-        width: 18px;
-        height: 18px;
+        width: 16px;
+        height: 16px;
         background-color: var(--btn-bg);
         border-radius: 50%;
         transition: transform 0.5s, background-color 0.5s;
         will-change: transform;
     }
 
-    &.dark {
-        .inner {
-            transform: translateX(21px);
+    &.dark{
+        .inner{
+            transform: translateX(27px);
         }
     }
 }

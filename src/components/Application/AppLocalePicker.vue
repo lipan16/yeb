@@ -1,7 +1,7 @@
 <template>
     <el-dropdown class="lang-select" trigger="click" @command="handleLocale">
         <div>
-            <SvgIcon name="language" />
+            <SvgIcon name="language"/>
         </div>
         <template #dropdown>
             <el-dropdown-menu>
@@ -21,7 +21,7 @@ const selectedKeys = ref<string>('')
 
 const appStore = useAppStoreWithOut()
 
-async function handleLocale(lang: string) {
+async function handleLocale(lang: string){
     selectedKeys.value = lang
     appStore.setLocal(lang)
     await changeLocale(lang)
@@ -29,9 +29,10 @@ async function handleLocale(lang: string) {
 </script>
 
 <style lang="less" scoped>
-.lang-select {
-    margin: 8px;
-    .svg-icon {
+.lang-select{
+    margin: 0 6px;
+
+    .svg-icon{
         fill: var(--text);
     }
 }
