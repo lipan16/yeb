@@ -22,12 +22,12 @@ export default {
         nodejs: 'iframe-nodejs'
     },
     navbar: {
-        logOut: 'Log Out',
+        logout: 'Log Out',
         dashboard: 'Dashboard',
         github: 'Github',
         theme: 'Theme',
         size: 'Global Size',
-        profile: 'Profile'
+        'personal center': 'personal Center'
     },
     login: {
         title: 'Login Form',
@@ -62,5 +62,10 @@ export default {
         'You have worked today': 'You have worked today: ',
         'Continue to work': 'Continue to work',
         'have a bit of rest': 'have a bit of rest'
+    },
+    utils: {
+        'Navigation failed, the menu type is unrecognized!': 'Navigation failed, menu type not recognized!',
+        'Navigation failed, it is at the navigation target position!': 'Navigation failed, it is already at the navigation the position!',
+        'Navigation failed, invalid route!': 'Navigation failed, invalid route!',
     }
 }

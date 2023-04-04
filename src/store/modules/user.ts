@@ -49,7 +49,7 @@ const userStore = defineStore('user', () => {
                 if(!data.roles || data.roles.length <= 0){
                     reject('getUserInfo: roles must be a non-null array!')
                 }
-                lastUpdateTime.value = new Date().getTime()
+                lastUpdateTime.value = Date.now()
                 nickname.value = data.nickname
                 avatar.value = data.avatar
                 roles.value = data.roles

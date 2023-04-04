@@ -22,12 +22,12 @@ export default {
         nodejs: 'iframe-nodejs'
     },
     navbar: {
-        logOut: '退出登录',
+        logout: '退出登录',
         dashboard: '首页',
         github: '项目地址',
         theme: '换肤',
         size: '布局大小',
-        profile: '个人中心'
+        'personal center': '个人中心'
     },
     login: {
         title: '登录',
@@ -62,5 +62,10 @@ export default {
         'You have worked today': '您今天已经工作了: ',
         'Continue to work': '继续工作',
         'have a bit of rest': '休息一会'
+    },
+    utils: {
+        'Navigation failed, the menu type is unrecognized!': '导航失败，菜单类型无法识别！',
+        'Navigation failed, it is at the navigation target position!': '导航失败，已在导航目标位置！',
+        'Navigation failed, invalid route!': '导航失败，路由无效！',
     }
 }
