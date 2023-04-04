@@ -21,7 +21,7 @@ const getLocale = () => {
     return appStore.getLocal
 }
 
-const i18n = createI18n({
+export const i18n = createI18n({
     legacy: false,
     globalInjection: true, // 全局模式 可以直接使用$t
     locale: getLocale(),
