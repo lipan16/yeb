@@ -24,6 +24,7 @@ npm run build
 
 ## todo
 * 更新提示，赞助等页面
+* 配置layout的单页面
 * 提醒功能
 * 个人头像
 * tagsView 支持缓存, 支持拖拽，切换动画

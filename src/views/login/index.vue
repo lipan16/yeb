@@ -100,7 +100,7 @@ import {router} from '@/router'
 import {getUrlParam} from '@/utils'
 import {useEncryption} from '@/utils/encrypt'
 import {particlesConfig} from './config/particles-config'
-import {USER_INFO_KEY} from '@/setting/cacheKey'
+import {LOGIN_INFO_KEY} from '@/setting/cacheKey'
 import {getAuthCache} from '@/utils/auth'
 
 const userStore = useUserStoreWithOut()
@@ -125,12 +125,12 @@ const loginForm = reactive({
 const loading = ref(false)
 
 onBeforeMount(() => {
-    const userInfo = getAuthCache(USER_INFO_KEY)
-    if(userInfo){
-        loginForm.username = userInfo.username
-        loginForm.captcha = userInfo.captcha
-        loginForm.captcha_id = userInfo.captcha_id
-        loginForm.keep = userInfo.keep
+    const loginInfo = getAuthCache(LOGIN_INFO_KEY)
+    if(loginInfo){
+        loginForm.username = loginInfo.username
+        loginForm.captcha = loginInfo.captcha
+        loginForm.captcha_id = loginInfo.captcha_id
+        loginForm.keep = loginInfo.keep
     }else{
         loginForm.username = '201811'
         loginForm.captcha = 'xiaobing'

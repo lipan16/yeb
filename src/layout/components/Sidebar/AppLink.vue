@@ -1,5 +1,5 @@
 <template>
-    <a v-if="isExternal(to)" :href="to" target="_blank" rel="noopener">
+    <a v-if="isExternalUrl(to)" :href="to" target="_blank" rel="noopener">
         <slot></slot>
     </a>
     <div v-else @click="push">
@@ -9,7 +9,7 @@
 
 <script lang="ts" setup>
 import {computed} from 'vue'
-import {isExternal} from '@/utils/validate'
+import {isExternalUrl} from '@/utils/validate'
 import {useRouter} from 'vue-router'
 
 import {DeviceType, useAppStoreWithOut} from '@/store/modules/app'

@@ -35,6 +35,8 @@ const appStore = defineStore({
             showTagsViewIcon: SETTING.showTagsViewIcon,
             showSidebarLogo: SETTING.showSidebarLogo,
 
+            animation: 'slide-right', // 主界面切换动画
+
             openSso: SETTING.openSso,
             ssoUrl: SETTING.ssoUrl
         },
