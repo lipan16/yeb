@@ -10,7 +10,7 @@
               :collapse-transition="false"
               background-color="transparent"
             >
-                <SidebarItem v-for="route in permissionStore.routes" :key="route.path" :item="route" :base-path="route.path" :is-collapse="isCollapse"/>
+                <SidebarItem v-for="route in permissionStore.routes" :key="route.path" :item="route" :base-path="route.path"/>
             </el-menu>
         </el-scrollbar>
     </div>
@@ -47,7 +47,6 @@ const defaultActiveMenu = computed<string>(() => {
 </script>
 
 <style lang="less">
-
 // 鼠标 hover 时颜色
 .el-menu-hover-bg-color{
     background-color: var(--yeb-sidebar-active-bg-color) !important;
@@ -181,18 +180,20 @@ const defaultActiveMenu = computed<string>(() => {
 
 // 折叠情况下 二三级菜单弹出样式
 .el-popper.is-pure.is-light .el-menu--vertical{
-    .nest-menu .el-menu-item{
+    .el-menu-item{
         .svg-icon{
             margin-right: 8px;
         }
 
         &:hover{
+            color: var(--el-menu-active-color);
             .el-menu-hover-bg-color;
         }
 
         // 一层时激活状态样式
         &.is-active{
-            //.el-menu-hover-bg-color;
+            color: var(--el-menu-active-color);
+            .el-menu-hover-bg-color;
         }
     }
 

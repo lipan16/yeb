@@ -33,14 +33,15 @@ npm run build
 
 ### route配置
 * path:配置的路径或者第三方跳转地址
+* name:路由的name
 * component：配置组件
 * redirect：重定向地址
 * meat：
-    * icon：图标
     * title：标题,用于tagsView显示
-    * link：iframe时的地址
+    * type: 外部链接类型，有link和iframe
+    * icon：图标
+    * link：iframe或link时的地址
     * hidden：是否在侧边栏显示
-    * alwaysShow：是否显示子路由
     * roles：能看到此路由的角色列表
     * keepAlive：是否缓存
     * affix：是否固定到tagVIew栏
