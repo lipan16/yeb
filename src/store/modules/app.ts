@@ -4,12 +4,7 @@ import {set} from 'lodash'
 import {store} from '@/store'
 import {LOCAL__KEY} from '@/setting/cacheKey'
 import {SETTING} from '@/setting'
-import {PayLoadObject} from '#/store'
-
-export enum DeviceType {
-    mobile,
-    desktop
-}
+import {DeviceType, PayLoadObject} from '#/store'
 
 const appStore = defineStore({
     id: 'app',

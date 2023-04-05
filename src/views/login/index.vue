@@ -70,8 +70,8 @@
                       @keyup.enter.native="handleLogin(refLoginForm)"
                     />
                     <div class="captcha">
-                        {{ loginForm.captcha_id }}
-                        <!--                        <img @click="onChangeCaptcha" class="captcha-img" :src="'&id=' + loginForm.captcha_id" alt=""/>-->
+                        {{ loginForm.captchaId }}
+                        <!--                        <img @click="onChangeCaptcha" class="captcha-img" :src="'&id=' + loginForm.captchaId" alt=""/>-->
                     </div>
                 </el-form-item>
 
@@ -119,7 +119,7 @@ const loginForm = reactive({
     username: '201811',
     password: 'lipan@xb',
     captcha: 'xiaobing',
-    captcha_id: 'xiaobing',
+    captchaId: 'xiaobing',
     keep: true
 })
 const loading = ref(false)
@@ -129,12 +129,12 @@ onBeforeMount(() => {
     if(loginInfo){
         loginForm.username = loginInfo.username
         loginForm.captcha = loginInfo.captcha
-        loginForm.captcha_id = loginInfo.captcha_id
+        loginForm.captchaId = loginInfo.captchaId
         loginForm.keep = loginInfo.keep
     }else{
         loginForm.username = '201811'
         loginForm.captcha = 'xiaobing'
-        loginForm.captcha_id = 'xiaobing'
+        loginForm.captchaId = 'xiaobing'
         loginForm.keep = true
     }
     loginForm.password = 'lipan@xb'
@@ -158,7 +158,7 @@ const validatePassword = (rule, value, callback) => {
 }
 
 const validateCaptcha = (rule, value, callback) => {
-    if(value !== loginForm.captcha_id){
+    if(value !== loginForm.captchaId){
         callback(new Error(t('login.Please enter captcha')))
     }else{
         callback()

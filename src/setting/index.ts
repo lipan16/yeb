@@ -35,3 +35,5 @@ export const SETTING = {
     // 单点登录地址
     ssoUrl: import.meta.env.VITE_APP_SSO_URL
 }
+
+export default SETTING

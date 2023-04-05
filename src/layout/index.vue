@@ -19,10 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import {computed, watchEffect} from 'vue'
-import {useWindowSize} from '@vueuse/core'
-
-import {DeviceType, useAppStoreWithOut} from '@/store/modules/app'
+import {useAppStoreWithOut} from '@/store/modules/app'
 
 // 引入组件
 import RightPanel from '@/components/RightPanel/index.vue'
@@ -31,6 +28,7 @@ import Navbar from '@/layout/components/Navbar/index.vue'
 import Settings from '@/layout/components/Settings/index.vue'
 import Sidebar from '@/layout/components/Sidebar/index.vue'
 import TagsView from '@/layout/components/TagsView/index.vue'
+import {DeviceType} from '#/store'
 
 // const AppMain = defineAsyncComponent(() => import('@/layout/components/AppMain.vue'))
 // const Navbar = defineAsyncComponent(() => import('@/layout/components/Navbar/index.vue'))

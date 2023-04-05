@@ -74,7 +74,7 @@ module.exports = {
         'generator-star-spacing': 'off',
         'no-unreachable': 'off',
         'no-multiple-template-root': 'off',
-        'no-unused-vars': 'error',
+        'no-unused-vars': 'warn',
         'no-v-model-argument': 'off',
         'no-case-declarations': 'off',
 
@@ -153,7 +153,7 @@ module.exports = {
         // 要求方法链中每个调用都有一个换行符
         'newline-per-chained-call': ['warn', {ignoreChainWithDepth: 3}],
         // 禁止 if 作为唯一的语句出现在 else 语句中
-        'no-lonely-if': 'warn',
+        'no-lonely-if': 'off',
         // 禁止空格和 tab 的混合缩进
         'no-mixed-spaces-and-tabs': 'warn',
         // 禁止出现多行空行
@@ -161,9 +161,9 @@ module.exports = {
         // 禁止出现, ;
         semi: ['warn', 'never'],
         // 强制在块之前使用一致的空格
-        'space-before-blocks': 'warn',
+        'space-before-blocks': 'off',
         // 强制在 function的左括号之前使用一致的空格
-        // 'space-before-function-paren': ['warn', 'never'],
+        'space-before-function-paren': 'off',
         // 强制在圆括号内使用一致的空格
         'space-in-parens': 'warn',
         // 要求操作符周围有空格
@@ -184,7 +184,6 @@ module.exports = {
         'no-async-promise-executor': 'warn',
         'vue/script-setup-uses-vars': 'error',
         'no-undef': 'warn',
-        'space-before-function-paren': 'off',
         'vue/v-on-event-hyphenation': 'off',
         'vue/component-definition-name-casing': 'off',
         'vue/require-prop-types': 'off',
