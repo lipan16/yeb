@@ -25,11 +25,6 @@ export const constantRoutes: RouteRecordRaw[] = [
         }
     },
     {
-        path: '/auth-redirect',
-        component: () => import(/* webpackChunkName: "auth-redirect" */ '@/views/login/auth-redirect.vue'),
-        meta: {hidden: true}
-    },
-    {
         path: '/404',
         component: () => import(/* webpackChunkName: "404" */ '@/views/error-page/404.vue'),
         meta: {hidden: true}

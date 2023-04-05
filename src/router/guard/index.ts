@@ -1,7 +1,7 @@
 import {Router} from 'vue-router'
 import {createPermissionGuard} from '@/router/guard/permission'
 
-export function setupRouterGuard(router: Router) {
+export function setupRouterGuard(router: Router){
     // createPageGuard(router);
     // createPageLoadingGuard(router);
     // createHttpGuard(router);
