@@ -1,29 +1,27 @@
 <template>
     <div v-if="!item.meta || !item.meta.hidden">
-        <template
-          v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChildren) && (!item.meta || !item.meta.alwaysShow)">
-            <AppLink v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
-                <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown': !isNest}">
+        <!--有一个要显示的子路由 && 子路由没有下一级子路由 && 有meta属性-->
+        <template v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChildren) && onlyOneChild.meta">
+            <a v-if="onlyOneChild.meta.type === 'link'" :href="onlyOneChild.meta.link" target="_blank" rel="noopener">
+                <el-menu-item :index="resolvePath(onlyOneChild.path)">
                     <SvgIcon v-if="onlyOneChild.meta && onlyOneChild.meta.icon" :name="onlyOneChild.meta.icon"/>
                     <template #title>{{ $t('route.' + onlyOneChild.meta.title) }}</template>
                 </el-menu-item>
-            </AppLink>
+            </a>
+
+            <el-menu-item v-else :index="resolvePath(onlyOneChild.path)">
+                <SvgIcon v-if="onlyOneChild.meta && onlyOneChild.meta.icon" :name="onlyOneChild.meta.icon"/>
+                <template #title>{{ $t('route.' + onlyOneChild.meta.title) }}</template>
+            </el-menu-item>
         </template>
 
-        <el-sub-menu v-else :index="resolvePath(item.path)" popper-class="yeb-el-menu--popup-container">
+        <el-sub-menu v-else :index="resolvePath(item.path)">
             <template #title>
                 <SvgIcon v-if="item.meta && item.meta.icon" :name="item.meta.icon"/>
                 <span v-if="item.meta && item.meta.title">{{ $t('route.' + item.meta.title) }}</span>
             </template>
 
-            <SidebarItem
-              v-for="child in item.children"
-              :key="child.path"
-              :item="child"
-              :is-nest="true"
-              :base-path="resolvePath(child.path)"
-              class="nest-menu"
-            />
+            <SidebarItem v-for="child in item.children" :key="child.path" :item="child" :base-path="resolvePath(child.path)"/>
         </el-sub-menu>
     </div>
 </template>
@@ -31,24 +29,14 @@
 <script setup lang="ts">
 import path from 'path-browserify'
 import {isExternalUrl} from '@/utils/validate'
-import AppLink from '@/layout/components/Sidebar/AppLink.vue'
 import SvgIcon from '@/components/Icon/SvgIcon.vue'
 
 const props = defineProps({
-    item: {
-        type: Object,
-        required: true
-    },
-    isNest: {
-        type: Boolean,
-        required: false
-    },
-    basePath: {
-        type: String,
-        required: true
-    }
+    item: {type: Object, required: true},
+    basePath: {type: String, required: true}
 })
 
+// 记录唯一显示的子路由
 const onlyOneChild = ref()
 
 function hasOneShowingChild(children = [] as any, parent: any){
@@ -56,18 +44,14 @@ function hasOneShowingChild(children = [] as any, parent: any){
         children = []
     }
     const showingChildren = children.filter((item: any) => {
-        if(item.meta && item.meta.hidden){
-            return false
-        }
-        // Temp set(will be used if only has one showing child)
-        onlyOneChild.value = item
-        return true
+        return !(item.meta && item.meta.hidden)
     })
-    // When there is only one child router, the child router is displayed by default
+    // 只有一个子路由时，默认显示子路由
     if(showingChildren.length === 1){
+        onlyOneChild.value = showingChildren[0]
         return true
     }
-    // Show parent if there are no child router to display
+    // 没有子路由要显示时显示父路由
     if(showingChildren.length === 0){
         onlyOneChild.value = {...parent, path: '', noShowingChildren: true}
         return true
@@ -79,28 +63,11 @@ function resolvePath(routePath: string){
     if(isExternalUrl(routePath)){
         return routePath
     }
-    if(isExternalUrl(props.basePath)){
+    if(isExternalUrl(props.basePath as string)){
         return props.basePath
     }
 
     return path.resolve(props.basePath, routePath)
 }
+
 </script>
-
-<style lang="less">
-.yeb-el-menu--popup-container{
-    .el-menu-item{
-        &:hover{
-            background-color: var(--el-menu-hover-color) !important;
-            color: var(--el-menu-active-color) !important;
-        }
-    }
-
-    .nest-menu .el-sub-menu .el-sub-menu__title{
-        &:hover{
-            background-color: var(--el-menu-hover-color) !important;
-            color: var(--el-menu-active-color) !important;
-        }
-    }
-}
-</style>

@@ -30,18 +30,13 @@ const filterAsyncRoutes = (routes: RouteRecordRaw[], roles: string[]) => {
                 tmp.component = Layout
             }else{
                 const component = modules[`../../views/${tmp.component}.vue`] as any
-                // console.log('tmp.component', tmp.component, component)
-                if(component){
-                    tmp.component = component
-                }else{
-                    tmp.component = modules[`../../views/error-page/404.vue`]
-                }
+                tmp.component = component ? component : modules[`../../views/error-page/404.vue`]
             }
-            res.push(tmp)
-
             if(tmp.children){
                 tmp.children = filterAsyncRoutes(tmp.children, roles)
             }
+
+            res.push(tmp)
         }
     })
     return res
@@ -50,11 +45,9 @@ const filterAsyncRoutes = (routes: RouteRecordRaw[], roles: string[]) => {
 const permissionStore = defineStore('permission', () => {
     // state
     const routes = ref<RouteRecordRaw[]>([])
-    const addRoutes = ref<RouteRecordRaw[]>([])
 
     // actions
     function setRoutes(newRoutes: RouteRecordRaw[]){
-        addRoutes.value = newRoutes
         routes.value = constantRoutes.concat(newRoutes)
     }
 

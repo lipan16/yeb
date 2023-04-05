@@ -12,7 +12,6 @@ const menuList = [
             title: 'system',
             icon: 'system',
             hidden: false,
-            alwaysShow: true,
             roles: ['ADMIN'],
             keepAlive: true
         },
@@ -25,7 +24,6 @@ const menuList = [
                     title: 'userManagement',
                     icon: 'user',
                     hidden: false,
-                    alwaysShow: false,
                     roles: ['ADMIN'],
                     keepAlive: true
                 }
@@ -38,7 +36,6 @@ const menuList = [
                     title: 'roleManagement',
                     icon: 'role',
                     hidden: false,
-                    alwaysShow: false,
                     roles: ['ADMIN'],
                     keepAlive: true
                 }
@@ -51,7 +48,6 @@ const menuList = [
                     title: 'menuManagement',
                     icon: 'menu',
                     hidden: false,
-                    alwaysShow: false,
                     roles: ['ADMIN'],
                     keepAlive: true
                 }
@@ -64,7 +60,6 @@ const menuList = [
                     title: 'deptManagement',
                     icon: 'tree',
                     hidden: false,
-                    alwaysShow: false,
                     roles: ['ADMIN'],
                     keepAlive: true
                 }
@@ -77,7 +72,6 @@ const menuList = [
                     title: 'dictManagement',
                     icon: 'dict',
                     hidden: false,
-                    alwaysShow: false,
                     roles: ['ADMIN'],
                     keepAlive: true
                 }
@@ -87,64 +81,59 @@ const menuList = [
     {
         path: '/multi-level-menu',
         component: 'Layout',
-        redirect: '/nested/level1/level2',
+        redirect: '/multi-level-menu/level1',
         meta: {
             title: 'multi-level-menu',
             icon: 'nested',
             hidden: false,
-            alwaysShow: true,
             roles: ['ADMIN'],
             keepAlive: true
         },
         children: [
             {
-                path: 'nested_level1_index',
+                path: 'level1',
                 component: 'nested/level1/index',
-                redirect: '/nested/level1/level2',
+                redirect: '/multi-level-menu/level1/level2',
                 meta: {
                     title: 'nested_level1',
                     icon: '',
                     hidden: false,
-                    alwaysShow: true,
                     roles: ['ADMIN'],
                     keepAlive: true
                 },
                 children: [
                     {
-                        path: 'nested_level1_level2_index',
+                        path: 'level2',
                         component: 'nested/level1/level2/index',
-                        redirect: '/nested/level1/level2/level3',
+                        redirect: '/multi-level-menu/level1/level2/level3',
                         meta: {
                             title: 'nested_level1_level2',
                             icon: '',
                             hidden: false,
-                            alwaysShow: true,
                             roles: ['ADMIN'],
                             keepAlive: true
                         },
                         children: [
                             {
-                                path: 'nested_level1_level2_level3_index1',
+                                path: 'level3',
                                 component: 'nested/level1/level2/level3/index1',
                                 name: 'nested_level1_level2_level3_index1',
                                 meta: {
                                     title: 'nested_level1_level2_level3_index1',
                                     icon: '',
                                     hidden: false,
-                                    alwaysShow: false,
                                     roles: ['ADMIN'],
                                     keepAlive: true
                                 }
                             },
                             {
-                                path: 'nested_level1_level2_level3_index2',
+                                path: 'level3_2',
                                 component: 'nested/level1/level2/level3/index2',
                                 name: 'nested_level1_level2_level3_index2',
                                 meta: {
                                     title: 'nested_level1_level2_level3_index2',
                                     icon: '',
                                     hidden: false,
-                                    alwaysShow: false,
                                     roles: ['ADMIN'],
                                     keepAlive: true
                                 }
@@ -156,39 +145,12 @@ const menuList = [
         ]
     },
     {
-        path: '/external-link',
-        component: 'Layout',
-        redirect: 'noRedirect',
-        meta: {
-            title: 'link',
-            icon: 'link',
-            hidden: false,
-            // alwaysShow: true,
-            roles: ['ADMIN'],
-            keepAlive: true
-        },
-        children: [
-            {
-                path: 'https://github.com/lipan16/yeb',
-                meta: {
-                    title: 'github',
-                    icon: 'link',
-                    hidden: false,
-                    alwaysShow: false,
-                    roles: ['ADMIN'],
-                    keepAlive: true
-                }
-            }
-        ]
-    },
-    {
         path: '/component',
         component: 'Layout',
         meta: {
             title: 'components',
             icon: 'menu',
             hidden: false,
-            alwaysShow: true,
             roles: ['ADMIN'],
             keepAlive: true
         },
@@ -201,7 +163,6 @@ const menuList = [
                     title: 'tinymce',
                     icon: '',
                     hidden: false,
-                    alwaysShow: false,
                     roles: ['ADMIN'],
                     keepAlive: true
                 }
@@ -214,7 +175,6 @@ const menuList = [
                     title: 'uploader',
                     icon: '',
                     hidden: false,
-                    alwaysShow: false,
                     roles: ['ADMIN'],
                     keepAlive: true
                 }
@@ -222,26 +182,72 @@ const menuList = [
         ]
     },
     {
-        path: '/iframe',
+        path: '/',
         component: 'Layout',
-        redirect: '/iframe/nodejs',
+        redirect: '/link',
         meta: {
             roles: ['ADMIN'],
-            type: 'iframe'
         },
         children: [
             {
-                path: 'nodejs',
-                component: 'iframe/index',
-                name: 'nodejs',
+                path: 'link',
+                component: 'link/index',
+                name: 'link',
                 meta: {
-                    icon: 'iframe',
+                    title: 'github',
+                    type: 'link',
+                    link: 'https://github.com/lipan16/yeb',
+                    icon: 'link',
+                    hidden: false,
+                    roles: ['ADMIN'],
+                    keepAlive: true
+                }
+            }
+        ]
+    },
+    {
+        path: '/',
+        component: 'Layout',
+        redirect: '/iframeNodejs',
+        meta: {
+            roles: ['ADMIN'],
+        },
+        children: [
+            {
+                path: 'iframeNodejs',
+                component: 'iframe/index',
+                name: 'iframeNodejs',
+                meta: {
                     title: 'nodejs',
+                    type: 'iframe',
+                    icon: 'iframe',
                     link: 'https://nodejs.org/zh-cn/',
                     affix: false,
                     hidden: false,
-                    alwaysShow: false,
                     roles: ['ADMIN'],
+                    keepAlive: true
+                }
+            }
+        ]
+    },
+    {
+        path: '/',
+        component: 'Layout',
+        redirect: '/personal',
+        meta: {
+            roles: ['ADMIN'],
+        },
+        children: [
+            {
+                path: 'personal',
+                component: 'personal/index',
+                name: 'personal',
+                meta: {
+                    roles: ['ADMIN'],
+                    title: 'personal',
+                    icon: 'personal',
+                    affix: false,
+                    hidden: false,
                     keepAlive: true
                 }
             }
@@ -274,7 +280,7 @@ export const LoginInfo = query => {
 const UserInfo = {
     userId: Random.id(),
     nickname: Random.cname(),
-    avatar: 'https://s2.loli.net/2022/04/07/gw1L2Z5sPtS8GIl.gif',
+    avatar: 'https://avatars.githubusercontent.com/u/37772795?v=4',
     roles: ['ADMIN'],
     perms: ['sys:user:edit', 'sys:user:delete', 'sys:user:add']
 }
