@@ -48,7 +48,7 @@ export default defineConfig(({mode, command}: ConfigEnv): UserConfig => {
                 resolvers: [
                     ElementPlusResolver(),
                     // 自动导入图标
-                    IconsResolver({prefix: 'Icon'})
+                    IconsResolver({})
                 ],
                 dts: path.resolve(path.resolve(__dirname, ''), 'auto-imports.d.ts')
             }),
@@ -70,10 +70,10 @@ export default defineConfig(({mode, command}: ConfigEnv): UserConfig => {
                 iconDirs: [path.resolve(process.cwd(), 'src/assets/svg/')],
                 svgoOptions: isBuild,
                 // default
-                symbolId: 'icon-[dir]-[name]'
+                symbolId: '[name]'
             }),
             // @vitejs/plugin-legacy 为打包后的文件提供传统浏览器兼容性支持
-            legacy()
+            // legacy()
         ],
         server: {
             host: '0.0.0.0',
