@@ -8,6 +8,7 @@ export default {
         menuManagement: 'MenuManagement',
         deptManagement: 'DepartmentManagement',
         dictManagement: 'DictionaryManagement',
+        animateLoading: 'loading',
         'multi-level-menu': 'multi-level-menu',
         'nested_level1': 'level1',
         'nested_level1_level2': 'level2',

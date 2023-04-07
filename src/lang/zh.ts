@@ -8,6 +8,7 @@ export default {
         menuManagement: '菜单管理',
         deptManagement: '部门管理',
         dictManagement: '字典管理',
+        animateLoading: '加载动画',
 
         'multi-level-menu': '多级菜单',
         'nested_level1': '菜单一级',
