@@ -43,7 +43,7 @@ export const constantRoutes: RouteRecordRaw[] = [
             component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue'),
             meta: {
                 title: 'dashboard',
-                icon: 'homepage',
+                icon: 'iconfont icon-home',
                 affix: true
             }
         }]

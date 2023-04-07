@@ -3,7 +3,7 @@
         <div class="right-panel-background"></div>
         <div class="right-panel">
             <div class="right-panel__button" :style="{top: buttonTop + 'px', 'background-color': appStore.projectConfig.theme}" @click="show = !show">
-                <SvgIcon :name="show ? 'close' : 'system'" size="24" />
+                <SvgIcon :name="show ? 'close' : 'iconfont icon-systemset'" size="24" />
             </div>
             <div class="right-panel__items">
                 <slot></slot>

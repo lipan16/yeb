@@ -10,7 +10,7 @@ const menuList = [
         component: 'Layout',
         meta: {
             title: 'system',
-            icon: 'system',
+            icon: 'iconfont icon-rolejiaose',
             hidden: false,
             roles: ['ADMIN'],
             keepAlive: true
@@ -22,7 +22,7 @@ const menuList = [
                 name: 'user',
                 meta: {
                     title: 'userManagement',
-                    icon: 'user',
+                    icon: 'iconfont icon-UserManager',
                     hidden: false,
                     roles: ['ADMIN'],
                     keepAlive: true
@@ -34,7 +34,7 @@ const menuList = [
                 name: 'role',
                 meta: {
                     title: 'roleManagement',
-                    icon: 'role',
+                    icon: 'iconfont icon-role',
                     hidden: false,
                     roles: ['ADMIN'],
                     keepAlive: true
@@ -46,7 +46,7 @@ const menuList = [
                 name: 'menu',
                 meta: {
                     title: 'menuManagement',
-                    icon: 'menu',
+                    icon: 'iconfont icon-menu1',
                     hidden: false,
                     roles: ['ADMIN'],
                     keepAlive: true
@@ -58,7 +58,7 @@ const menuList = [
                 name: 'dept',
                 meta: {
                     title: 'deptManagement',
-                    icon: 'tree',
+                    icon: 'iconfont icon-bumen',
                     hidden: false,
                     roles: ['ADMIN'],
                     keepAlive: true
@@ -70,7 +70,7 @@ const menuList = [
                 name: 'dict',
                 meta: {
                     title: 'dictManagement',
-                    icon: 'dict',
+                    icon: 'iconfont icon-daimabiao',
                     hidden: false,
                     roles: ['ADMIN'],
                     keepAlive: true
@@ -84,7 +84,7 @@ const menuList = [
         component: 'Layout',
         meta: {
             title: 'animate',
-            icon: 'animate',
+            icon: 'iconfont icon-loading-animate',
             hidden: false,
             roles: ['ADMIN'],
             keepAlive: true
@@ -96,7 +96,7 @@ const menuList = [
                 name: 'loading',
                 meta: {
                     title: 'animateLoading',
-                    icon: 'iconfont icon-wenhao',
+                    icon: 'iconfont icon-loading-animate',
                     hidden: false,
                     roles: ['ADMIN'],
                     keepAlive: true
@@ -110,7 +110,7 @@ const menuList = [
         component: 'Layout',
         meta: {
             title: 'components',
-            icon: 'menu',
+            icon: 'iconfont icon-zujian',
             hidden: false,
             roles: ['ADMIN'],
             keepAlive: true
@@ -158,7 +158,7 @@ const menuList = [
                     title: 'github',
                     type: 'link',
                     link: 'https://github.com/lipan16/yeb',
-                    icon: 'link',
+                    icon: 'iconfont icon-github',
                     hidden: false,
                     roles: ['ADMIN'],
                     keepAlive: true
@@ -181,7 +181,7 @@ const menuList = [
                 meta: {
                     title: 'nodejs',
                     type: 'iframe',
-                    icon: 'iframe',
+                    icon: 'iconfont icon-iframe',
                     link: 'https://nodejs.org/zh-cn/',
                     affix: false,
                     hidden: false,
@@ -206,7 +206,7 @@ const menuList = [
                 meta: {
                     roles: ['ADMIN'],
                     title: 'personal',
-                    icon: 'personal',
+                    icon: 'iconfont icon-gerenzhongxin',
                     affix: false,
                     hidden: false,
                     keepAlive: true
@@ -221,7 +221,7 @@ const menuList = [
         redirect: '/multi-level-menu/level1',
         meta: {
             title: 'multi-level-menu',
-            icon: 'nested',
+            icon: 'iconfont icon-menu',
             hidden: false,
             roles: ['ADMIN'],
             keepAlive: true

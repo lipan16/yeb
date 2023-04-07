@@ -1,12 +1,12 @@
 <template>
-    <i v-if="isShowEleSvg" class="el-icon" :style="setIconSvgStyle">
+    <i v-if="isShowEleSvg" class="el-icon svg-icon" :style="setIconSvgStyle">
         <component :is="getIconName"/>
     </i>
-    <i v-else-if="isShowAliSvg" :class="getIconName" :style="setIconSvgStyle" />
+    <i v-else-if="isShowAliSvg" class="svg-icon" :class="getIconName" :style="setIconSvgStyle" />
     <svg v-else-if="isShowLocalSvg" aria-hidden="true" class="svg-icon" :style="setIconImgOutStyle">
         <use :href="'#' + getIconName" :fill="color"/>
     </svg>
-    <img v-else src="../../assets/svg/yeb.svg" alt="" :style="setIconImgOutStyle"/>
+    <img class="svg-icon" v-else src="../../assets/svg/yeb.svg" alt="" :style="setIconImgOutStyle"/>
 </template>
 
 <script lang="ts" setup>
@@ -40,12 +40,12 @@ const isShowLocalSvg = computed(() => {
 
 // 设置图标样式
 const setIconSvgStyle = computed(() => {
-    return `font-size: ${props.size}px;color: ${props.color};`
+    return `font-size: ${props.size}px; color: ${props.color};`
 })
 
 // 设置图片样式
 const setIconImgOutStyle = computed(() => {
-    return `width: ${props.size}px;height: ${props.size}px;display: inline-block;overflow: hidden;`
+    return `width: ${props.size}px; height: ${props.size}px; display: inline-block; overflow: hidden;`
 })
 </script>
 <style scoped>
