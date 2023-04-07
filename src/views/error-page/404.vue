@@ -1,6 +1,6 @@
 <template>
     <div class="error-page-404">
-        <SvgIcon name="404" size="350"/>
+        <SvgIcon name="iconfont icon-icon-test" size="350"/>
     </div>
 </template>
 <script setup lang="ts">
@@ -10,6 +10,7 @@ import SvgIcon from '@/components/Icon/SvgIcon.vue'
 .error-page-404{
     margin: 10px auto;
     text-align: center;
+    color: var(--theme);
 }
 </style>
 
